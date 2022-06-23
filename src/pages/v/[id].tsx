@@ -1,6 +1,7 @@
-import { Button, Heading, HStack, Link, VStack } from "@chakra-ui/react";
+import { Button, Heading, HStack, Link, Text, VStack } from "@chakra-ui/react";
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
+import EnhancedChakraLink from "@components/EnhancedChakraLink";
 import { NextPageContext } from "next";
 import Head from "next/head";
 
@@ -8,16 +9,16 @@ export default function ({ video }) {
   return (
     <>
       <Head>
-        <title>{video.author} | QuickTok</title>
+        <title>{video.author || "Error Loading Video"} | QuickTok</title>
         <meta
           property="og:description"
           content={`Check out ${video.author}'s video!`}
         />
       </Head>
       <Container minH="100vh">
-        <ContainerInside>
-          {video ? (
-            <VStack>
+        <ContainerInside as={VStack}>
+          {video.url ? (
+            <>
               <video src={video.url} controls />
               <HStack>
                 <Button
@@ -37,9 +38,18 @@ export default function ({ video }) {
                   View
                 </Button>
               </HStack>
-            </VStack>
+            </>
           ) : (
-            <Heading>There was a problem loading the video</Heading>
+            <>
+              <Heading>Oh no! It seems that this video is unavailable.</Heading>
+              <Text>
+                This can be due to TikTok taking down the video or the video
+                being deleted.
+              </Text>
+              <Button as={EnhancedChakraLink} href="/">
+                Back Home
+              </Button>
+            </>
           )}
         </ContainerInside>
       </Container>
@@ -47,7 +57,11 @@ export default function ({ video }) {
   );
 }
 
-async function downloadVideo(videoUrl: RequestInfo | URL, authorName: string, videoId: string) {
+async function downloadVideo(
+  videoUrl: RequestInfo | URL,
+  authorName: string,
+  videoId: string
+) {
   const res = await fetch(videoUrl);
   const blob = await res.blob();
   const url = window.URL.createObjectURL(blob);
@@ -77,9 +91,9 @@ export async function getServerSideProps({ query }: NextPageContext) {
   return {
     props: {
       video: {
-        url: video?.aweme_detail?.video?.play_addr?.url_list?.[0],
-        author: video?.aweme_detail?.author?.unique_id,
-        id: video?.aweme_detail?.aweme_id,
+        url: video?.aweme_detail?.video?.play_addr?.url_list?.[0] || null,
+        author: video?.aweme_detail?.author?.unique_id || null,
+        id: video?.aweme_detail?.aweme_id || null,
       },
     },
   };
