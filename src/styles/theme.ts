@@ -9,7 +9,6 @@ const theme = extendTheme({
     bg: "linear-gradient(45deg, hsl(209, 61%, 50%) 0%, hsl(259,72%, 69%) 100%)",
     // bg: "hsl(211, 100%, 6%)",
   },
-
   components: {
     Button,
     Link,

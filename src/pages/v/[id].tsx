@@ -2,38 +2,48 @@ import { Button, Heading, HStack, Link, VStack } from "@chakra-ui/react";
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
 import { NextPageContext } from "next";
+import Head from "next/head";
 
 export default function ({ video }) {
   return (
-    <Container minH="100vh">
-      <ContainerInside>
-        {video ? (
-          <VStack>
-            <video src={video.url} controls />
-            <HStack>
-              <Button
-                as={Link}
-                onClick={() => {
-                  downloadVideo(video.url, video.author, video.id);
-                }}
-              >
-                Download Video
-              </Button>
-              <Button
-                variant="accent"
-                as={Link}
-                isExternal
-                href={`https://m.tiktok.com/v/${video.id}`}
-              >
-                View
-              </Button>
-            </HStack>
-          </VStack>
-        ) : (
-          <Heading>There was a problem loading the video</Heading>
-        )}
-      </ContainerInside>
-    </Container>
+    <>
+      <Head>
+        <title>{video.author} | QuickTok</title>
+        <meta
+          property="og:description"
+          content={`Check out ${video.author}'s video!`}
+        />
+      </Head>
+      <Container minH="100vh">
+        <ContainerInside>
+          {video ? (
+            <VStack>
+              <video src={video.url} controls />
+              <HStack>
+                <Button
+                  as={Link}
+                  onClick={() => {
+                    downloadVideo(video.url, video.author, video.id);
+                  }}
+                >
+                  Download Video
+                </Button>
+                <Button
+                  variant="accent"
+                  as={Link}
+                  isExternal
+                  href={`https://m.tiktok.com/v/${video.id}`}
+                >
+                  View
+                </Button>
+              </HStack>
+            </VStack>
+          ) : (
+            <Heading>There was a problem loading the video</Heading>
+          )}
+        </ContainerInside>
+      </Container>
+    </>
   );
 }
 
