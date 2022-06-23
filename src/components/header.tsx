@@ -86,12 +86,19 @@ export default function () {
                 justify="center"
                 flexDir={{ base: "column", sm: "row" }}
               >
-                <Image
-                  src="/logo.svg"
-                  alt="quicktok's logo"
-                  width="75px"
-                  height="75px"
-                />
+                <Box
+                  bg={background ? "accent" : "transparent"}
+                  p={background ? 0.5 : 0}
+                  rounded="lg"
+                  transition="all 0.3s ease"
+                >
+                  <Image
+                    src="/logo.svg"
+                    alt="quicktok's logo"
+                    width="75px"
+                    height="75px"
+                  />
+                </Box>
                 <Heading
                   display={{ base: "none", sm: "block" }}
                   size="md"
