@@ -47,7 +47,7 @@ export default function ({ video }) {
   );
 }
 
-async function downloadVideo(videoUrl, authorName, videoId) {
+async function downloadVideo(videoUrl: RequestInfo | URL, authorName: string, videoId: string) {
   const res = await fetch(videoUrl);
   const blob = await res.blob();
   const url = window.URL.createObjectURL(blob);
