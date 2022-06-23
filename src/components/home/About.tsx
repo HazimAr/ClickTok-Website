@@ -7,7 +7,7 @@ const data = [
   {
     title: "Easily embed Tiktok videos",
     description:
-      "QuickTok is a simple Discord bot that allows you to embed Tiktok videos easily in Discord server.",
+      "QuickTok is a simple Discord bot that allows you to embed Tiktok videos easily in your Discord server.",
     button: "Start Embedding",
     img: "/embed.gif",
   },
