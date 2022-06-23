@@ -4,7 +4,7 @@ export default function NotFound() {
   return (
     <>
       <Heading as="h1">404 Page not Found</Heading>
-      <Heading as="h3">Edit this page in /src/pages/404</Heading>
+      <Heading as="h3">Not sure what you were looking for here.</Heading>
       <Link href="/">Go back home</Link>
     </>
   );

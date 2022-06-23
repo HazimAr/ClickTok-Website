@@ -86,19 +86,12 @@ export default function () {
                 justify="center"
                 flexDir={{ base: "column", sm: "row" }}
               >
-                <Box
-                  bg={background ? "accent" : "transparent"}
-                  p={background ? 0.5 : 0}
-                  rounded="lg"
-                  transition="all 0.3s ease"
-                >
-                  <Image
-                    src="/logo.svg"
-                    alt="quicktok's logo"
-                    width="75px"
-                    height="75px"
-                  />
-                </Box>
+                <Image
+                  src={`logo${background ? "_inverted" : ""}.svg`}
+                  alt="quicktok's logo"
+                  height="75px"
+                />
+
                 <Heading
                   display={{ base: "none", sm: "block" }}
                   size="md"
@@ -321,6 +314,10 @@ const NAV_ITEMS: Array<NavItem> = [
     label: "Support",
     href: "/support",
     external: true,
+  },
+  {
+    label: "Download ",
+    href: "/download",
   },
   {
     label: "Invite Bot",

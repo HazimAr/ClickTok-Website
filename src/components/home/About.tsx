@@ -12,14 +12,14 @@ const data = [
     img: "/embed.gif",
   },
   {
-    title: "View all the info about a video",
+    title: "View info about a video",
     description:
       "QuickTok is a simple Discord bot that allows you to embed Tiktok videos easily in Discord server.",
     button: "Start Viewing",
     img: "/view.gif",
   },
   {
-    title: "Download the video straight to your computer",
+    title: "Download straight to your computer",
     description:
       "QuickTok is a simple Discord bot that allows you to embed Tiktok videos easily in Discord server.",
     button: "Start Downloading",
@@ -29,7 +29,7 @@ const data = [
 
 export default function () {
   return (
-    <Container py={10}>
+    <Container py={10} id="#about">
       <ContainerInside>
         {data.map((item, index) => (
           <Section
