@@ -112,7 +112,7 @@ export default function () {
               display={{ base: "none", sm: "block" }}
               isExternal
             >
-              <Button ml={8}>Invite</Button>
+              <Button ml={8}>Invite Bot</Button>
             </HeaderLink>
           </Flex>
         </Flex>
@@ -134,7 +134,7 @@ const DesktopNav = () => {
         <Box
           key={navItem.label}
           display={
-            navItem.label.toLowerCase() == "invite" && {
+            navItem.label.toLowerCase() == "invite bot" && {
               base: "block",
               sm: "none",
             }
@@ -305,7 +305,7 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: "About",
-    href: "/about",
+    href: "/#about",
   },
   {
     label: "Support",
@@ -313,7 +313,7 @@ const NAV_ITEMS: Array<NavItem> = [
     external: true,
   },
   {
-    label: "Invite",
+    label: "Invite Bot",
     href: "/invite",
     external: true,
   },
