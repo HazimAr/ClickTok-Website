@@ -1,4 +1,4 @@
-import type { ComponentStyleConfig } from "@chakra-ui/theme"
+import type { ComponentStyleConfig } from "@chakra-ui/theme";
 
 export const Button: ComponentStyleConfig = {
   baseStyle: {
@@ -21,8 +21,9 @@ export const Button: ComponentStyleConfig = {
   variants: {
     primary: {
       bg: "primary",
-      color: "accent",
-      _hover: { bg: "secondary", color: "primary" },
+      color: "white",
+      boxShadow: "2px 2px 2px 1px ",
+      _hover: { transform: "scale(1.05)", boxShadow: "none" },
     },
     secondary: {
       bg: "secondary",
@@ -32,7 +33,7 @@ export const Button: ComponentStyleConfig = {
     accent: {
       bg: "accent",
       color: "white",
-      _hover: { bg: "white", color: "accent" },
+      _hover: { transform: "scale(1.05)" },
     },
   },
 
@@ -40,7 +41,7 @@ export const Button: ComponentStyleConfig = {
     size: "md",
     variant: "primary",
   },
-}
+};
 
 export const Link: ComponentStyleConfig = {
   baseStyle: {
@@ -51,4 +52,4 @@ export const Link: ComponentStyleConfig = {
   sizes: {},
   variants: {},
   defaultProps: {},
-}
+};
