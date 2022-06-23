@@ -20,20 +20,42 @@ export const Button: ComponentStyleConfig = {
   },
   variants: {
     primary: {
-      bg: "primary",
-      color: "white",
-      boxShadow: "2px 2px 2px 1px ",
-      _hover: { transform: "scale(1.05)", boxShadow: "none" },
+      bg: "white",
+      color: "black",
+      borderColor: "white",
+      borderWidth: "2px",
+
+      _hover: {
+        color: "white",
+        bg: "hsla(0, 0%, 0%, 0)",
+        borderColor: "white",
+        borderWidth: "2px",
+      },
     },
+
     secondary: {
       bg: "secondary",
       color: "primary",
-      _hover: { bg: "primary", color: "secondary" },
+      borderColor: "secondary",
+      borderWidth: "2px",
+      _hover: {
+        color: "secondary",
+        bg: "hsla(0, 0%, 0%, 0)",
+        borderColor: "secondary",
+        borderWidth: "2px",
+      },
     },
     accent: {
       bg: "accent",
       color: "white",
-      _hover: { transform: "scale(1.05)" },
+      borderColor: "accent",
+      borderWidth: "2px",
+      _hover: {
+        color: "accent",
+        bg: "hsla(0, 0%, 0%, 0)",
+        borderColor: "accent",
+        borderWidth: "2px",
+      },
     },
   },
 

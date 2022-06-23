@@ -1,6 +1,6 @@
 import { Center } from "@chakra-ui/react";
 
-export default function Container({ children, ...props }) {
+export default function Container({ children = undefined, ...props }) {
   return (
     <Center as="section" flexDir="column" {...props}>
       {children}

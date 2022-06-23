@@ -3,12 +3,13 @@ import { Button, Link } from "./components";
 
 const theme = extendTheme({
   colors: {
-    primary: "hsl(30, 90%, 45%)",
-    secondary: "hsl(230, 90%, 20%)",
+    primary: "hsl(209, 61%, 50%)",
+    secondary: "hsl(259, 72%, 69%)",
     accent: "hsl(0, 0%, 10%)",
-    bg: "hsl(230, 90%, 6%)",
-    // bg: "hsl(230, 90%, 6%)",
+    bg: "linear-gradient(45deg, hsl(209, 61%, 50%) 0%, hsl(259,72%, 69%) 100%)",
+    // bg: "hsl(211, 100%, 6%)",
   },
+
   components: {
     Button,
     Link,
@@ -18,7 +19,9 @@ const theme = extendTheme({
       body: {
         fontFamily:
           "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
-        backgroundColor: "bg",
+        background: "bg",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
         color: "white",
       },
       "&::-webkit-scrollbar": {

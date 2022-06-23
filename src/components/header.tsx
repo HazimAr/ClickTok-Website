@@ -43,8 +43,8 @@ export default function () {
 
   return (
     <Container
-      position="fixed"
-      w="100vw"
+      position="sticky"
+      top="0"
       transition="all 0.3s ease"
       background={background ? "white" : "transparent"}
       shadow={background ? "md" : null}
