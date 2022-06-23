@@ -53,8 +53,9 @@ function Section({ title, description, button, img, index }) {
       spacing={0}
       flexDir={index % 2 == 0 ? "row" : "row-reverse"}
       py={20}
+      gap={20}
     >
-      <Stack w="50%" px={5}>
+      <Stack w="50%">
         <Heading>{title}</Heading>
         <Text>{description}</Text>
         <Button
@@ -66,7 +67,7 @@ function Section({ title, description, button, img, index }) {
           {button}
         </Button>
       </Stack>
-      <Image src={img} w="50%" px={5} />
+      <Image src={img} w="50%" />
     </HStack>
   );
 }

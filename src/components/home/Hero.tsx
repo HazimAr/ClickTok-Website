@@ -5,7 +5,7 @@ import EnhancedChakraLink from "@components/EnhancedChakraLink";
 
 export default function Hero() {
   return (
-    <Container py={20}>
+    <Container py={40}>
       <ContainerInside as={VStack} justify="center" spacing={4}>
         <Heading size="3xl" as="h1">
           QuickTok
