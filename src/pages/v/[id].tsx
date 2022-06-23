@@ -13,8 +13,9 @@ export default function ({ video }) {
             <HStack>
               <Button
                 as={Link}
-                href={video.url}
-                download={`${video.author}-${video.id} (quicktok.win)`}
+                onClick={() => {
+                  downloadVideo(video.url, video.author, video.id);
+                }}
               >
                 Download Video
               </Button>
@@ -34,6 +35,19 @@ export default function ({ video }) {
       </ContainerInside>
     </Container>
   );
+}
+
+async function downloadVideo(videoUrl, authorName, videoId) {
+  const res = await fetch(videoUrl);
+  const blob = await res.blob();
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.style.display = "none";
+  a.href = url;
+  a.download = `${authorName}-${videoId} (quicktok.win).mp4`;
+  document.body.appendChild(a);
+  a.click();
+  window.URL.revokeObjectURL(url);
 }
 
 export async function getServerSideProps({ query }: NextPageContext) {

@@ -8,7 +8,12 @@ import { FaRecycle, FaServer, FaUserAlt } from "react-icons/fa";
 export default function Statistics({ users, converted, guilds }) {
   return (
     <Container bg="white" py={4}>
-      <ContainerInside as={HStack} justify="space-evenly" color="accent">
+      <ContainerInside
+        as={HStack}
+        flexDir={{ base: "column", md: "row" }}
+        justify="space-evenly"
+        color="accent"
+      >
         <Statistic value={users} label="Users" icon={FaUserAlt} />
 
         <Statistic
