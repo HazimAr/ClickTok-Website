@@ -5,7 +5,7 @@ import { NextPageContext } from "next";
 
 export default function ({ video }) {
   return (
-    <Container>
+    <Container minH="100vh">
       <ContainerInside>
         {video ? (
           <VStack>
