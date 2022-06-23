@@ -1,6 +1,5 @@
 {
 	"trailingSlash": false,
-	"redirects": [],
 	"github": {
 		"silent": true,
 		"autoJobCancelation": true

@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from "@chakra-ui/react";
 import NextLink from "next/link";
 
-export default function NextChakraLink(props: any) {
+export default function EnhancedChakraLink(props: any) {
   return (
     <NextLink href={props.href} passHref>
       <Link
