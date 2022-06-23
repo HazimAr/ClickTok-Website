@@ -1,0 +1,36 @@
+{
+	"name": "template",
+	"version": "0.1.0",
+	"author": "Hazim Arafa <hazimarafa80@gmail.com>",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/HazimAr/"
+	},
+	"keywords": [
+		"NextJS",
+		"ChakraUI",
+		"Boilerplate"
+	],
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start"
+	},
+	"dependencies": {
+		"@chakra-ui/icons": "^2.0.2",
+		"@chakra-ui/react": "^2.2.1",
+		"@emotion/react": "^11.9.3",
+		"@emotion/styled": "^11.9.3",
+		"framer-motion": "^6.3.13",
+		"next": "^12.1.6",
+		"react": "^18.1.0",
+		"react-dom": "18.2.0",
+		"react-icons": "^4.4.0"
+	},
+	"devDependencies": {
+		"@types/node": "^18.0.0",
+		"@types/react": "^18.0.12",
+		"typescript": "^4.7.4"
+	}
+}
