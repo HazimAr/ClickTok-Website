@@ -48,6 +48,7 @@ export default function () {
       transition="all 0.3s ease"
       background={background ? "white" : "transparent"}
       shadow={background ? "md" : null}
+      color={background ? "black" : "white"}
       zIndex={100}
       fontSize={22}
       as="header"
@@ -112,7 +113,9 @@ export default function () {
               display={{ base: "none", sm: "block" }}
               isExternal
             >
-              <Button ml={8}>Invite Bot</Button>
+              <Button ml={8} variant={background ? "accent" : "primary"}>
+                Invite Bot
+              </Button>
             </HeaderLink>
           </Flex>
         </Flex>
