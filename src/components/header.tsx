@@ -1,7 +1,7 @@
-import Container from "./Container"
-import ContainerInside from "./ContainerInside"
-import EnhancedChakraLink from "./EnhancedChakraLink"
-import { Image, useMutation, useRouter } from "blitz"
+import { useEffect, useState } from "react";
+import Container from "./Container";
+import ContainerInside from "./ContainerInside";
+import EnhancedChakraLink from "./EnhancedChakraLink";
 import {
   Box,
   Flex,
@@ -17,49 +17,57 @@ import {
   useColorModeValue,
   useDisclosure,
   Heading,
-  Menu,
-  MenuButton,
-  MenuList,
-  Center,
-  Avatar,
-  MenuDivider,
-  MenuItem,
-  Input,
-  InputGroup,
-  InputRightElement,
-} from "@chakra-ui/react"
+  Image,
+} from "@chakra-ui/react";
 import {
-  Search2Icon,
   HamburgerIcon,
   CloseIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-} from "@chakra-ui/icons"
-import { useCurrentUser } from "../hooks/useCurrentUser"
-import logout from "app/client/users/mutations/logout"
+} from "@chakra-ui/icons";
 
-export default function Header() {
-  const { isOpen, onToggle } = useDisclosure()
+export default function () {
+  const [background, setBackground] = useState(false);
+  const { isOpen, onToggle } = useDisclosure();
+
+  useEffect(() => {
+    onscroll = () => {
+      if (window.scrollY > 30) {
+        setBackground(true);
+        return;
+      }
+
+      setBackground(false);
+    };
+  }, []);
 
   return (
     <Container
-      // position="sticky"
+      position="sticky"
       top={0}
-      w="auto"
       transition="all 0.3s ease"
-      color="white"
-      // shadow="md"
+      background={background ? "white" : "transparent"}
+      shadow={background ? "md" : null}
       zIndex={100}
       fontSize={22}
       as="header"
-      py={3}
     >
-      <ContainerInside>
-        <Flex align="center" justify={{ base: "start", md: "center" }} gap={4}>
-          <Flex flex={1} display={{ base: "flex", md: "none" }} justify="center">
+      <ContainerInside py={2}>
+        <Flex align="center" justify={{ base: "start", md: "center" }}>
+          <Flex
+            flex={1}
+            display={{ base: "flex", md: "none" }}
+            justify="center"
+          >
             <IconButton
               onClick={onToggle}
-              icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
+              icon={
+                isOpen ? (
+                  <CloseIcon w={3} h={3} />
+                ) : (
+                  <HamburgerIcon w={5} h={5} />
+                )
+              }
               variant={"ghost"}
               aria-label={"Toggle Navigation"}
               _hover={{ background: "white" }}
@@ -71,27 +79,42 @@ export default function Header() {
             align="center"
           >
             <EnhancedChakraLink href="/">
-              <Flex gap={5} align="center" justify="center" flexDir={{ base: "column", sm: "row" }}>
-                <Image src="/logo.png" alt="logo" width="100px" height="100px" />
-                <Heading display={{ base: "none", sm: "block" }} size="md" textAlign="center">
-                  Kuung Fu
+              <Flex
+                gap={5}
+                align="center"
+                justify="center"
+                flexDir={{ base: "column", sm: "row" }}
+              >
+                <Image
+                  src="/logo.svg"
+                  alt="quicktok's logo"
+                  width="75px"
+                  height="75px"
+                />
+                <Heading
+                  display={{ base: "none", sm: "block" }}
+                  size="md"
+                  textAlign="center"
+                >
+                  QuickTok
                 </Heading>
               </Flex>
             </EnhancedChakraLink>
-
-            {/* <Input placeholder="Search" mx={10} /> */}
-            <InputGroup mx={10}>
-              <Input placeholder="Search" />
-              <InputRightElement>
-                <Search2Icon color="primary" />
-              </InputRightElement>
-            </InputGroup>
 
             <Flex display={{ base: "none", md: "flex" }}>
               <DesktopNav />
             </Flex>
           </Flex>
-          <UserInfo />
+
+          <Flex flex={1} justify="center">
+            <HeaderLink
+              href="/invite"
+              display={{ base: "none", sm: "block" }}
+              isExternal
+            >
+              <Button ml={8}>Invite</Button>
+            </HeaderLink>
+          </Flex>
         </Flex>
       </ContainerInside>
 
@@ -99,71 +122,33 @@ export default function Header() {
         <MobileNav />
       </Collapse>
     </Container>
-  )
-}
-
-const UserInfo = () => {
-  const currentUser = useCurrentUser()
-  const [logoutMutation] = useMutation(logout)
-  const router = useRouter()
-
-  return currentUser ? (
-    <>
-      <Menu>
-        <MenuButton _focus={{}}>
-          <Avatar size={"md"} src={currentUser.avatar_url as string} />
-        </MenuButton>
-        <MenuList alignItems={"center"}>
-          <Center>
-            <Avatar size={"2xl"} src={currentUser.avatar_url as string} />
-          </Center>
-
-          <MenuDivider />
-          <EnhancedChakraLink href={`/users/${currentUser.id}`}>
-            <MenuItem>Profile</MenuItem>
-          </EnhancedChakraLink>
-          <EnhancedChakraLink href="/classes/enrolled">
-            <MenuItem>Enrolled Classes</MenuItem>
-          </EnhancedChakraLink>
-          <MenuDivider />
-          <EnhancedChakraLink href="/settings">
-            <MenuItem>Settings</MenuItem>
-          </EnhancedChakraLink>
-          <MenuItem
-            onClick={async () => {
-              await logoutMutation()
-              router.push("/")
-            }}
-          >
-            Logout
-          </MenuItem>
-        </MenuList>
-      </Menu>
-    </>
-  ) : (
-    <>
-      <HeaderLink href="/login">Login</HeaderLink>
-      <EnhancedChakraLink href="/register">
-        <Button>Register</Button>
-      </EnhancedChakraLink>
-    </>
-  )
+  );
 }
 
 const DesktopNav = () => {
-  const popoverContentBgColor = useColorModeValue("white", "gray.800")
+  const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
   return (
     <Stack direction={"row"} spacing={4}>
       {NAV_ITEMS.map((navItem) => (
         <Box
           key={navItem.label}
-          display={navItem.label.toLowerCase() == "register" ? "none" : "block"}
+          display={
+            navItem.label.toLowerCase() == "invite" && {
+              base: "block",
+              sm: "none",
+            }
+          }
         >
           <Popover trigger={"hover"} placement={"bottom-start"}>
             {/* @ts-ignore */}
             <PopoverTrigger>
-              <HeaderLink p={2} href={navItem.href ?? "#"}>
+              <HeaderLink
+                p={2}
+                href={navItem.href ?? "#"}
+                fontWeight={500}
+                isExternal={navItem.external}
+              >
                 {navItem.label}
               </HeaderLink>
             </PopoverTrigger>
@@ -188,8 +173,8 @@ const DesktopNav = () => {
         </Box>
       ))}
     </Stack>
-  )
-}
+  );
+};
 
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   return (
@@ -200,10 +185,15 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
       p={2}
       rounded={"md"}
       _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
+      isExternal
     >
       <Stack direction={"row"} align={"center"}>
         <Box>
-          <Text transition={"all .3s ease"} _groupHover={{ color: "pink.400" }} fontWeight={500}>
+          <Text
+            transition={"all .3s ease"}
+            _groupHover={{ color: "pink.400" }}
+            fontWeight={500}
+          >
             {label}
           </Text>
           <Text fontSize={"sm"}>{subLabel}</Text>
@@ -221,8 +211,8 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
         </Flex>
       </Stack>
     </HeaderLink>
-  )
-}
+  );
+};
 
 const MobileNav = () => {
   return (
@@ -231,11 +221,11 @@ const MobileNav = () => {
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
     </Stack>
-  )
-}
+  );
+};
 
 const MobileNavItem = ({ label, children, href }: NavItem) => {
-  const { isOpen, onToggle } = useDisclosure()
+  const { isOpen, onToggle } = useDisclosure();
 
   return (
     <Stack spacing={4} onClick={children && onToggle}>
@@ -249,7 +239,10 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           textDecoration: "none",
         }}
       >
-        <Text fontWeight={600} color={useColorModeValue("gray.600", "gray.200")}>
+        <Text
+          fontWeight={600}
+          color={useColorModeValue("gray.600", "gray.200")}
+        >
           {label}
         </Text>
         {children && (
@@ -274,29 +267,35 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         >
           {children &&
             children.map((child) => (
-              <HeaderLink key={child.label} py={2} href={child.href}>
+              <HeaderLink
+                key={child.label}
+                py={2}
+                href={child.href}
+                isExternal={child.external}
+              >
                 {child.label}
               </HeaderLink>
             ))}
         </Stack>
       </Collapse>
     </Stack>
-  )
-}
+  );
+};
 
-function HeaderLink({ children, href, ...props }) {
+function HeaderLink({ children, href, isExternal, ...props }) {
   return (
-    <EnhancedChakraLink href={href} fontWeight={500} {...props}>
+    <EnhancedChakraLink href={href} isExternal={isExternal} {...props}>
       {children}
     </EnhancedChakraLink>
-  )
+  );
 }
 
 interface NavItem {
-  label: string
-  subLabel?: string
-  children?: Array<NavItem>
-  href?: string
+  label: string;
+  subLabel?: string;
+  children?: Array<NavItem>;
+  href?: string;
+  external?: boolean;
 }
 
 const NAV_ITEMS: Array<NavItem> = [
@@ -305,11 +304,17 @@ const NAV_ITEMS: Array<NavItem> = [
     href: "/",
   },
   {
-    label: "Classes",
-    href: "/classes",
+    label: "About",
+    href: "/about",
   },
   {
-    label: "Register",
-    href: "/register",
+    label: "Support",
+    href: "/support",
+    external: true,
   },
-]
+  {
+    label: "Invite",
+    href: "/invite",
+    external: true,
+  },
+];
