@@ -315,10 +315,10 @@ const NAV_ITEMS: Array<NavItem> = [
     href: "/support",
     external: true,
   },
-  {
-    label: "Download ",
-    href: "/download",
-  },
+  // {
+  //   label: "Download ",
+  //   href: "/download",
+  // },
   {
     label: "Invite Bot",
     href: "/invite",
