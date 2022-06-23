@@ -6,7 +6,7 @@ import EnhancedChakraLink from "@components/EnhancedChakraLink";
 export default function Hero() {
   return (
     <Container>
-      <ContainerInside as={VStack} justify="center" minH="100vh">
+      <ContainerInside as={VStack} justify="center" spacing={4} minH="100vh">
         <Heading size="3xl">QuickTok</Heading>
         <Text maxW="50ch" textAlign="center">
           QuickTok is a simple Discord bot that allows you to embed Tiktok
