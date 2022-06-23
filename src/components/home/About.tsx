@@ -67,7 +67,7 @@ function Section({ title, description, button, img, index }) {
           {button}
         </Button>
       </Stack>
-      <Image src={img} w="50%" />
+      <Image src={img} w="50%" borderRadius="lg" />
     </HStack>
   );
 }
