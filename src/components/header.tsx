@@ -87,7 +87,7 @@ export default function () {
                 flexDir={{ base: "column", sm: "row" }}
               >
                 <Image
-                  src={`logo${background ? "_inverted" : ""}.svg`}
+                  src={`/logo${background ? "_inverted" : ""}.svg`}
                   alt="quicktok's logo"
                   height="75px"
                 />
