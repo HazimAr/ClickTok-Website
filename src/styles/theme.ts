@@ -6,7 +6,7 @@ const theme = extendTheme({
     primary: "hsl(139, 86%, 50%)",
     secondary: "hsl(235, 86%, 30%)",
     accent: "hsl(0, 0%, 12%)",
-    bg: "hsl(235, 86%, 10%)",
+    bg: "hsl(235, 86%, 15%)",
   },
   components: {
     Button,
