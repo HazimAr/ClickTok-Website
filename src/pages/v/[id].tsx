@@ -12,7 +12,11 @@ export default function ({ video }) {
         <title>{video.author || "Error Loading Video"} | QuickTok</title>
         <meta
           property="og:description"
-          content={`Check out ${video.author}'s video!`}
+          content={
+            video.author
+              ? `Check out ${video.author}'s video!`
+              : "This can be due to TikTok taking down the video or the video being deleted."
+          }
         />
       </Head>
       <Container minH="100vh">
