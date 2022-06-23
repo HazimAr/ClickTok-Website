@@ -21,7 +21,7 @@ export const Button: ComponentStyleConfig = {
   variants: {
     primary: {
       bg: "primary",
-      color: "secondary",
+      color: "accent",
       _hover: { bg: "secondary", color: "primary" },
     },
     secondary: {
@@ -32,6 +32,7 @@ export const Button: ComponentStyleConfig = {
     accent: {
       bg: "accent",
       color: "white",
+      _hover: { bg: "white", color: "accent" },
     },
   },
 

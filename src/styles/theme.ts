@@ -3,8 +3,10 @@ import { Button, Link } from "./components";
 
 const theme = extendTheme({
   colors: {
-    primary: "#57f287",
-    secondary: "#5865f2",
+    primary: "hsl(139, 86%, 50%)",
+    secondary: "hsl(235, 86%, 30%)",
+    accent: "hsl(0, 0%, 12%)",
+    bg: "hsl(235, 86%, 10%)",
   },
   components: {
     Button,
@@ -15,7 +17,7 @@ const theme = extendTheme({
       body: {
         fontFamily:
           "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
-        backgroundColor: "secondary",
+        backgroundColor: "bg",
         color: "white",
       },
       "&::-webkit-scrollbar": {
