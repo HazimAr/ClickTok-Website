@@ -12,6 +12,8 @@ export default function Statistics({ users, converted, guilds }) {
         as={HStack}
         flexDir={{ base: "column", md: "row" }}
         justify="space-evenly"
+        spacing={0}
+        gap={{ base: 8, md: 0 }}
         color="accent"
       >
         <Statistic value={users} label="Users" icon={FaUserAlt} />
