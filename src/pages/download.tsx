@@ -1,5 +1,22 @@
-export default function () {
-  return null;
+import { Heading, HStack, VStack, Text, Input } from "@chakra-ui/react";
+import Container from "@components/Container";
+import ContainerInside from "@components/ContainerInside";
+
+export default function Download() {
+  return (
+    <Container py={40}>
+      <ContainerInside as={VStack} justify="center" spacing={4}>
+        <Heading size="3xl" as="h1">
+          QuickTok Downloader
+        </Heading>
+        <Text maxW="50ch" textAlign="center">
+          The easiest way to download TikTok videos.
+        </Text>
+        <HStack spacing={4}></HStack>
+        <Input placeholder="Enter TikTok video URL" size='md'/>
+      </ContainerInside>
+    </Container>
+  );
 }
 // Usage:
 // Text field someone can put tiktok link wether short or long
