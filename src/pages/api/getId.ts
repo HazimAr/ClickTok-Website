@@ -15,7 +15,7 @@ export default async function handler(
 }
 
 async function getId(url: string, regex: RegExp) {
-  let match = url?.match(regex);
+  let match = url.match(regex);
   if (!match) return null;
   let id = match[match.length - 1];
 
