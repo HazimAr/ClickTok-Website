@@ -1,6 +1,6 @@
 import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
-axios.defaults.timeout = 20000;
+axios.defaults.timeout = 60000;
 
 export default async function handler(
   req: NextApiRequest,

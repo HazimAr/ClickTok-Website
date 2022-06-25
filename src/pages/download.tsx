@@ -60,7 +60,7 @@ export default function Download() {
                 })
                 .catch(({ response }) => {
                   toast({
-                    title: response.data.error,
+                    title: response.data?.error,
                     description: "Please enter a valid TikTok URL.",
                     status: "error",
                     duration: 9000,
