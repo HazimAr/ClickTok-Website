@@ -1,5 +1,6 @@
 import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
+axios.defaults.timeout = 20000;
 
 export default async function handler(
   req: NextApiRequest,
@@ -55,5 +56,3 @@ async function getIdFromUrl(url: string) {
 
   return null;
 }
-
-

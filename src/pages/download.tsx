@@ -16,6 +16,7 @@ import Head from "next/head";
 
 export default function Download() {
   const [url, setUrl] = useState("");
+  const [loading, setLoading] = useState(false);
   const toast = useToast();
   const router = useRouter();
   return (
@@ -51,6 +52,7 @@ export default function Download() {
                   duration: 9000,
                   isClosable: true,
                 });
+              setLoading(true);
               axios
                 .get(`${location.origin}/api/getId?url=${url}`)
                 .then(({ data }) => {
@@ -64,6 +66,9 @@ export default function Download() {
                     duration: 9000,
                     isClosable: true,
                   });
+                })
+                .finally(() => {
+                  setLoading(false);
                 });
             }}
           >
@@ -75,7 +80,9 @@ export default function Download() {
                 isRequired
                 _placeholder={{ color: "white" }}
               />
-              <Button type="submit">Download</Button>
+              <Button type="submit" isLoading={loading}>
+                Download
+              </Button>
             </VStack>
           </form>
         </ContainerInside>
