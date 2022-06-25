@@ -23,6 +23,7 @@ const data = [
     description:
       "QuickTok is a simple Discord bot that allows you to embed Tiktok videos easily in Discord server.",
     button: "Start Downloading",
+    href: "/download",
     img: "/download.gif",
   },
 ];
@@ -46,7 +47,7 @@ export default function () {
   );
 }
 
-function Section({ title, description, button, img, index }) {
+function Section({ title, description, button, img, index, href = null }) {
   return (
     <HStack
       justify="space-between"
@@ -61,7 +62,7 @@ function Section({ title, description, button, img, index }) {
         <Button
           w="fit-content"
           as={EnhancedChakraLink}
-          href="/invite"
+          href={href || "/invite"}
           isExternal
         >
           {button}
