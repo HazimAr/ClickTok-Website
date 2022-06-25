@@ -1,5 +1,5 @@
 // google analytics measurement id
-const GA_TRACKING_ID = "";
+const GA_TRACKING_ID = "G-PGZQKZHHW0";
 
 const META = {
   title: "QuickTok | A Simple Tiktok Discord Embed Bot",
