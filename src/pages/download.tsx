@@ -1,8 +1,13 @@
-import { Heading, HStack, VStack, Text, Input } from "@chakra-ui/react";
+import { Heading, HStack, VStack, Text, Input, Button } from "@chakra-ui/react";
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
+import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 export default function Download() {
+  const [url, setUrl] = useState("");
+  const router = useRouter();
   return (
     <Container py={40}>
       <ContainerInside as={VStack} justify="center" spacing={4}>
@@ -13,11 +18,27 @@ export default function Download() {
           The easiest way to download TikTok videos.
         </Text>
         <HStack spacing={4}></HStack>
-        <Input placeholder="Enter TikTok video URL" size='md'/>
+        <Input
+          placeholder="Enter TikTok video URL"
+          size="md"
+          onChange={(e) => setUrl(e.target.value)}
+        />
+        <Button
+          onClick={async () => {
+            axios
+              .get(`${location.origin}/api/getId?url=${url}`)
+              .then(({ data }) => {
+                router.push(`/v/${data.id}`);
+              });
+          }}
+        >
+          Download
+        </Button>
       </ContainerInside>
     </Container>
   );
 }
+
 // Usage:
 // Text field someone can put tiktok link wether short or long
 // if long search for id in the url and can redirect to /v/:id
