@@ -30,11 +30,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/logo.png" />
       </Head>
       <ChakraProvider theme={theme}>
-        <Header />
+        <div style={{ minHeight: "100vh" }}>
+          <Header />
 
-        <Component {...pageProps}  />
+          <Component {...pageProps} />
 
-        <Footer />
+          <Footer />
+        </div>
       </ChakraProvider>
     </>
   );

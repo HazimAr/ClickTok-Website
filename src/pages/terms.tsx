@@ -3,7 +3,7 @@ import ContainerInside from "@components/ContainerInside";
 
 export default function Terms() {
   return (
-    <Container minH="100vh">
+    <Container>
       <ContainerInside >
         <h2 className="text-5xl font-bold py-5">Terms Of Use</h2>
         <p className="text-xl">

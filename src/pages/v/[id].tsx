@@ -19,11 +19,11 @@ export default function ({ video }) {
           }
         />
       </Head>
-      <Container minH="100vh">
+      <Container py={10}>
         <ContainerInside as={VStack}>
           {video.url ? (
             <>
-              <video src={video.url} controls />
+              <video src={video.url} width="300" controls />
               <HStack>
                 <Button
                   as={Link}

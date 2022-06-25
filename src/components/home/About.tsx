@@ -18,13 +18,13 @@ const data = [
     button: "Start Viewing",
     img: "/view.gif",
   },
-  // {
-  //   title: "Download straight to your computer",
-  //   description:
-  //     "QuickTok is a simple Discord bot that allows you to embed Tiktok videos easily in Discord server.",
-  //   button: "Start Downloading",
-  //   img: "/download.png",
-  // },
+  {
+    title: "Download straight to your computer",
+    description:
+      "QuickTok is a simple Discord bot that allows you to embed Tiktok videos easily in Discord server.",
+    button: "Start Downloading",
+    img: "/download.gif",
+  },
 ];
 
 export default function () {

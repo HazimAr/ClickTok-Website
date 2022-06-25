@@ -1,42 +1,112 @@
-import { Heading, HStack, VStack, Text, Input, Button } from "@chakra-ui/react";
+import {
+  Heading,
+  HStack,
+  VStack,
+  Text,
+  Input,
+  Button,
+  useToast,
+} from "@chakra-ui/react";
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 export default function Download() {
   const [url, setUrl] = useState("");
+  const toast = useToast();
   const router = useRouter();
   return (
-    <Container py={40}>
-      <ContainerInside as={VStack} justify="center" spacing={4}>
-        <Heading size="3xl" as="h1">
-          QuickTok Downloader
-        </Heading>
-        <Text maxW="50ch" textAlign="center">
-          The easiest way to download TikTok videos.
-        </Text>
-        <HStack spacing={4}></HStack>
-        <Input
-          placeholder="Enter TikTok video URL"
-          size="md"
-          onChange={(e) => setUrl(e.target.value)}
+    <>
+      <Head>
+        <title>TikTok Downloader | QuickTok</title>
+        <meta
+          property="og:description"
+          content="Download TikTok videos from the web!"
         />
-        <Button
-          onClick={async () => {
-            axios
-              .get(`${location.origin}/api/getId?url=${url}`)
-              .then(({ data }) => {
-                router.push(`/v/${data.id}`);
-              });
-          }}
-        >
-          Download
-        </Button>
-      </ContainerInside>
-    </Container>
+        <meta
+          itemProp="description"
+          content="Download TikTok videos from the web!"
+        />
+      </Head>
+      <Container py={40}>
+        <ContainerInside as={VStack} justify="center" spacing={4}>
+          <Heading size="3xl" as="h1">
+            TikTok Downloader
+          </Heading>
+          <Text maxW="50ch" textAlign="center">
+            The easiest way to download TikTok videos.
+          </Text>
+          <HStack spacing={4}></HStack>
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              if (!checkValidTikTokUrl(url))
+                return toast({
+                  title: "Invalid URL",
+                  description: "Please enter a valid TikTok URL.",
+                  status: "error",
+                  duration: 9000,
+                  isClosable: true,
+                });
+              axios
+                .get(`${location.origin}/api/getId?url=${url}`)
+                .then(({ data }) => {
+                  router.push(`/v/${data.id}`);
+                })
+                .catch(({ response }) => {
+                  toast({
+                    title: response.data.error,
+                    description: "Please enter a valid TikTok URL.",
+                    status: "error",
+                    duration: 9000,
+                    isClosable: true,
+                  });
+                });
+            }}
+          >
+            <VStack>
+              <Input
+                placeholder="Enter TikTok video URL"
+                minW="300px"
+                onChange={(e) => setUrl(e.target.value)}
+                isRequired
+                _placeholder={{ color: "white" }}
+              />
+              <Button type="submit">Download</Button>
+            </VStack>
+          </form>
+        </ContainerInside>
+      </Container>
+    </>
   );
+}
+
+function checkValidTikTokUrl(url) {
+  let regex =
+    /(http:|https:\/\/)?(www\.)?tiktok\.com\/(@.{1,24})\/video\/(\d{15,30})/;
+  let match = url.match(regex);
+  if (match) return true;
+
+  regex = /(http:|https:\/\/)?((?!ww)\w{2})\.tiktok.com\/(\w{5,15})/;
+  match = url.match(regex);
+  if (match) return true;
+
+  regex = /(http:|https:\/\/)?(www\.)?tiktok.com\/t\/(\w{5,15})/;
+  match = url.match(regex);
+  if (match) return true;
+
+  regex = /(http:|https:\/\/)?m\.tiktok\.com\/v\/(\d{15,30})/;
+  match = url.match(regex);
+  if (match) return true;
+
+  regex = /(http:|https:\/\/)?(www)?\.tiktok\.com\/(.*)item_id=(\d{5,30})/;
+  match = url.match(regex);
+  if (match) return true;
+
+  return false;
 }
 
 // Usage:
