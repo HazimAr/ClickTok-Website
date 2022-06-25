@@ -34,11 +34,7 @@ export default function () {
       <ContainerInside>
         {data.map((item, index) => (
           <Section
-            key={item.title}
-            title={item.title}
-            description={item.description}
-            button={item.button}
-            img={item.img}
+            {...item}
             index={index}
           />
         ))}
