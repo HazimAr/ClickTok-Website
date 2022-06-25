@@ -24,7 +24,7 @@ async function getId(url: string, regex: RegExp) {
       .then(async (response) => {
         return await getIdFromUrl(response.request.res.responseUrl);
       })
-      .catch((err) => null);
+      .catch(() => null);
   }
   return id;
 }
