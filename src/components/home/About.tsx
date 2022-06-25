@@ -14,14 +14,14 @@ const data = [
   {
     title: "View info about a video",
     description:
-      "QuickTok is a simple Discord bot that allows you to embed Tiktok videos easily in Discord server.",
+      "Grab info about a Tiktok video like the title, author, and description.",
     button: "Start Viewing",
     img: "/view.gif",
   },
   {
     title: "Download straight to your computer",
     description:
-      "QuickTok is a simple Discord bot that allows you to embed Tiktok videos easily in Discord server.",
+      "Download TikTok's without any watermark for free.",
     button: "Start Downloading",
     href: "/download",
     img: "/download.gif",
