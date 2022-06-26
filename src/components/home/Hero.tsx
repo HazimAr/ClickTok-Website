@@ -8,10 +8,10 @@ export default function Hero() {
     <Container py={40}>
       <ContainerInside as={VStack} justify="center" spacing={4}>
         <Heading size="3xl" as="h1">
-          QuickTok
+          ClickTok
         </Heading>
         <Text maxW="50ch" textAlign="center">
-          QuickTok is a simple Discord bot that allows you to embed Tiktok
+          ClickTok is a simple Discord bot that allows you to embed Tiktok
           videos easily in Discord server.
         </Text>
         <HStack spacing={4}>

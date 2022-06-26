@@ -8,10 +8,10 @@ export default function Privacy() {
       <ContainerInside>
         <Heading>Privacy Policy</Heading>
         <p className="text-xl">
-          Your privacy is important to us. It is QuickTok's policy to respect
+          Your privacy is important to us. It is ClickTok's policy to respect
           your privacy and comply with any applicable law and regulation
           regarding any personal information we may collect about you, including
-          across our website, "https://quicktok.win" and QuickTok Discord bot.
+          across our website, "https://clicktok.xyz" and ClickTok Discord bot.
         </p>
         <p className="text-xl">
           This policy is effective as of 9 March 2022 and was last updated on
@@ -26,7 +26,7 @@ export default function Privacy() {
         </p>
         <h4 className="text-2xl font-bold py-5">Log Data</h4>
         <p className="text-xl">
-          When you use our QuickTok services, if opted in to usage data
+          When you use our ClickTok services, if opted in to usage data
           collection services, we may collect:
         </p>
         <ul className="list-disc pl-7">
@@ -75,7 +75,7 @@ export default function Privacy() {
           You may request access to your personal information, and change what
           you are ok with us collecting from you. You may also request that we
           delete your personal identifying information. This all can chaged with
-          the QuickTok Discord bot. <code>/privacy usage data</code>
+          the ClickTok Discord bot. <code>/privacy usage data</code>
         </p>
         <h3 className="text-2xl font-bold py-5">Limits of Our Policy</h3>
         <p className="text-xl">

@@ -23,7 +23,7 @@ export default function Download() {
   return (
     <>
       <Head>
-        <title>TikTok Downloader | QuickTok</title>
+        <title>TikTok Downloader | ClickTok</title>
         <meta
           property="og:description"
           content="Download TikTok videos from the web!"

@@ -1,30 +1,30 @@
+import {
+  ChevronDownIcon,
+  ChevronRightIcon,
+  CloseIcon,
+  HamburgerIcon,
+} from "@chakra-ui/icons";
+import {
+  Box,
+  Button,
+  Collapse,
+  Flex,
+  Heading,
+  Icon,
+  IconButton,
+  Image,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Stack,
+  Text,
+  useColorModeValue,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Container from "./Container";
 import ContainerInside from "./ContainerInside";
 import EnhancedChakraLink from "./EnhancedChakraLink";
-import {
-  Box,
-  Flex,
-  Text,
-  IconButton,
-  Button,
-  Stack,
-  Collapse,
-  Icon,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  useColorModeValue,
-  useDisclosure,
-  Heading,
-  Image,
-} from "@chakra-ui/react";
-import {
-  HamburgerIcon,
-  CloseIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-} from "@chakra-ui/icons";
 
 export default function () {
   const [background, setBackground] = useState(false);
@@ -88,7 +88,7 @@ export default function () {
               >
                 <Image
                   src={`/logo${background ? "_inverted" : ""}.svg`}
-                  alt="quicktok's logo"
+                  alt="clicktok's logo"
                   height="75px"
                 />
 
@@ -97,7 +97,7 @@ export default function () {
                   size="md"
                   textAlign="center"
                 >
-                  QuickTok
+                  ClickTok
                 </Heading>
               </Flex>
             </EnhancedChakraLink>

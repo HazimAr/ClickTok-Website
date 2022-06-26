@@ -9,7 +9,7 @@ export default function ({ video }) {
   return (
     <>
       <Head>
-        <title>{video.author || "Error Loading Video"} | QuickTok</title>
+        <title>{video.author || "Error Loading Video"} | ClickTok</title>
         <meta
           property="og:description"
           content={
@@ -72,7 +72,7 @@ async function downloadVideo(
   const a = document.createElement("a");
   a.style.display = "none";
   a.href = url;
-  a.download = `${authorName}-${videoId} (quicktok.win).mp4`;
+  a.download = `${authorName}-${videoId} (clicktok.xyz).mp4`;
   document.body.appendChild(a);
   a.click();
   window.URL.revokeObjectURL(url);

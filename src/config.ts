@@ -2,11 +2,11 @@
 const GA_TRACKING_ID = "G-PGZQKZHHW0";
 
 const META = {
-  title: "QuickTok | A Simple Tiktok Discord Embed Bot",
+  title: "ClickTok | A Simple Tiktok Discord Embed Bot",
   lang: "en-us",
   description:
-    "QuickTok is a simple Discord bot that allows you to embed Tiktok videos in Discord channels.",
-  url: "https://quicktok.win",
+    "ClickTok is a simple Discord bot that allows you to embed Tiktok videos in Discord channels.",
+  url: "https://clicktok.xyz",
   image: "/logo.png",
   tags: [],
 };
