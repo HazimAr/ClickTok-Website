@@ -9,7 +9,13 @@ export default function footer() {
         <p>|</p>
         <EnhancedChakraLink href="/terms">Terms Of Use</EnhancedChakraLink>
       </HStack>
-      <Link href="https://hazim.tech" isExternal>
+      <Link
+        href="https://hazim.tech"
+        _hover={{
+          textDecor: "underline",
+        }}
+        isExternal
+      >
         Designed & Developed with<span>💖</span>
         by: <span style={{ fontWeight: "bold" }}>Hazim Arafa</span>
       </Link>

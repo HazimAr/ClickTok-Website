@@ -33,10 +33,7 @@ export default function () {
     <Container py={10} id="#about">
       <ContainerInside>
         {data.map((item, index) => (
-          <Section
-            {...item}
-            index={index}
-          />
+          <Section {...item} index={index} key={item.title} />
         ))}
       </ContainerInside>
     </Container>
