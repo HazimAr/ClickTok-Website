@@ -1,4 +1,4 @@
-import { HStack, VStack } from "@chakra-ui/react";
+import { HStack, Link, VStack } from "@chakra-ui/react";
 import EnhancedChakraLink from "./EnhancedChakraLink";
 
 export default function footer() {
@@ -9,6 +9,10 @@ export default function footer() {
         <p>|</p>
         <EnhancedChakraLink href="/terms">Terms Of Use</EnhancedChakraLink>
       </HStack>
+      <Link href="https://hazim.tech" isExternal>
+        Designed & Developed with<span>💖</span>
+        by: <span style={{ fontWeight: "bold" }}>Hazim Arafa</span>
+      </Link>
     </VStack>
   );
 }
