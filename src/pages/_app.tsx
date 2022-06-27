@@ -7,6 +7,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import Script from "next/script";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -28,6 +29,16 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>{META.title}</title>
         <link rel="icon" href="/logo.png" />
+        <Script
+          id="Adsense-id"
+          async
+          onError={(e) => {
+            console.error("Script failed to load", e);
+          }}
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8350269166887594"
+          crossOrigin="anonymous"
+        />
       </Head>
       <ChakraProvider theme={theme}>
         <div style={{ minHeight: "100vh" }}>
