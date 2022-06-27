@@ -18,7 +18,14 @@ export default function ({ video }) {
               : "This can be due to TikTok taking down the video or the video being deleted."
           }
         />
-        <meta property="og:type" content="video" />
+        <meta
+          property="og:title"
+          content={video.author || "Error Loading Video"}
+        />
+        <meta
+          property="og:url"
+          content={`https://clicktok.com/v/${video.id}`}
+        />
         <meta property="og:video" content={video.url} />
       </Head>
       <Container py={10}>
@@ -86,13 +93,6 @@ export async function getServerSideProps({ query }: NextPageContext) {
   const video = await (
     await fetch(`https://api2.musical.ly/aweme/v1/aweme/detail/?aweme_id=${id}`)
   ).json();
-
-  // if (!video.status_code)
-  //   return {
-  //     props: {
-  //       video: null,
-  //     },
-  //   };
 
   return {
     props: {
