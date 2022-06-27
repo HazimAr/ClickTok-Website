@@ -18,6 +18,11 @@ export default function ({ video }) {
               : "This can be due to TikTok taking down the video or the video being deleted."
           }
         />
+        <meta property="og:type" content="video" />
+        <meta
+          property="og:video"
+          content={`https://clicktok.xyz/v/${video.id}`}
+        />
       </Head>
       <Container py={10}>
         <ContainerInside as={VStack}>
