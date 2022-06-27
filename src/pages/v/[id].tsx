@@ -19,10 +19,7 @@ export default function ({ video }) {
           }
         />
         <meta property="og:type" content="video" />
-        <meta
-          property="og:video"
-          content={`https://clicktok.xyz/v/${video.id}`}
-        />
+        <meta property="og:video" content={video.url} />
       </Head>
       <Container py={10}>
         <ContainerInside as={VStack}>

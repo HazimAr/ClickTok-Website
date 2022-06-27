@@ -15,7 +15,6 @@ export default function Document() {
         <meta itemProp="image" content={META.image} />
 
         <meta property="og:url" content={META.url} />
-        <meta property="og:type" content="website" />
         <meta property="og:title" content={META.title} />
         <meta property="og:description" content={META.description} />
         <meta property="og:image" content={META.image} />
