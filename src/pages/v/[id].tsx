@@ -18,15 +18,6 @@ export default function ({ video }) {
               : "This can be due to TikTok taking down the video or the video being deleted."
           }
         />
-        <meta
-          property="og:title"
-          content={video.author || "Error Loading Video"}
-        />
-        <meta
-          property="og:url"
-          content={`https://clicktok.com/v/${video.id}`}
-        />
-        <meta property="og:video" content={video.url} />
       </Head>
       <Container py={10}>
         <ContainerInside as={VStack}>
