@@ -28,7 +28,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>{META.title}</title>
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/logo_white.png" />
         <Script
           id="Adsense-id"
           async
