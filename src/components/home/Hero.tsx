@@ -12,7 +12,7 @@ export default function Hero() {
         </Heading>
         <Text maxW="50ch" textAlign="center">
           ClickTok is a simple Discord bot that allows you to embed Tiktok
-          videos easily in Discord server.
+          videos easily in your Discord server.
         </Text>
         <HStack spacing={4}>
           <Button as={EnhancedChakraLink} href="/invite" isExternal>
