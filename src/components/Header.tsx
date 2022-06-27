@@ -86,11 +86,7 @@ export default function () {
                 justify="center"
                 flexDir={{ base: "column", sm: "row" }}
               >
-                <Image
-                  src={`/logo${background ? "_inverted" : ""}.svg`}
-                  alt="clicktok's logo"
-                  height="75px"
-                />
+                <Image src="/logo.png" alt="clicktok's logo" height="75px" />
 
                 <Heading
                   display={{ base: "none", sm: "block" }}
