@@ -86,7 +86,7 @@ export default function () {
                 justify="center"
                 flexDir={{ base: "column", sm: "row" }}
               >
-                <Image src="/logo.png" alt="clicktok's logo" height="75px" bg="white" p={1} rounded="lg"/>
+                <Image src="/logo.png" alt="clicktok's logo" height="75px"  p={1} rounded="lg"/>
 
                 <Heading
                   display={{ base: "none", sm: "block" }}
