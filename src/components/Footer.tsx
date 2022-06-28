@@ -1,4 +1,4 @@
-import { HStack, Link, VStack } from "@chakra-ui/react";
+import { HStack, VStack } from "@chakra-ui/react";
 import EnhancedChakraLink from "./EnhancedChakraLink";
 
 export default function footer() {
