@@ -24,7 +24,7 @@ export default function Statistics({ users, converted, guilds }) {
           icon={FaRecycle}
         />
 
-        <Statistic value={guilds} label="Servers" icon={FaServer} />
+        <Statistic value={guilds} label="Discord Servers" icon={FaServer} />
       </ContainerInside>
     </Container>
   );
