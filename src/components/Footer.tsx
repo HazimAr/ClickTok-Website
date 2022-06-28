@@ -3,7 +3,7 @@ import EnhancedChakraLink from "./EnhancedChakraLink";
 
 export default function footer() {
   return (
-    <VStack as="footer">
+    <VStack as="footer" py={4}>
       <HStack>
         <EnhancedChakraLink href="/privacy">Privacy Policy </EnhancedChakraLink>{" "}
         <p>|</p>
