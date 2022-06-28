@@ -9,7 +9,7 @@ export default function footer() {
         <p>|</p>
         <EnhancedChakraLink href="/terms">Terms Of Use</EnhancedChakraLink>
       </HStack>
-      {/*<Link
+      {/* <Link
         href="https://hazim.tech"
         _hover={{
           textDecor: "underline",
@@ -18,7 +18,7 @@ export default function footer() {
       >
         Designed & Developed with<span>💖</span>
         by: <span style={{ fontWeight: "bold" }}>Hazim Arafa</span>
-      </Link>*/}
+      </Link> */}
     </VStack>
   );
 }
