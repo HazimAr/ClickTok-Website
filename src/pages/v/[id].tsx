@@ -77,7 +77,7 @@ export default function ({ video }) {
                 <Button
                   as={Link}
                   onClick={() => {
-                    downloadVideo(video.url, video.author, video.id);
+                    downloadVideo(video.url, video.author.username, video.id);
                   }}
                 >
                   Download Video
