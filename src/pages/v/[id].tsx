@@ -88,7 +88,7 @@ export async function getServerSideProps({ query }: NextPageContext) {
   return {
     props: {
       video: {
-        url: video?.aweme_detail?.video?.play_addr?.url_list?.[0] || null,
+        url: video?.aweme_detail?.video?.download_addr?.url_list?.[0] || null,
         author: video?.aweme_detail?.author?.unique_id || null,
         id: video?.aweme_detail?.aweme_id || null,
       },

@@ -17,5 +17,5 @@ export default async function handler(
   if (!video?.aweme_detail)
     return res.status(400).json({ error: "Id is invalid" });
 
-  return res.redirect(video.aweme_detail?.video?.play_addr?.url_list?.[0]);
+  return res.redirect(video.aweme_detail?.video?.download_addr?.url_list?.[0]);
 }

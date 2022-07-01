@@ -11,7 +11,7 @@ import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
 import { useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/router";
+import useRouter from "next/router";
 import Head from "next/head";
 axios.defaults.timeout = 0;
 
@@ -54,23 +54,8 @@ export default function Download() {
                   isClosable: true,
                 });
               setLoading(true);
-              axios
-                .get(`${location.origin}/api/getId?url=${url}`)
-                .then(({ data }) => {
-                  router.push(`/v/${data.id}`);
-                })
-                .catch(({ response }) => {
-                  toast({
-                    title: response.data?.error,
-                    description: "Please enter a valid TikTok URL.",
-                    status: "error",
-                    duration: 9000,
-                    isClosable: true,
-                  });
-                })
-                .finally(() => {
-                  setLoading(false);
-                });
+
+              router.push(`/v/${await getIdFromUrl(url)}`);
             }}
           >
             <VStack>
@@ -123,3 +108,46 @@ function checkValidTikTokUrl(url) {
 // if id is not there use the client to make request to get the video id
 // this will save on requests from the server example url "https://abstract.land/api/proxy/tiktok.com/t/ZSd3XPeS1/?k=1"
 // "abstract.land/api/proxy/" is a cors bypass just make get request to the url and get the video from final url (or Location header)
+
+async function getId(url: string, regex: RegExp) {
+  let match = url.match(regex);
+  if (!match) return null;
+  let id = match[match.length - 1];
+
+  if (isNaN(parseInt(id)) && url.length > 5) {
+    id = await axios
+      .get(url)
+      .then(async (response) => {
+        return await getIdFromUrl(response.request.res.responseUrl);
+      })
+      .catch(() => null);
+  }
+  return id;
+}
+
+async function getIdFromUrl(url: string) {
+  let regex =
+    /(http:|https:\/\/)?(www\.)?tiktok\.com\/(@.{1,24})\/video\/(\d{15,30})/;
+  let id = await getId(url, regex);
+  if (id) return id;
+
+  regex = /(http:|https:\/\/)?((?!ww)\w{2})\.tiktok.com\/(\w{5,15})/;
+  id = await getId(url, regex);
+  // get real id from tiktok
+  if (id) return id;
+
+  regex = /(http:|https:\/\/)?(www\.)?tiktok.com\/t\/(\w{5,15})/;
+  id = await getId(url, regex);
+  // get real id from tiktok
+  if (id) return id;
+
+  regex = /(http:|https:\/\/)?m\.tiktok\.com\/v\/(\d{15,30})/;
+  id = await getId(url, regex);
+  if (id) return id;
+
+  regex = /(http:|https:\/\/)?(www)?\.tiktok\.com\/(.*)item_id=(\d{5,30})/;
+  id = await getId(url, regex);
+  if (id) return id;
+
+  return null;
+}
