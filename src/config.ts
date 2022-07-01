@@ -8,12 +8,6 @@ const META = {
     "ClickTok is a simple Discord bot that allows you to embed Tiktok videos in Discord channels.",
   url: "https://clicktok.xyz",
   image: "/logo.png",
-  tags: [
-    "discord tiktok embed",
-    "tiktok discord embed",
-    "tiktok embed discord",
-    "discord embed tiktok",
-  ],
 };
 
 export { GA_TRACKING_ID, META };
