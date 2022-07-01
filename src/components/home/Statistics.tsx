@@ -4,7 +4,6 @@ import ContainerInside from "@components/ContainerInside";
 import { useRef } from "react";
 import { useCountUp } from "react-countup";
 import { FaRecycle, FaServer, FaUserAlt } from "react-icons/fa";
-import { GoPrimitiveDot } from "react-icons/go";
 
 export default function Statistics({ users, converted, guilds }) {
   return (

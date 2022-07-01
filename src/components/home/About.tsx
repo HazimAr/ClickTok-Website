@@ -20,7 +20,7 @@ const data = [
   },
   {
     title: "Download straight to your computer",
-    description: "Download TikTok's without any watermark for free.",
+    description: "Download TikTok's for free.",
     button: "Start Downloading",
     href: "/download",
     img: "/download.gif",
@@ -64,7 +64,3 @@ function Section({ title, description, button, img, index, href = null }) {
     </HStack>
   );
 }
-
-// embed
-// View info
-// Download Videos
