@@ -11,7 +11,7 @@ import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
 import { useState } from "react";
 import axios from "axios";
-import useRouter from "next/router";
+import { useRouter } from "next/router";
 import Head from "next/head";
 axios.defaults.timeout = 0;
 
