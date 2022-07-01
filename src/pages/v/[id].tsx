@@ -8,7 +8,6 @@ import {
   Link,
   Stack,
   Text,
-  useToken,
   VStack,
 } from "@chakra-ui/react";
 import Container from "@components/Container";
@@ -19,7 +18,6 @@ import Head from "next/head";
 import { FaMusic } from "react-icons/fa";
 
 export default function ({ video }) {
-  const primary = useToken("colors", "primary");
   return (
     <>
       <Head>
@@ -47,7 +45,7 @@ export default function ({ video }) {
               : "This can be due to TikTok taking down the video or the video being deleted."
           }
         />
-        <meta name="theme-color" content={primary} />
+        <meta name="theme-color" content="#9B77E9" />
 
         <meta property="og:video" content={video?.url} />
         <meta property="og:video:secure_url" content={video?.url} />
