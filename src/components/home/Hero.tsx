@@ -2,6 +2,7 @@ import { Button, Heading, HStack, Text, VStack } from "@chakra-ui/react";
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
 import EnhancedChakraLink from "@components/EnhancedChakraLink";
+import { FaDiscord, FaInfo } from "react-icons/fa";
 
 export default function Hero() {
   return (
@@ -15,10 +16,16 @@ export default function Hero() {
           videos easily in your Discord server.
         </Text>
         <HStack spacing={4}>
-          <Button as={EnhancedChakraLink} href="/invite" isExternal>
+          <Button
+            leftIcon={<FaDiscord />}
+            as={EnhancedChakraLink}
+            href="/invite"
+            isExternal
+          >
             Invite Bot
           </Button>
           <Button
+            leftIcon={<FaInfo />}
             as={EnhancedChakraLink}
             href="/support"
             variant="accent"
