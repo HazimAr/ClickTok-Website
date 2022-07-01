@@ -24,10 +24,12 @@ export default function ({ video }) {
     <>
       <Head>
         <title>
-          {video
-            ? `Check out ${video.author.name}'s video!`
-            : "Error Loading Video"}{" "}
-          | ClickTok
+          {`${
+            video
+              ? `Check out ${video.author.name}'s video!`
+              : "Error Loading Video"
+          }
+          | ClickTok`}
         </title>
         <meta
           property="og:title"
@@ -46,6 +48,12 @@ export default function ({ video }) {
           }
         />
         <meta name="theme-color" content={primary} />
+
+        <meta property="og:video" content={video?.url} />
+        <meta property="og:video:secure_url" content={video?.url} />
+        <meta property="og:video:type" content="video/mp4" />
+        <meta property="og:video:width" content="300" />
+        <meta property="og:video:height" content="533" />
       </Head>
       <Container py={10}>
         <ContainerInside as={Stack} w="400px">
@@ -54,7 +62,7 @@ export default function ({ video }) {
               <VStack>
                 <video
                   src={video.url}
-                  width="75%"
+                  width="300"
                   controls
                   style={{ borderRadius: "10px" }}
                 />

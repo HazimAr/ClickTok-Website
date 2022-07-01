@@ -9,6 +9,7 @@ export default function Document() {
         <meta name="description" content={META.description} />
         <meta name="author" content="https://hazim.tech" />
 
+        <meta property="og:type" content="website" />
         <meta property="og:url" content={META.url} />
         <meta property="og:title" content={META.title} />
         <meta property="og:description" content={META.description} />
