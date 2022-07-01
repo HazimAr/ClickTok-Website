@@ -9,15 +9,17 @@ export default function Document() {
         <meta name="description" content={META.description} />
         <meta name="author" content="https://hazim.tech" />
 
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={META.url} />
         <meta property="og:title" content={META.title} />
         <meta property="og:description" content={META.description} />
+        <meta property="og:url" content={META.url} />
+        <meta property="og:image" content={META.image} />
+        <meta property="og:type" content="website" />
 
-        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={META.title} />
         <meta name="twitter:description" content={META.description} />
         <meta name="twitter:site" content="@discord" />
+        <meta name="twitter:image" content={META.image} />
+        <meta name="twitter:card" content="summary_large_image" />
 
         <script
           async
