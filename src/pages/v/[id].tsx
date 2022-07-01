@@ -44,7 +44,7 @@ export default function ({ video }) {
               ? video.description
               : "This can be due to TikTok taking down the video or the video being deleted."
           }
-        />{" "}
+        />
         <meta name="theme-color" content={primary} />
       </Head>
       <Container py={10}>

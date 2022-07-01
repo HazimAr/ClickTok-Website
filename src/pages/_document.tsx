@@ -16,6 +16,7 @@ export default function Document() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={META.title} />
         <meta name="twitter:description" content={META.description} />
+        <meta name="twitter:site" content="@discord" />
 
         <script
           async
