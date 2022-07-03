@@ -6,8 +6,11 @@ export default function Privacy() {
   return (
     <Container py={10}>
       <ContainerInside>
-
-        <iframe src="https://docs.google.com/document/d/e/2PACX-1vTnnCWRqnVdGYSZRCWFZeuR8WTiPLM_NYnDNpslAMf_iatv1LhW1ZP14iR8hIdJC3sM1e_HTRMLEyYy/pub?embedded=true"></iframe>
+        <p className="text-xl">
+          Your privacy is important to us. It is ClickTok's policy to respect
+          your privacy and comply with any applicable law and regulation
+          regarding any personal information we may collect about you, including
+          across our website, "https://clicktok.xyz" and ClickTok Discord bot.
         </p>
         <p className="text-xl">
           This policy is effective as of 9 March 2022 and was last updated on
