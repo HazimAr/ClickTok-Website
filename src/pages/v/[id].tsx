@@ -152,7 +152,7 @@ export async function getServerSideProps({ query }: NextPageContext) {
       video: {
         url: video.aweme_detail.video.download_addr.url_list[0],
         description: video.aweme_detail.desc,
-        music: video.aweme_detail.music.title,
+        music: video.aweme_detail.music?.title || "N/A",
         author: {
           name: video.aweme_detail.author.nickname,
           username: video.aweme_detail.author.unique_id,
