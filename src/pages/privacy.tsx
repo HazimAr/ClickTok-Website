@@ -1,4 +1,3 @@
-import { Heading } from "@chakra-ui/react";
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
 
