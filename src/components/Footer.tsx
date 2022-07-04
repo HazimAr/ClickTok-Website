@@ -5,9 +5,9 @@ export default function footer() {
   return (
     <VStack as="footer" py={4}>
       <HStack>
-        <EnhancedChakraLink href="/privacy">Privacy Policy </EnhancedChakraLink>{" "}
+        <EnhancedChakraLink href="/privacypolicy.pdf" target="_blank">Privacy Policy </EnhancedChakraLink>{" "}
         <p>|</p>
-        <EnhancedChakraLink href="/terms">Terms Of Use</EnhancedChakraLink>
+        <EnhancedChakraLink href="/terms.pdf" target="_blank">Terms Of Use</EnhancedChakraLink>
         
       </HStack>
       {/* <Link
