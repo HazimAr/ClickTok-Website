@@ -8,6 +8,8 @@ export default function footer() {
         <EnhancedChakraLink href="/privacy">Privacy Policy </EnhancedChakraLink>{" "}
         <p>|</p>
         <EnhancedChakraLink href="/terms">Terms Of Use</EnhancedChakraLink>
+        <p>|</p>
+        <EnhancedChakraLink href="https://forms.gle/4FfMCWTj4mSJinAu5">Data Removal</EnhancedChakraLink>
       </HStack>
       {/* <Link
         href="https://hazim.tech"
