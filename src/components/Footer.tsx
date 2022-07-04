@@ -8,8 +8,7 @@ export default function footer() {
         <EnhancedChakraLink href="/privacy">Privacy Policy </EnhancedChakraLink>{" "}
         <p>|</p>
         <EnhancedChakraLink href="/terms">Terms Of Use</EnhancedChakraLink>
-        <p>|</p>
-        <EnhancedChakraLink href="https://forms.gle/4FfMCWTj4mSJinAu5">Data Removal Request</EnhancedChakraLink>
+        
       </HStack>
       {/* <Link
         href="https://hazim.tech"
@@ -21,6 +20,7 @@ export default function footer() {
         Designed & Developed with<span>💖</span>
         by: <span style={{ fontWeight: "bold" }}>Hazim Arafa</span>
       </Link> */}
+      <EnhancedChakraLink href="https://forms.gle/4FfMCWTj4mSJinAu5">Data Removal Request</EnhancedChakraLink>
     </VStack>
   );
 }
