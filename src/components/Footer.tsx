@@ -20,7 +20,7 @@ export default function footer() {
         Designed & Developed with<span>💖</span>
         by: <span style={{ fontWeight: "bold" }}>Hazim Arafa</span>
       </Link> */}
-      <EnhancedChakraLink href="https://forms.gle/4FfMCWTj4mSJinAu5">Data Removal Request</EnhancedChakraLink>
+      <EnhancedChakraLink href="https://forms.gle/4FfMCWTj4mSJinAu5" target="_blank">Data Removal Request</EnhancedChakraLink>
     </VStack>
   );
 }
