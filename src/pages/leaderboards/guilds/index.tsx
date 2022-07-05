@@ -27,10 +27,12 @@ export default function GuildsLeaderboard({
           <Table colorScheme="blackAlpha" size="lg" variant="striped">
             <Thead>
               <Tr>
-              <Th fontSize={24}>#</Th>
+                <Th fontSize={24}>#</Th>
                 <Th></Th>
                 <Th fontSize={24}>Guild</Th>
-                <Th fontSize={24} isNumeric>Conversions</Th>
+                <Th fontSize={24} isNumeric>
+                  Conversions
+                </Th>
               </Tr>
             </Thead>
             <Tbody>
