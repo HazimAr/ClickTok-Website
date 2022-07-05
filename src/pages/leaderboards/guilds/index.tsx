@@ -1,4 +1,13 @@
-import { Avatar, HStack, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  HStack,
+  Table,
+  Text,
+  TableContainer,
+  Thead,
+  Tr,
+  Th,
+} from "@chakra-ui/react";
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
 import axios from "axios";
@@ -13,9 +22,20 @@ export default function GuildsLeaderboard({
   return (
     <Container>
       <ContainerInside>
-        {leaderboards.map((guild) => (
-          <Guild {...guild} />
-        ))}
+        <TableContainer>
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th></Th>
+                <Th>Guild</Th>
+                <Th isNumeric>Conversions</Th>
+              </Tr>
+            </Thead>
+            {leaderboards.map((guild) => (
+              <Guild {...guild} />
+            ))}
+          </Table>
+        </TableContainer>
       </ContainerInside>
     </Container>
   );
@@ -26,7 +46,7 @@ export function Guild(guild: LeaderboardGuild) {
     <HStack>
       <Avatar size="sm" src={guild.icon} name={guild.name} />
       <Text>{guild.name}</Text>
-			<Text>{guild.conversions}</Text>
+      <Text>{guild.conversions}</Text>
     </HStack>
   );
 }
