@@ -1,4 +1,4 @@
-import { Avatar, HStack } from "@chakra-ui/react";
+import { Avatar, HStack, Text } from "@chakra-ui/react";
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
 import axios from "axios";
@@ -25,6 +25,8 @@ export function Guild(guild: LeaderboardGuild) {
   return (
     <HStack>
       <Avatar size="sm" src={guild.icon} name={guild.name} />
+      <Text>{guild.name}</Text>
+			<Text>{guild.conversions}</Text>
     </HStack>
   );
 }
