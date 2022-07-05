@@ -56,6 +56,7 @@ export function Guild(guild: LeaderboardGuild) {
       </Td>
       <Td>
         <Text>{guild.conversions}</Text>
+      </Td>
     </Tr>
   );
 }
