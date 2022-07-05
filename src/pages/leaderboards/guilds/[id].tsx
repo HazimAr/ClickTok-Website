@@ -24,17 +24,23 @@ export default function GuildUsersLeaderboard({
     <Container>
       <ContainerInside>
         <TableContainer>
-          <Table variant="simple">
+          <Table colorScheme="blackAlpha" size="lg" variant="striped">
             <Thead>
               <Tr>
+                <Th fontSize={24}>#</Th>
                 <Th></Th>
-                <Th>Guild</Th>
-                <Th isNumeric>Conversions</Th>
+                <Th fontSize={24}>User</Th>
+                <Th fontSize={24} isNumeric>
+                  Conversions
+                </Th>
               </Tr>
             </Thead>
             <Tbody>
-              {leaderboards.map((guild) => (
-                <User {...guild} />
+              {leaderboards.map((user, index) => (
+                <Tr>
+                  <Td fontSize={18}>{index + 1}</Td>
+                  <User {...user} />
+                </Tr>
               ))}
             </Tbody>
           </Table>
@@ -44,21 +50,20 @@ export default function GuildUsersLeaderboard({
   );
 }
 
-export function User(user: LeaderboardGuildUser) {
+export function User(guild: LeaderboardGuildUser) {
   return (
-    <Tr>
+    <>
       <Td>
-        <Avatar size="sm" src={user.avatarURL} name={user.name} />
+        <Avatar size="lg" src={guild.avatarURL} name={guild.username} />
       </Td>
       <Td>
-        <Text>{user.name}</Text>
+        <Text fontSize={20}>{guild.username}</Text>
       </Td>
       <Td isNumeric>
-        <Text>{user.conversions}</Text>
+        <Text fontSize={20}>{guild.conversions}</Text>
       </Td>
-    </Tr>
+    </>
   );
-}
 
 export async function getServerSideProps({ query }) {
   const { data: leaderboards } = await axios.get(

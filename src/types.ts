@@ -6,7 +6,7 @@ export type LeaderboardGuild = {
 };
 
 export type LeaderboardGuildUser = {
-  name: string;
+  username: string;
   avatarURL: string;
   conversions: number;
   createdAt: Date;
