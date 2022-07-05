@@ -94,7 +94,7 @@ export default function ({ video }) {
                 <Button
                   as={Link}
                   onClick={() => {
-                    downloadAudio(video.audio, video.author.username, video.id);
+                    downloadAudio(video.music, video.author.username, video.id);
                   }}
                 >
                   Download Audio
