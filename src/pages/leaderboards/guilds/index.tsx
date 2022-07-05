@@ -7,6 +7,7 @@ import {
   Thead,
   Tr,
   Th,
+  Tbody,
 } from "@chakra-ui/react";
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
@@ -31,9 +32,11 @@ export default function GuildsLeaderboard({
                 <Th isNumeric>Conversions</Th>
               </Tr>
             </Thead>
-            {leaderboards.map((guild) => (
-              <Guild {...guild} />
-            ))}
+            <Tbody>
+              {leaderboards.map((guild) => (
+                <Guild {...guild} />
+              ))}
+            </Tbody>
           </Table>
         </TableContainer>
       </ContainerInside>
@@ -43,11 +46,11 @@ export default function GuildsLeaderboard({
 
 export function Guild(guild: LeaderboardGuild) {
   return (
-    <HStack>
+    <Tr>
       <Avatar size="sm" src={guild.icon} name={guild.name} />
       <Text>{guild.name}</Text>
       <Text>{guild.conversions}</Text>
-    </HStack>
+    </Tr>
   );
 }
 
