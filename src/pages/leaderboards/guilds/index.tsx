@@ -8,6 +8,7 @@ import {
   Tr,
   Th,
   Tbody,
+  Td,
 } from "@chakra-ui/react";
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
@@ -47,9 +48,14 @@ export default function GuildsLeaderboard({
 export function Guild(guild: LeaderboardGuild) {
   return (
     <Tr>
-      <Avatar size="sm" src={guild.icon} name={guild.name} />
-      <Text>{guild.name}</Text>
-      <Text>{guild.conversions}</Text>
+      <Td>
+        <Avatar size="sm" src={guild.icon} name={guild.name} />
+      </Td>
+      <Td>
+        <Text>{guild.name}</Text>
+      </Td>
+      <Td>
+        <Text>{guild.conversions}</Text>
     </Tr>
   );
 }
