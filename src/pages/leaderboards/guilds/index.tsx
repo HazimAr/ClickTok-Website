@@ -34,8 +34,11 @@ export default function GuildsLeaderboard({
               </Tr>
             </Thead>
             <Tbody>
-              {leaderboards.map((guild) => (
-                <Guild {...guild} />
+              {leaderboards.map((guild, index) => (
+                <Tr key={guild.createdAt.getTime()}>
+                  <Td>{index}</Td>
+                  <Guild {...guild} />
+                </Tr>
               ))}
             </Tbody>
           </Table>
@@ -47,7 +50,7 @@ export default function GuildsLeaderboard({
 
 export function Guild(guild: LeaderboardGuild) {
   return (
-    <Tr>
+    <>
       <Td>
         <Avatar size="md" src={guild.icon} name={guild.name} />
       </Td>
@@ -57,7 +60,7 @@ export function Guild(guild: LeaderboardGuild) {
       <Td isNumeric>
         <Text>{guild.conversions}</Text>
       </Td>
-    </Tr>
+    </>
   );
 }
 
