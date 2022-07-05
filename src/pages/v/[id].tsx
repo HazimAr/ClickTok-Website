@@ -92,6 +92,14 @@ export default function ({ video }) {
                   Download Video
                 </Button>
                 <Button
+                  as={Link}
+                  onClick={() => {
+                    downloadAudio(video.audio, video.author.username, video.id);
+                  }}
+                >
+                  Download Audio
+                </Button>
+                <Button
                   variant="accent"
                   as={Link}
                   isExternal
@@ -136,6 +144,23 @@ async function downloadVideo(
   window.URL.revokeObjectURL(url);
 }
 
+async function downloadAudio(
+  audioUrl: RequestInfo | URL,
+  authorName: string,
+  videoId: string
+) {
+  const res = await fetch(audioUrl);
+  const blob = await res.blob();
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.style.display = "none";
+  a.href = url;
+  a.download = `${authorName}-${videoId} (clicktok.xyz).mp3`;
+  document.body.appendChild(a);
+  a.click();
+  window.URL.revokeObjectURL(url);
+}
+
 export async function getServerSideProps({ query }: NextPageContext) {
   const id = query.id;
 
@@ -151,6 +176,7 @@ export async function getServerSideProps({ query }: NextPageContext) {
     props: {
       video: {
         url: video.aweme_detail.video.download_addr.url_list[0],
+        audio: video.aweme_detail.audio.download_addr.url_list[0],
         description: video.aweme_detail.desc,
         music: video.aweme_detail.music?.title || "N/A",
         author: {
