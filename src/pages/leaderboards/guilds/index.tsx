@@ -1,6 +1,5 @@
 import {
   Avatar,
-  HStack,
   Table,
   Text,
   TableContainer,
