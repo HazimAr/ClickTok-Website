@@ -49,7 +49,7 @@ export function Guild(guild: LeaderboardGuild) {
   return (
     <Tr>
       <Td>
-        <Avatar size="sm" src={guild.icon} name={guild.name} />
+        <Avatar size="md" src={guild.icon} name={guild.name} />
       </Td>
       <Td>
         <Text>{guild.name}</Text>
