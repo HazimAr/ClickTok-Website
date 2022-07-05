@@ -25,18 +25,19 @@ export default function GuildsLeaderboard({
     <Container>
       <ContainerInside>
         <TableContainer>
-          <Table variant="simple">
+          <Table colorScheme="blackAlpha" size="lg" variant="striped">
             <Thead>
               <Tr>
+              <Th fontSize={24}>#</Th>
                 <Th></Th>
-                <Th>Guild</Th>
-                <Th isNumeric>Conversions</Th>
+                <Th fontSize={24}>Guild</Th>
+                <Th fontSize={24} isNumeric>Conversions</Th>
               </Tr>
             </Thead>
             <Tbody>
               {leaderboards.map((guild, index) => (
                 <Tr>
-                  <Td>{index}</Td>
+                  <Td fontSize={18}>{index + 1}</Td>
                   <Guild {...guild} />
                 </Tr>
               ))}
@@ -52,13 +53,13 @@ export function Guild(guild: LeaderboardGuild) {
   return (
     <>
       <Td>
-        <Avatar size="md" src={guild.icon} name={guild.name} />
+        <Avatar size="lg" src={guild.icon} name={guild.name} />
       </Td>
       <Td>
-        <Text>{guild.name}</Text>
+        <Text fontSize={20}>{guild.name}</Text>
       </Td>
       <Td isNumeric>
-        <Text>{guild.conversions}</Text>
+        <Text fontSize={20}>{guild.conversions}</Text>
       </Td>
     </>
   );
