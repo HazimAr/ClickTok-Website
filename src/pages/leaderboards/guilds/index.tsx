@@ -30,7 +30,7 @@ export default function GuildsLeaderboard({
               <Tr>
                 <Th></Th>
                 <Th>Guild</Th>
-                <Th isNumeric>Conversions</Th>
+                <Th>Conversions</Th>
               </Tr>
             </Thead>
             <Tbody>
