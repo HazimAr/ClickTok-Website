@@ -77,9 +77,6 @@ export function User(guild: LeaderboardGuildUser) {
     </>
   );
 
-
-
-
 // export async function getStaticPaths() {
 //   const { data: leaderboards } = await axios.get(`${API}/leaderboards/guilds`);
 
