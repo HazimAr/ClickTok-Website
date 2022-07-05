@@ -99,15 +99,15 @@ export default function ({ video }) {
                 >
                   Download Audio
                 </Button>
-                <Button
-                  variant="accent"
-                  as={Link}
-                  isExternal
-                  href={`https://m.tiktok.com/v/${video.id}`}
-                >
-                  View
-                </Button>
               </HStack>
+              <Button
+                variant="accent"
+                as={Link}
+                isExternal
+                href={`https://m.tiktok.com/v/${video.id}`}
+              >
+                View
+              </Button>
             </>
           ) : (
             <>
