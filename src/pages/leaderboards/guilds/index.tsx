@@ -35,7 +35,7 @@ export default function GuildsLeaderboard({
             </Thead>
             <Tbody>
               {leaderboards.map((guild, index) => (
-                <Tr key={guild.createdAt.getTime()}>
+                <Tr>
                   <Td>{index}</Td>
                   <Guild {...guild} />
                 </Tr>
