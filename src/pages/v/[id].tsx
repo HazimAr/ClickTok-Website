@@ -176,7 +176,7 @@ export async function getServerSideProps({ query }: NextPageContext) {
     props: {
       video: {
         url: video.aweme_detail.video.download_addr.url_list[0],
-        audio: video.aweme_detail.audio.download_addr.url_list[0],
+        audio: video.aweme_detail.music.play_url.url_list[0],
         description: video.aweme_detail.desc,
         music: video.aweme_detail.music?.title || "N/A",
         author: {
