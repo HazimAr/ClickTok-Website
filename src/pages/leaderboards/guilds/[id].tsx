@@ -50,6 +50,18 @@ export default function GuildUsersLeaderboard({
   );
 }
 
+export async function getServerSideProps({ query }) {
+  const { data: leaderboards } = await axios.get(
+    `${API}/leaderboards/guilds/${query.id}`
+  );
+
+  return {
+    props: {
+      leaderboards,
+    },
+  };
+}
+
 export function User(guild: LeaderboardGuildUser) {
   return (
     <>
@@ -65,17 +77,8 @@ export function User(guild: LeaderboardGuildUser) {
     </>
   );
 
-export async function getServerSideProps({ query }) {
-  const { data: leaderboards } = await axios.get(
-    `${API}/leaderboards/guilds/${query.id}`
-  );
 
-  return {
-    props: {
-      leaderboards,
-    },
-  };
-}
+
 
 // export async function getStaticPaths() {
 //   const { data: leaderboards } = await axios.get(`${API}/leaderboards/guilds`);
