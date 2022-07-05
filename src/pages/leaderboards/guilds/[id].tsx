@@ -60,7 +60,7 @@ export function User(user: LeaderboardGuildUser) {
   );
 }
 
-export async function getStaticProps({ query }) {
+export async function getServerSideProps({ query }) {
   const { data: leaderboards } = await axios.get(
     `${API}/leaderboards/guilds/${query.id}`
   );
@@ -72,15 +72,18 @@ export async function getStaticProps({ query }) {
   };
 }
 
-export async function getStaticPaths() {
-  const { data: leaderboards } = await axios.get(`${API}/leaderboards/guilds`);
+// export async function getStaticPaths() {
+//   const { data: leaderboards } = await axios.get(`${API}/leaderboards/guilds`);
 
-  return {
-    paths: leaderboards.map((guild) => ({
-      params: {
-        id: guild.id,
-      },
-    })),
-    fallback: true,
-  };
-}
+//   return {
+//     paths: leaderboards.map((guild) => {
+//       console.log(guild)
+//       return {
+//         params: {
+//           id: guild?.id || "1",
+//         },
+//       };
+//     }),
+//     fallback: "blocking",
+//   };
+// }

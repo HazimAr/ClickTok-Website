@@ -73,5 +73,6 @@ export async function getStaticProps() {
     props: {
       leaderboards,
     },
+    revalidate: 60,
   };
 }
