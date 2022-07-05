@@ -71,3 +71,16 @@ export async function getStaticProps({ query }) {
     },
   };
 }
+
+export async function getStaticPaths() {
+  const { data: leaderboards } = await axios.get(`${API}/leaderboards/guilds`);
+
+  return {
+    paths: leaderboards.map((guild) => ({
+      params: {
+        id: guild.id,
+      },
+    })),
+    fallback: true,
+  };
+}
