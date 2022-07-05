@@ -30,7 +30,7 @@ export default function GuildsLeaderboard({
               <Tr>
                 <Th></Th>
                 <Th>Guild</Th>
-                <Th>Conversions</Th>
+                <Th isNumeric>Conversions</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -54,7 +54,7 @@ export function Guild(guild: LeaderboardGuild) {
       <Td>
         <Text>{guild.name}</Text>
       </Td>
-      <Td>
+      <Td isNumeric>
         <Text>{guild.conversions}</Text>
       </Td>
     </Tr>
