@@ -8,6 +8,7 @@ import {
   Th,
   Tbody,
   Td,
+  Heading,
 } from "@chakra-ui/react";
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
@@ -23,41 +24,47 @@ export default function GuildUsersLeaderboard({
   return (
     <Container>
       <ContainerInside>
-        <TableContainer>
-          <Table colorScheme="blackAlpha" size="lg" variant="striped">
-            <Thead>
-              <Tr>
-                <Th fontSize={24}>#</Th>
-                <Th></Th>
-                <Th fontSize={24}>User</Th>
-                <Th fontSize={24} isNumeric>
-                  Conversions
-                </Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {leaderboards.map((user, index) => (
+        {leaderboards?.length ? (
+          <TableContainer>
+            <Table colorScheme="blackAlpha" size="lg" variant="striped">
+              <Thead>
                 <Tr>
-                  <Td fontSize={18}>{index + 1}</Td>
-                  <User {...user} />
+                  <Th fontSize={24}>#</Th>
+                  <Th></Th>
+                  <Th fontSize={24}>User</Th>
+                  <Th fontSize={24} isNumeric>
+                    Conversions
+                  </Th>
                 </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
+              </Thead>
+              <Tbody>
+                {leaderboards.map((user, index) => (
+                  <Tr>
+                    <Td fontSize={18}>{index + 1}</Td>
+                    <User {...user} />
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          </TableContainer>
+        ) : (
+          <Heading textAlign="center">No Guild found</Heading>
+        )}
       </ContainerInside>
     </Container>
   );
 }
 
 export async function getServerSideProps({ query }) {
-  const { data: leaderboards } = await axios.get(
-    `${API}/leaderboards/${query.id}`
-  );
+  const response = await axios
+    .get(`${API}/leaderboards/${query.id}`)
+    .then((res) => res)
+    .catch((e) => e.response);
 
+  if (response.status != 200) return { props: {} };
   return {
     props: {
-      leaderboards,
+      leaderboards: response.data,
     },
   };
 }
