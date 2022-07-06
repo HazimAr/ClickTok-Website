@@ -52,7 +52,7 @@ export default function GuildUsersLeaderboard({
 
 export async function getServerSideProps({ query }) {
   const { data: leaderboards } = await axios.get(
-    `${API}/leaderboards/guilds/${query.id}`
+    `${API}/leaderboards/${query.id}`
   );
 
   return {
@@ -79,7 +79,7 @@ export function User(guild: LeaderboardGuildUser) {
 }
 
 // export async function getStaticPaths() {
-//   const { data: leaderboards } = await axios.get(`${API}/leaderboards/guilds`);
+//   const { data: leaderboards } = await axios.get(`${API}/leaderboards`);
 
 //   return {
 //     paths: leaderboards.map((guild) => {
