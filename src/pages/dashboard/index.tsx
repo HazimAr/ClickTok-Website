@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
+import EnhancedChakraLink from "@components/EnhancedChakraLink";
 import Header from "@components/Header";
 import axios from "axios";
 import { unstable_getServerSession } from "next-auth";
@@ -56,7 +57,9 @@ function Guild(guild: Guild) {
         border="2px"
       />
       <Heading size="sm">{guild.name}</Heading>
-      <Button>Go</Button>
+      <Button as={EnhancedChakraLink} href={`/dashboard/${guild.id}`}>
+        Go
+      </Button>
     </VStack>
   );
 }
