@@ -43,10 +43,12 @@ function Guild(guild: Guild) {
       _before={{
         content: "''",
         top: 0,
+        zIndex: 0,
         position: "absolute",
         width: "100%",
         height: "100%",
         backdropFilter: "blur(10px)",
+        background: "rgba(0,0,0,0.5)",
       }}
     >
       <Image
@@ -55,9 +57,15 @@ function Guild(guild: Guild) {
         w="75px"
         borderRadius="100%"
         border="2px"
+        zIndex={1}
       />
-      <Heading size="sm">{guild.name}</Heading>
-      <Button as={EnhancedChakraLink} href={`/dashboard/${guild.id}`}>
+      <Heading size="sm" zIndex={1}>
+        {guild.name}
+      </Heading>
+      <Button
+        as={EnhancedChakraLink}
+        href={`/dashboard/${guild.id}`}
+      >
         Go
       </Button>
     </VStack>
