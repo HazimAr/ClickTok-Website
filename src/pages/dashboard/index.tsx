@@ -102,7 +102,7 @@ export async function getServerSideProps({
     return { props: {} };
   }
   console.log(session);
-  const { data } = await axios.get(`${API}/me/guilds`, {
+  const { data } = await axios.get(`${API}/dashboard`, {
     headers: {
       authorization: `Bearer ${session.accessToken}`,
     },
