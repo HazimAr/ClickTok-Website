@@ -1,16 +1,25 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 import theme from "../styles/theme";
 import { META, GA_TRACKING_ID } from "../config";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { ReactElement, ReactNode, useEffect } from "react";
 import Script from "next/script";
+import { SessionProvider } from "next-auth/react";
+import { NextPage } from "next";
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+export type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
+  const session = pageProps?.session;
   useEffect(() => {
     const handleRouteChange = (url: unknown) => {
       // @ts-ignore
@@ -23,31 +32,19 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
   }, [router.events]);
-
+  const getLayout = Component.getLayout || ((page) => page);
   return (
     <>
       <Head>
         <title>{META.title}</title>
         <link rel="icon" href="/logo.png" />
-        <Script
-          id="Adsense-id"
-          async
-          onError={(e) => {
-            console.error("Script failed to load", e);
-          }}
-          strategy="afterInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8350269166887594"
-          crossOrigin="anonymous"
-        />
       </Head>
       <ChakraProvider theme={theme}>
-        <div style={{ minHeight: "100vh" }}>
-          <Header />
-
-          <Component {...pageProps} />
-
-          <Footer />
-        </div>
+        <SessionProvider session={session}>
+          <div style={{ minHeight: "100vh" }}>
+            {getLayout(<Component {...pageProps} />)}
+          </div>
+        </SessionProvider>
       </ChakraProvider>
     </>
   );

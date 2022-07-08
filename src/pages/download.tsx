@@ -9,13 +9,14 @@ import {
 } from "@chakra-ui/react";
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Head from "next/head";
-axios.defaults.timeout = 0;
+import Header from "@components/Header";
+import Footer from "@components/Footer";
 
-export default function Download() {
+const Download = () => {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const toast = useToast();
@@ -75,7 +76,19 @@ export default function Download() {
       </Container>
     </>
   );
-}
+};
+
+Download.getLayout = (page: ReactElement) => {
+  return (
+    <>
+      <Header />
+      {page}
+      <Footer />
+    </>
+  );
+};
+
+export default Download;
 
 function checkValidTikTokUrl(url) {
   let regex =

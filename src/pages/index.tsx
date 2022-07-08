@@ -1,9 +1,12 @@
+import Header from "@components/Header";
+import Footer from "@components/Footer";
 import About from "@components/home/About";
 import Hero from "@components/home/Hero";
 import Statistics from "@components/home/Statistics";
 import { MongoClient } from "mongodb";
+import { ReactElement } from "react";
 
-export default function Home({ users, converted, guilds }) {
+export const Home = ({ users, converted, guilds }) => {
   return (
     <>
       <Hero />
@@ -11,7 +14,20 @@ export default function Home({ users, converted, guilds }) {
       <About />
     </>
   );
-}
+};
+
+Home.getLayout = (page: ReactElement) => {
+  return (
+    <>
+      <Header />
+      {page}
+      <Footer />
+    </>
+  );
+};
+
+export default Home;
+
 
 export async function getStaticProps() {
   const client = new MongoClient(process.env.MONGO);
@@ -42,7 +58,6 @@ export async function getStaticProps() {
       guildsResponse.length,
     ];
   });
-  
 
   return {
     props: {
