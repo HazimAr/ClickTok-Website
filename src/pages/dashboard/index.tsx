@@ -1,13 +1,4 @@
-import {
-  Button,
-  Heading,
-  HStack,
-  Stack,
-  Image,
-  SimpleGrid,
-  VStack,
-  Box,
-} from "@chakra-ui/react";
+import { Button, Heading, Image, SimpleGrid, VStack } from "@chakra-ui/react";
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
 import EnhancedChakraLink from "@components/EnhancedChakraLink";
