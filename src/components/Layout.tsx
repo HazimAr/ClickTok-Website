@@ -3,7 +3,6 @@ import {
   useColorModeValue,
   Flex,
   Icon,
-  // Collapse,
   Drawer,
   DrawerOverlay,
   DrawerContent,
@@ -29,17 +28,12 @@ import { useSession } from "next-auth/react";
 
 export default function DashboardLayout({ children = null }) {
   const sidebar = useDisclosure();
-  // const integrations = useDisclosure();
   const color = useColorModeValue("gray.600", "gray.300");
   const router = useRouter();
   const { data } = useSession();
 
   const NavItem = (props) => {
     const { icon, children, href, ...rest } = props;
-    console.log(
-      href.substring(1, href.length),
-      router.asPath.split("/")[router.asPath.split("/").length - 1]
-    );
     return (
       <Flex
         as={EnhancedChakraLink}
@@ -62,6 +56,7 @@ export default function DashboardLayout({ children = null }) {
         color="inherit"
         _dark={{
           color: "gray.400",
+          // this right here is called im fucking lazy and i don't wanna refractor this bullshit of a code
           bg:
             router.asPath.split("/")[router.asPath.split("/").length - 1] ==
               router.query.guildId && !href.substring(1, href.length)
@@ -155,26 +150,6 @@ export default function DashboardLayout({ children = null }) {
         <NavItem href="/leaderboard" icon={HiViewBoards}>
           Leaderboard
         </NavItem>
-
-        {/* <NavItem href="/" icon={HiCode} onClick={integrations.onToggle}>
-          Integrations
-          <Icon
-            as={MdKeyboardArrowRight}
-            ml="auto"
-            transform={integrations.isOpen && "rotate(90deg)"}
-          />
-        </NavItem>
-        <Collapse in={integrations.isOpen}>
-          <NavItem href="/" pl="12" py="2">
-            Shopify
-          </NavItem>
-          <NavItem href="/" pl="12" py="2">
-            Slack
-          </NavItem>
-          <NavItem href="/" pl="12" py="2">
-            Zapier
-          </NavItem>
-        </Collapse> */}
         <NavItem href="/settings" icon={BsGearFill}>
           Settings
         </NavItem>
@@ -266,7 +241,7 @@ export default function DashboardLayout({ children = null }) {
           </Flex>
         </Flex>
 
-        <Box as="main" p="4">
+        <Box as="main" p={8}>
           {children}
         </Box>
       </Box>
