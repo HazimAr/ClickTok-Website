@@ -235,7 +235,12 @@ export default function DashboardLayout({ children = null }) {
 
           <Flex align="center" cursor="pointer" gap={4}>
             {/* <Icon color="gray.500" as={FaBell} cursor="pointer" /> */}
-            <Button>Upgrade to Premium</Button>
+            <Button
+              as={EnhancedChakraLink}
+              href={`/dashboard/${router.query.guildId}/premium`}
+            >
+              Upgrade to Premium
+            </Button>
             <Avatar size="sm" name={data?.user.name} src={data?.user.image} />
             <Icon as={FiMenu} />
           </Flex>
