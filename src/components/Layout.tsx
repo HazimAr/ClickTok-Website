@@ -15,6 +15,7 @@ import {
   Box,
   Text,
   Image,
+  Button,
 } from "@chakra-ui/react";
 import { FaBell, FaCrown } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
@@ -25,12 +26,15 @@ import { BsGearFill, BsGraphUp } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import EnhancedChakraLink from "./EnhancedChakraLink";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import { ArrowDownIcon } from "@chakra-ui/icons";
 
 export default function DashboardLayout({ children = null }) {
   const sidebar = useDisclosure();
   // const integrations = useDisclosure();
   const color = useColorModeValue("gray.600", "gray.300");
   const router = useRouter();
+  const { data } = useSession();
 
   const NavItem = (props) => {
     const { icon, children, href, ...rest } = props;
@@ -204,7 +208,7 @@ export default function DashboardLayout({ children = null }) {
           }}
           borderBottomWidth="1px"
           color="inherit"
-          h="14"
+          py={4}
         >
           <IconButton
             aria-label="Menu"
@@ -229,15 +233,11 @@ export default function DashboardLayout({ children = null }) {
             <Input placeholder="Search..." border="0px" w="100%" />
           </InputGroup>
 
-          <Flex align="center">
-            <Icon color="gray.500" as={FaBell} cursor="pointer" />
-            <Avatar
-              ml="4"
-              size="sm"
-              name="anubra266"
-              src="https://avatars.githubusercontent.com/u/30869823?v=4"
-              cursor="pointer"
-            />
+          <Flex align="center" cursor="pointer" gap={4}>
+            {/* <Icon color="gray.500" as={FaBell} cursor="pointer" /> */}
+            <Button>Upgrade to Premium</Button>
+            <Avatar size="sm" name={data?.user.name} src={data?.user.image} />
+            <Icon as={FiMenu} />
           </Flex>
         </Flex>
 
