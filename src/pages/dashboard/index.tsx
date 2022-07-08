@@ -1,4 +1,11 @@
-import { Button, Heading, Image, SimpleGrid, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  Center,
+  Heading,
+  Image,
+  SimpleGrid,
+  VStack,
+} from "@chakra-ui/react";
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
 import EnhancedChakraLink from "@components/EnhancedChakraLink";
@@ -12,11 +19,13 @@ const Dashboard = ({ guilds }) => {
   return (
     <Container>
       <ContainerInside>
-        <SimpleGrid columns={3} gap={4}>
-          {guilds.map((guild: Guild) => (
-            <Guild key={guild.id} {...guild} />
-          ))}
-        </SimpleGrid>
+        <Center>
+          <SimpleGrid columns={3} gap={4} >
+            {guilds.map((guild: Guild) => (
+              <Guild key={guild.id} {...guild} />
+            ))}
+          </SimpleGrid>
+        </Center>
       </ContainerInside>
     </Container>
   );
@@ -30,7 +39,7 @@ function Guild(guild: Guild) {
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
       position="relative"
-      py={4}
+      p={4}
       rounded="lg"
       _before={{
         content: "''",
