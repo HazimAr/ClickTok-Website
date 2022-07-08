@@ -3,7 +3,7 @@ import {
   useColorModeValue,
   Flex,
   Icon,
-  Collapse,
+  // Collapse,
   Drawer,
   DrawerOverlay,
   DrawerContent,
@@ -18,8 +18,8 @@ import {
 } from "@chakra-ui/react";
 import { FaBell, FaCrown } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
-import { MdKeyboardArrowRight } from "react-icons/md";
-import { HiCode, HiViewBoards } from "react-icons/hi";
+
+import { HiViewBoards } from "react-icons/hi";
 import { MdHome } from "react-icons/md";
 import { BsGearFill, BsGraphUp } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
@@ -28,7 +28,7 @@ import { useRouter } from "next/router";
 
 export default function DashboardLayout({ children = null }) {
   const sidebar = useDisclosure();
-  const integrations = useDisclosure();
+  // const integrations = useDisclosure();
   const color = useColorModeValue("gray.600", "gray.300");
   const router = useRouter();
 
@@ -221,7 +221,7 @@ export default function DashboardLayout({ children = null }) {
               base: "none",
               md: "flex",
             }}
-						pr="4"
+            pr="4"
           >
             <InputLeftElement color="gray.500">
               <FiSearch />
