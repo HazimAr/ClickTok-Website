@@ -62,6 +62,14 @@ export default function DashboardLayout({ children = null }) {
         color="inherit"
         _dark={{
           color: "gray.400",
+          bg:
+            router.asPath.split("/")[router.asPath.split("/").length - 1] ==
+              router.query.guildId && !href.substring(1, href.length)
+              ? "gray.900"
+              : href.substring(1, href.length) ==
+                router.asPath.split("/")[router.asPath.split("/").length - 1]
+              ? "gray.900"
+              : "transparent",
         }}
         _hover={{
           bg: "gray.100",
