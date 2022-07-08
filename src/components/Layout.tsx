@@ -36,10 +36,24 @@ export default function DashboardLayout({ children = null }) {
 
   const NavItem = (props) => {
     const { icon, children, href, ...rest } = props;
+    console.log(
+      href.substring(1, href.length),
+      router.asPath.split("/")[router.asPath.split("/").length - 1]
+    );
     return (
       <Flex
         as={EnhancedChakraLink}
         href={`/dashboard/${router.query.guildId}${href}`}
+        // this right here is called im fucking lazy and i don't wanna refractor this bullshit of a code
+        bg={
+          router.asPath.split("/")[router.asPath.split("/").length - 1] ==
+            router.query.guildId && !href.substring(1, href.length)
+            ? "gray.100"
+            : href.substring(1, href.length) ==
+              router.asPath.split("/")[router.asPath.split("/").length - 1]
+            ? "gray.100"
+            : "transparent"
+        }
         align="center"
         px="4"
         pl="4"
@@ -118,7 +132,7 @@ export default function DashboardLayout({ children = null }) {
         color="gray.600"
         aria-label="Main Navigation"
       >
-        <NavItem href="/" icon={MdHome}>
+        <NavItem href="" icon={MdHome}>
           Home
         </NavItem>
         <NavItem href="/premium" icon={FaCrown}>
