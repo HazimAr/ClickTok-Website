@@ -1,16 +1,11 @@
-import {
-  Button,
-  Center,
-  Heading,
-  Image,
-  SimpleGrid,
-  VStack,
-} from "@chakra-ui/react";
+import { Button, Heading, Image, SimpleGrid, VStack } from "@chakra-ui/react";
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
 import EnhancedChakraLink from "@components/EnhancedChakraLink";
 import Header from "@components/Header";
 import axios from "axios";
+import { API } from "config";
+import { NextPageContext } from "next";
 import { unstable_getServerSession } from "next-auth";
 import { Guild } from "types";
 import { authOptions } from "../api/auth/[...nextauth]";
@@ -19,19 +14,23 @@ const Dashboard = ({ guilds }) => {
   return (
     <Container>
       <ContainerInside>
-        <Center>
-          <SimpleGrid columns={3} gap={4} >
-            {guilds.map((guild: Guild) => (
-              <Guild key={guild.id} {...guild} />
+        <VStack>
+          <Heading mb={10}>Select A Server</Heading>
+          <SimpleGrid columns={3} gap={4}>
+            {guilds.botGuilds.map((guild: Guild) => (
+              <Guild key={guild.id} guild={guild} admin />
+            ))}
+            {guilds.normalGuilds.map((guild: Guild) => (
+              <Guild key={guild.id} guild={guild} />
             ))}
           </SimpleGrid>
-        </Center>
+        </VStack>
       </ContainerInside>
     </Container>
   );
 };
 
-function Guild(guild: Guild) {
+function Guild({ admin = false, guild }: { admin?: boolean; guild: Guild }) {
   return (
     <VStack
       backgroundImage={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`}
@@ -64,13 +63,17 @@ function Guild(guild: Guild) {
       <Heading size="sm" zIndex={1}>
         {guild.name}
       </Heading>
-      <Button as={EnhancedChakraLink} href={`/dashboard/${guild.id}`}>
-        Go
+      <Button
+        as={EnhancedChakraLink}
+        href={admin ? `/dashboard/${guild.id}` : `/invite?guild_id=${guild.id}`}
+        isExternal={!admin}
+        variant={admin ? "primary" : "accent"}
+      >
+        {admin ? "Manage" : "Setup"}
       </Button>
     </VStack>
   );
 }
-
 Dashboard.getLayout = (page) => {
   return (
     <>
@@ -82,7 +85,13 @@ Dashboard.getLayout = (page) => {
 
 export default Dashboard;
 
-export async function getServerSideProps({ req, res }) {
+export async function getServerSideProps({
+  req,
+  res,
+}: {
+  req: NextPageContext["req"] & { cookies: { [key: string]: string } };
+  res: NextPageContext["res"];
+}) {
   const session = await unstable_getServerSession(req, res, authOptions);
 
   if (!session?.user) {
@@ -92,18 +101,14 @@ export async function getServerSideProps({ req, res }) {
     res.end();
     return { props: {} };
   }
+  console.log(session);
+  const { data } = await axios.get(`${API}/me/guilds`, {
+    headers: {
+      authorization: `Bearer ${session.accessToken}`,
+    },
+  });
 
-  const { data: guilds } = await axios.get(
-    "https://discord.com/api/v10/users/@me/guilds",
-    {
-      headers: {
-        Authorization: `Bearer ${session.accessToken}`,
-      },
-    }
-  );
-
-  console.log(guilds);
   return {
-    props: { guilds },
+    props: { guilds: data },
   };
 }
