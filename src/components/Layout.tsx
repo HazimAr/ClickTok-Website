@@ -19,7 +19,6 @@ import {
 } from "@chakra-ui/react";
 import { FaBell, FaCrown } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
-
 import { HiViewBoards } from "react-icons/hi";
 import { MdHome } from "react-icons/md";
 import { BsGearFill, BsGraphUp } from "react-icons/bs";
@@ -27,7 +26,6 @@ import { FiSearch } from "react-icons/fi";
 import EnhancedChakraLink from "./EnhancedChakraLink";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import { ArrowDownIcon } from "@chakra-ui/icons";
 
 export default function DashboardLayout({ children = null }) {
   const sidebar = useDisclosure();
