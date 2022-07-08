@@ -101,7 +101,7 @@ export async function getServerSideProps({
     res.end();
     return { props: {} };
   }
-  console.log(session);
+
   const { data } = await axios.get(`${API}/dashboard`, {
     headers: {
       authorization: `Bearer ${session.accessToken}`,
