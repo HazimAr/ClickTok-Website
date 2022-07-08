@@ -34,12 +34,13 @@ const Dashboard = ({ guilds }) => {
 function Guild(guild: Guild) {
   return (
     <VStack
-      p={4}
       backgroundImage={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`}
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
       position="relative"
+      py={4}
+      rounded="lg"
       _before={{
         content: "''",
         top: 0,
@@ -48,6 +49,7 @@ function Guild(guild: Guild) {
         width: "100%",
         height: "100%",
         backdropFilter: "blur(10px)",
+        rounded: "lg",
         background: "rgba(0,0,0,0.5)",
       }}
     >
@@ -62,10 +64,7 @@ function Guild(guild: Guild) {
       <Heading size="sm" zIndex={1}>
         {guild.name}
       </Heading>
-      <Button
-        as={EnhancedChakraLink}
-        href={`/dashboard/${guild.id}`}
-      >
+      <Button as={EnhancedChakraLink} href={`/dashboard/${guild.id}`}>
         Go
       </Button>
     </VStack>
