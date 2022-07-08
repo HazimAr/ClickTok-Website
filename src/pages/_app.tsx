@@ -5,7 +5,6 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { ReactElement, ReactNode, useEffect } from "react";
-import Script from "next/script";
 import { SessionProvider } from "next-auth/react";
 import { NextPage } from "next";
 
