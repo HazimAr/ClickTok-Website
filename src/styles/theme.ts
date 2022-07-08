@@ -2,6 +2,10 @@ import { extendTheme } from "@chakra-ui/react";
 import { Button, Link } from "./components";
 
 const theme = extendTheme({
+  config: {
+    initialColorMode: "dark",
+    useSystemColorMode: true,
+  },
   colors: {
     primary: "hsl(209, 61%, 50%)",
     secondary: "hsl(259, 72%, 69%)",
