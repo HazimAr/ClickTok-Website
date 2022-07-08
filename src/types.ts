@@ -11,3 +11,12 @@ export type LeaderboardGuildUser = {
   conversions: number;
   createdAt: Date;
 };
+
+export type Guild = {
+  features: string[];
+  icon: string;
+  id: string;
+  name: string;
+  owner: boolean;
+  permissions: string;
+};
