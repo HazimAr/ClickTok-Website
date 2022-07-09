@@ -25,12 +25,18 @@ import { FiSearch } from "react-icons/fi";
 import EnhancedChakraLink from "./EnhancedChakraLink";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 export default function DashboardLayout({ children = null }) {
   const sidebar = useDisclosure();
   const color = useColorModeValue("gray.600", "gray.300");
   const router = useRouter();
-  const { data } = useSession();
+  const { data, status } = useSession();
+
+  useEffect(() => {
+    if (status == "loading") return;
+		if (status == "unauthenticated") router.push("/login");
+  }, [status]);
 
   const NavItem = (props) => {
     const { icon, children, href, ...rest } = props;
