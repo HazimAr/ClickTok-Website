@@ -9,7 +9,6 @@ export default function Footer() {
           Privacy Policy
         </EnhancedChakraLink>
         <p>|</p>
-        <EnhancedChakraLink href="/terms.pdf" target="_blank">Terms Of Use</EnhancedChakraLink>
         <EnhancedChakraLink href="/terms.pdf" target="_blank">
           Terms Of Use
         </EnhancedChakraLink>
