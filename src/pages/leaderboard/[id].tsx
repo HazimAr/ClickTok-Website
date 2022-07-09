@@ -21,13 +21,13 @@ import type { LeaderboardGuildUser } from "types";
 const GuildUsersLeaderboard = ({
   leaderboards,
 }: {
-  leaderboards: LeaderboardGuildUser[] | number;
+  leaderboards: LeaderboardGuildUser[];
 }) => {
   console.log(leaderboards);
   return (
     <Container>
       <ContainerInside>
-        {leaderboards != -1 ? (
+        {leaderboards ? (
           leaderboards?.length ? (
             <TableContainer>
               <Table colorScheme="blackAlpha" size="lg" variant="striped">
@@ -80,7 +80,7 @@ export async function getServerSideProps({ query }) {
     .catch((e) => e.response);
 
   if (response.status != 200 || response.status == 204)
-    return { props: { leaderboards: -1 } };
+    return { props: { leaderboards: 0 } };
 
   return {
     props: {
