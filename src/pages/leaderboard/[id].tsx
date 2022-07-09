@@ -12,15 +12,17 @@ import {
 } from "@chakra-ui/react";
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
+import Footer from "@components/Footer";
+import Header from "@components/Header";
 import axios from "axios";
 import { API } from "config";
 import type { LeaderboardGuildUser } from "types";
 
-export default function GuildUsersLeaderboard({
+const GuildUsersLeaderboard = ({
   leaderboards,
 }: {
   leaderboards: LeaderboardGuildUser[];
-}) {
+}) => {
   return (
     <Container>
       <ContainerInside>
@@ -53,7 +55,16 @@ export default function GuildUsersLeaderboard({
       </ContainerInside>
     </Container>
   );
-}
+};
+GuildUsersLeaderboard.getLayout = (page) => (
+  <>
+    <Header />
+    {page}
+    <Footer />
+  </>
+);
+
+export default GuildUsersLeaderboard;
 
 export async function getServerSideProps({ query }) {
   const response = await axios

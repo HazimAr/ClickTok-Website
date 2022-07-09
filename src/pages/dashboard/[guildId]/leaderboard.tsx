@@ -1,5 +1,13 @@
-import { Heading, HStack, Switch, Text, useToast } from "@chakra-ui/react";
+import {
+  Button,
+  Heading,
+  HStack,
+  Switch,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import Card from "@components/Card";
+import EnhancedChakraLink from "@components/EnhancedChakraLink";
 import DashboardLayout from "@components/Layout";
 import axios from "axios";
 import { API } from "config";
@@ -15,9 +23,17 @@ export default function Leaderboard() {
 
   return (
     <DashboardLayout>
-      <Heading fontSize="xl" mb={10}>
-        Leaderboard Settings
-      </Heading>
+      <HStack>
+        <Heading fontSize="xl" mb={10} flex={1}>
+          Leaderboard Settings
+        </Heading>
+        <Button
+          as={EnhancedChakraLink}
+          href={`/leaderboard/${router.query.guildId}`}
+        >
+          View Leaderboard
+        </Button>
+      </HStack>
       <Card>
         <HStack>
           <Heading fontSize="lg" flex="1">
