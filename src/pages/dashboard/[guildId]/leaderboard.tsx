@@ -3,6 +3,7 @@ import Card from "@components/Card";
 import DashboardLayout from "@components/Layout";
 import axios from "axios";
 import { API } from "config";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -10,6 +11,7 @@ export default function Leaderboard() {
   const [isPublic, setIsPublic] = useState(true);
   const router = useRouter();
   const toast = useToast();
+  const { data: session } = useSession();
 
   return (
     <DashboardLayout>
@@ -27,9 +29,17 @@ export default function Leaderboard() {
             onChange={async () => {
               setIsPublic(!isPublic);
               axios
-                .post(`${API}/dashboard/${router.query.guildId}/leaderboard`, {
-                  public: isPublic,
-                })
+                .post(
+                  `${API}/guilds/${router.query.guildId}/settings`,
+                  {
+                    public: !isPublic,
+                  },
+                  {
+                    headers: {
+                      Authorization: `Bearer ${session.accessToken}`,
+                    },
+                  }
+                )
                 .then(() => {
                   toast({
                     title: "Success",
