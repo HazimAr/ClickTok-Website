@@ -26,6 +26,8 @@ import EnhancedChakraLink from "./EnhancedChakraLink";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
+import axios from "axios";
+import { API } from "config";
 
 export default function DashboardLayout({ children = null }) {
   const sidebar = useDisclosure();
@@ -35,8 +37,14 @@ export default function DashboardLayout({ children = null }) {
 
   useEffect(() => {
     if (status == "loading") return;
-		if (status == "unauthenticated") router.push("/login");
+    if (status == "unauthenticated") router.push("/login");
   }, [status]);
+
+  useEffect(() => {
+    axios
+      .get(`${API}/guilds/${router.query.guildId}`)
+      .catch(() => router.push("/dashboard"));
+  }, []);
 
   const NavItem = (props) => {
     const { icon, children, href, ...rest } = props;
