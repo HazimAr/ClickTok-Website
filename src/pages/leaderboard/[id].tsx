@@ -21,36 +21,43 @@ import type { LeaderboardGuildUser } from "types";
 const GuildUsersLeaderboard = ({
   leaderboards,
 }: {
-  leaderboards: LeaderboardGuildUser[];
+  leaderboards: LeaderboardGuildUser[] | number;
 }) => {
+  console.log(leaderboards);
   return (
     <Container>
       <ContainerInside>
-        {leaderboards?.length ? (
-          <TableContainer>
-            <Table colorScheme="blackAlpha" size="lg" variant="striped">
-              <Thead>
-                <Tr>
-                  <Th fontSize={24}>#</Th>
-                  <Th></Th>
-                  <Th fontSize={24}>User</Th>
-                  <Th fontSize={24} isNumeric>
-                    Conversions
-                  </Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {leaderboards.map((user, index) => (
+        {leaderboards != -1 ? (
+          leaderboards?.length ? (
+            <TableContainer>
+              <Table colorScheme="blackAlpha" size="lg" variant="striped">
+                <Thead>
                   <Tr>
-                    <Td fontSize={18}>{index + 1}</Td>
-                    <User {...user} />
+                    <Th fontSize={24}>#</Th>
+                    <Th></Th>
+                    <Th fontSize={24}>User</Th>
+                    <Th fontSize={24} isNumeric>
+                      Conversions
+                    </Th>
                   </Tr>
-                ))}
-              </Tbody>
-            </Table>
-          </TableContainer>
+                </Thead>
+                <Tbody>
+                  {leaderboards.map((user, index) => (
+                    <Tr>
+                      <Td fontSize={18}>{index + 1}</Td>
+                      <User {...user} />
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
+            </TableContainer>
+          ) : (
+            <Heading textAlign="center">
+              Convert your first tiktok to view the leaderboard
+            </Heading>
+          )
         ) : (
-          <Heading textAlign="center">No Guild found</Heading>
+          <Heading textAlign="center">No Guild Found</Heading>
         )}
       </ContainerInside>
     </Container>
@@ -68,11 +75,13 @@ export default GuildUsersLeaderboard;
 
 export async function getServerSideProps({ query }) {
   const response = await axios
-    .get(`${API}/leaderboards/${query.id}`)
+    .get(`${API}/leaderboard/${query.id}`)
     .then((res) => res)
     .catch((e) => e.response);
 
-  if (response.status != 200) return { props: {} };
+  if (response.status != 200 || response.status == 204)
+    return { props: { leaderboards: -1 } };
+
   return {
     props: {
       leaderboards: response.data,

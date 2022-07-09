@@ -67,7 +67,7 @@ export function Guild(guild: LeaderboardGuild) {
 }
 
 export async function getStaticProps() {
-  const { data: leaderboards } = await axios.get(`${API}/leaderboards`);
+  const { data: leaderboards } = await axios.get(`${API}/leaderboard`);
 
   return {
     props: {
