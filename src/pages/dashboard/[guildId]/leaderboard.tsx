@@ -50,6 +50,7 @@ export default function Leaderboard() {
                   });
                 })
                 .catch(() => {
+                  setIsPublic(isPublic);
                   toast({
                     title: "Error",
                     description:
