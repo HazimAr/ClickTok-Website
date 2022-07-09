@@ -23,7 +23,6 @@ const GuildUsersLeaderboard = ({
 }: {
   leaderboards: LeaderboardGuildUser[];
 }) => {
-  console.log(leaderboards);
   return (
     <Container>
       <ContainerInside>
