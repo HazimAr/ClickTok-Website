@@ -32,7 +32,6 @@ export default function Settings() {
     deleteOrigin: false,
     suppressEmbed: true,
   });
-  const title = "leaderboard";
   const router = useRouter();
   const toast = useToast();
   const { data: session } = useSession();
