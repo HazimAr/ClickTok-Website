@@ -19,7 +19,7 @@ const data = {
       "Delete the original message if a TikTok is found in it after sending the embed. (Default: false)",
   },
   suppressEmbed: {
-    label: "Supress Embed",
+    label: "Suppress Embed",
     description:
       "Remove the original embed discord gives when a TikTok link is found in a message. (Default: true)",
   },
