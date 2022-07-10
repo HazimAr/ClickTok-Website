@@ -7,6 +7,29 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
+const data = {
+  public: {
+    label: "Make my server's leaderboard public",
+    description:
+      "If you enable this, your server's leaderboard will be public and anyone can see it. (Default: true)",
+  },
+  autoEmbed: {
+    label: "Auto Embed",
+    description:
+      "Automatically embed TikToks in the message if they are found. (Default: true)",
+  },
+  deleteOrigin: {
+    label: "Delete Origin",
+    description:
+      "Delete the original message if a TikTok is found in it after sending the embed. (Default: false)",
+  },
+  suppressEmbed: {
+    label: "Suppress Embed",
+    description:
+      "Remove the original embed discord gives when a TikTok link is found in a message. (Default: true)",
+  },
+};
+
 export default function Settings() {
   const [settings, setSettings] = useState({
     public: true,
@@ -29,19 +52,19 @@ export default function Settings() {
         .then((response) => setSettings(response.data));
     }
   }, [session]);
-  function Setting({ key, value, onChange }) {
+  function Setting({ name }) {
     return (
-      <Card>
+      <Card my={4}>
         <HStack>
           <Heading fontSize="lg" flex="1">
-            Make my server's leaderboard public
+            {data[name].label}
           </Heading>
           <Switch
             size="lg"
-            isChecked={settings[key]}
+            isChecked={settings[name]}
             onChange={async () => {
               const temp = settings;
-              temp[key] = !temp[key];
+              temp[name] = !temp[name];
               setSettings(temp);
               axios
                 .post(`${API}/guilds/${router.query.guildId}/settings`, temp, {
@@ -59,7 +82,7 @@ export default function Settings() {
                   });
                 })
                 .catch(() => {
-                  temp[key] = !temp[key];
+                  temp[name] = !temp[name];
                   setSettings(temp);
                   toast({
                     title: "Error",
@@ -73,10 +96,7 @@ export default function Settings() {
             }}
           />
         </HStack>
-        <Text fontSize="sm">
-          Enabling this option will allow your leaderboard to be seen by anyone
-          who has the link, or by searching your server on Google.
-        </Text>
+        <Text fontSize="sm">{data[name].description}</Text>
       </Card>
     );
   }
@@ -85,7 +105,9 @@ export default function Settings() {
       <Heading fontSize="xl" mb={10} flex={1}>
         Server Settings
       </Heading>
-      {}
+      {Object.keys(settings).map((key) => (
+        <Setting key={key} name={key} />
+      ))}
     </DashboardLayout>
   );
 }
