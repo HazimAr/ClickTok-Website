@@ -71,13 +71,15 @@ export default function ({ video }) {
                 <Text>{video.music}</Text>
               </HStack>
               <Divider />
-              <HStack py={2}>
+              <HStack
+                py={2}
+                as={Link}
+                href={`https://tiktok.com/@${video.author.username}`}
+                isExternal
+                _hover={{ color: "white", textDecor: "underline" }}
+              >
                 <Avatar src={video.author.icon} name={video.author.name} />
-                <Stack
-                  spacing={0}
-                  as={Link}
-                  href={`https://tiktok.com/@${video.author.username}`}
-                >
+                <Stack spacing={0}>
                   <Heading fontSize="lg">{video.author.username}</Heading>
                   <Text>
                     {video.author.name} •{" "}
