@@ -23,11 +23,6 @@ const data = {
     description:
       "Remove the original embed discord gives when a TikTok link is found in a message. (Default: true)",
   },
-  public: {
-    label: "Make my server's leaderboard public",
-    description:
-      "If you enable this, your server's leaderboard will be public and anyone can see it. (Default: true)",
-  },
 };
 
 export default function Settings() {
@@ -82,8 +77,7 @@ export default function Settings() {
                   });
                 })
                 .catch(() => {
-                  temp[name] = !temp[name];
-                  setSettings(temp);
+                  setSettings(settings);
                   toast({
                     title: "Error",
                     description:
@@ -105,9 +99,10 @@ export default function Settings() {
       <Heading fontSize="xl" mb={10} flex={1}>
         Server Settings
       </Heading>
-      {Object.keys(settings).map((key) => (
-        <Setting key={key} name={key} />
-      ))}
+      {Object.keys(settings).map((key) => {
+        if (key === "public") return;
+        return <Setting key={key} name={key} />;
+      })}
     </DashboardLayout>
   );
 }
