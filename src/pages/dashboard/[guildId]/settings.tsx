@@ -13,6 +13,16 @@ const data = {
     description:
       "Automatically embed TikToks in the message if they are found. (Default: true)",
   },
+  deleteOrigin: {
+    label: "Delete Origin",
+    description:
+      "Delete the original message if a TikTok is found in it after sending the embed. (Default: false)",
+  },
+  suppressEmbed: {
+    label: "Suppress Embed",
+    description:
+      "Remove the original embed discord gives when a TikTok link is found in a message. (Default: true)",
+  },
 };
 
 export default function Settings() {
@@ -50,11 +60,15 @@ export default function Settings() {
             onChange={async (e) => {
               setSettings((old) => ({ ...old, [name]: !old[name] }));
               axios
-                .post(`${API}/guilds/${router.query.guildId}/settings`, temp, {
-                  headers: {
-                    Authorization: `Bearer ${session.accessToken}`,
-                  },
-                })
+                .post(
+                  `${API}/guilds/${router.query.guildId}/settings`,
+                  { ...settings, [name]: !settings[name] },
+                  {
+                    headers: {
+                      Authorization: `Bearer ${session.accessToken}`,
+                    },
+                  }
+                )
                 .then(() => {
                   toast({
                     title: "Success",
