@@ -8,11 +8,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const data = {
-  public: {
-    label: "Make my server's leaderboard public",
-    description:
-      "If you enable this, your server's leaderboard will be public and anyone can see it. (Default: true)",
-  },
   autoEmbed: {
     label: "Auto Embed",
     description:
@@ -28,14 +23,19 @@ const data = {
     description:
       "Remove the original embed discord gives when a TikTok link is found in a message. (Default: true)",
   },
+  public: {
+    label: "Make my server's leaderboard public",
+    description:
+      "If you enable this, your server's leaderboard will be public and anyone can see it. (Default: true)",
+  },
 };
 
 export default function Settings() {
   const [settings, setSettings] = useState({
-    public: true,
+    autoEmbed: true,
     deleteOrigin: false,
     suppressEmbed: true,
-    autoEmbed: true,
+    public: true,
   });
 
   const router = useRouter();
@@ -63,7 +63,7 @@ export default function Settings() {
             size="lg"
             isChecked={settings[name]}
             onChange={async () => {
-              const temp = settings;
+              const temp = Object.assign({}, settings);
               temp[name] = !temp[name];
               setSettings(temp);
               axios
@@ -75,7 +75,7 @@ export default function Settings() {
                 .then(() => {
                   toast({
                     title: "Success",
-                    description: "Leaderboard settings updated.",
+                    description: "Server settings updated.",
                     status: "success",
                     duration: 5000,
                     isClosable: true,
