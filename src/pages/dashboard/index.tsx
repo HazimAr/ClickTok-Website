@@ -1,4 +1,4 @@
-import { Button, Heading, Image, SimpleGrid, VStack } from "@chakra-ui/react";
+import { Avatar, Button, Heading, SimpleGrid, VStack } from "@chakra-ui/react";
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
 import EnhancedChakraLink from "@components/EnhancedChakraLink";
@@ -52,9 +52,9 @@ function Guild({ admin = false, guild }: { admin?: boolean; guild: Guild }) {
         background: "rgba(0,0,0,0.5)",
       }}
     >
-      <Image
+      <Avatar
         src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}`}
-        alt={guild.name}
+        name={guild.name}
         w="75px"
         borderRadius="100%"
         border="2px"
