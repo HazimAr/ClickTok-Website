@@ -1,13 +1,5 @@
-import {
-  Button,
-  Heading,
-  HStack,
-  Switch,
-  Text,
-  useToast,
-} from "@chakra-ui/react";
+import { Heading, HStack, Switch, Text, useToast } from "@chakra-ui/react";
 import Card from "@components/Card";
-import EnhancedChakraLink from "@components/EnhancedChakraLink";
 import DashboardLayout from "@components/Layout";
 import axios from "axios";
 import { API } from "config";
@@ -16,7 +8,13 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Settings() {
-  const [settings, setSettings] = useState({});
+  const [settings, setSettings] = useState({
+    public: true,
+    deleteOrigin: false,
+    suppressEmbed: true,
+    autoEmbed: true,
+  });
+
   const router = useRouter();
   const toast = useToast();
   const { data: session } = useSession();
@@ -31,7 +29,7 @@ export default function Settings() {
         .then((response) => setSettings(response.data));
     }
   }, [session]);
-  function Setting({ name, value, onChange }) {
+  function Setting({ key, value, onChange }) {
     return (
       <Card>
         <HStack>
@@ -40,22 +38,17 @@ export default function Settings() {
           </Heading>
           <Switch
             size="lg"
-            isChecked={value}
+            isChecked={settings[key]}
             onChange={async () => {
-              const 
-              setSettings(value);
+              const temp = settings;
+              temp[key] = !temp[key];
+              setSettings(temp);
               axios
-                .post(
-                  `${API}/guilds/${router.query.guildId}/settings`,
-                  {
-                    public: !value,
+                .post(`${API}/guilds/${router.query.guildId}/settings`, temp, {
+                  headers: {
+                    Authorization: `Bearer ${session.accessToken}`,
                   },
-                  {
-                    headers: {
-                      Authorization: `Bearer ${session.accessToken}`,
-                    },
-                  }
-                )
+                })
                 .then(() => {
                   toast({
                     title: "Success",
@@ -66,7 +59,8 @@ export default function Settings() {
                   });
                 })
                 .catch(() => {
-                  setIsPublic(isPublic);
+                  temp[key] = !temp[key];
+                  setSettings(temp);
                   toast({
                     title: "Error",
                     description:
@@ -88,17 +82,10 @@ export default function Settings() {
   }
   return (
     <DashboardLayout>
-      <HStack>
-        <Heading fontSize="xl" mb={10} flex={1}>
-          Leaderboard Settings
-        </Heading>
-        <Button
-          as={EnhancedChakraLink}
-          href={`/leaderboard/${router.query.guildId}`}
-        >
-          View Leaderboard
-        </Button>
-      </HStack>
+      <Heading fontSize="xl" mb={10} flex={1}>
+        Server Settings
+      </Heading>
+      {}
     </DashboardLayout>
   );
 }
