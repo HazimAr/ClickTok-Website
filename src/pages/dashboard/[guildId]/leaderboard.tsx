@@ -55,6 +55,7 @@ export default function Leaderboard() {
             isChecked={isPublic}
             onChange={async () => {
               setIsPublic(!isPublic);
+
               axios
                 .post(
                   `${API}/guilds/${router.query.guildId}/settings`,
@@ -98,3 +99,16 @@ export default function Leaderboard() {
     </DashboardLayout>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
