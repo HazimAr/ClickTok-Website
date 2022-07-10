@@ -22,7 +22,7 @@ export default function Settings() {
     suppressEmbed: true,
     public: true,
   });
-
+  const title = "leaderboard";
   const router = useRouter();
   const toast = useToast();
   const { data: session } = useSession();
