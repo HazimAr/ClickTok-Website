@@ -73,7 +73,11 @@ export default function ({ video }) {
               <Divider />
               <HStack py={2}>
                 <Avatar src={video.author.icon} name={video.author.name} />
-                <Stack spacing={0}>
+                <Stack
+                  spacing={0}
+                  as={Link}
+                  href={`https://tiktok.com/@${video.author.username}`}
+                >
                   <Heading fontSize="lg">{video.author.username}</Heading>
                   <Text>
                     {video.author.name} •{" "}

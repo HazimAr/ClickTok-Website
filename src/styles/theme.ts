@@ -3,7 +3,7 @@ import { Button, Link } from "./components";
 
 const theme = extendTheme({
   config: {
-    initialColorMode: "dark",
+    initialColorMode: "system",
     useSystemColorMode: true,
   },
   colors: {
