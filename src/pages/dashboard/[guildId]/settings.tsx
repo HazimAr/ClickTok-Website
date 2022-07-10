@@ -57,10 +57,8 @@ export default function Settings() {
           <Switch
             size="lg"
             isChecked={settings[name]}
-            onChange={async () => {
-              const temp = Object.assign({}, settings);
-              temp[name] = !temp[name];
-              setSettings(temp);
+            onChange={async (e) => {
+              setSettings((old) => ({ ...old, [name]: !old[name] }));
               axios
                 .post(`${API}/guilds/${router.query.guildId}/settings`, temp, {
                   headers: {
@@ -100,7 +98,7 @@ export default function Settings() {
         Server Settings
       </Heading>
       {Object.keys(settings).map((key) => {
-        if (key === "public") return;
+        if (!data[key]) return;
         return <Setting key={key} name={key} />;
       })}
     </DashboardLayout>
