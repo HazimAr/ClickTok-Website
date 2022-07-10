@@ -37,14 +37,18 @@ export default function DashboardLayout({ children = null }) {
 
   useEffect(() => {
     if (status == "loading") return;
-    if (status == "unauthenticated") router.push("/login");
-  }, [status]);
-
-  useEffect(() => {
+    if (status == "unauthenticated") {
+      router.push("/login");
+      return;
+    }
     axios
-      .get(`${API}/guilds/${router.query.guildId}`)
+      .get(`${API}/guilds/${router.query.guildId}`, {
+        headers: {
+          Authorization: `Bearer ${data.accessToken}`,
+        },
+      })
       .catch(() => router.push("/dashboard"));
-  }, []);
+  }, [status]);
 
   const NavItem = (props) => {
     const { icon, children, href, ...rest } = props;
