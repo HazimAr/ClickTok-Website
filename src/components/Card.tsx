@@ -1,17 +1,19 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Skeleton } from "@chakra-ui/react";
 
-export default function Card({ children = null, ...props }) {
+export default function Card({ children = null, isLoaded = false, ...props }) {
   return (
-    <Box
-      bg="white"
-      _dark={{
-        bg: "gray.800",
-      }}
-      rounded="lg"
-      p={6}
-      {...props}
-    >
-      {children}
-    </Box>
+    <Skeleton isLoaded={isLoaded} rounded="lg">
+      <Box
+        bg="white"
+        _dark={{
+          bg: "gray.800",
+        }}
+        p={6}
+        rounded="lg"
+        {...props}
+      >
+        {children}
+      </Box>
+    </Skeleton>
   );
 }

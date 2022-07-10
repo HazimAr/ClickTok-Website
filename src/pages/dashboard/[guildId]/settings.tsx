@@ -25,12 +25,11 @@ const data = {
   },
 };
 
-
 export default function Settings() {
   const [settings, setSettings] = useState({
-    autoEmbed: true,
-    deleteOrigin: false,
-    suppressEmbed: true,
+    autoEmbed: null,
+    deleteOrigin: null,
+    suppressEmbed: null,
   });
   const router = useRouter();
   const toast = useToast();
@@ -48,7 +47,7 @@ export default function Settings() {
   }, [session]);
   function Setting({ name }) {
     return (
-      <Card my={4}>
+      <Card my={4} isLoaded={settings[name] != null}>
         <HStack>
           <Heading fontSize="lg" flex="1">
             {data[name].label}

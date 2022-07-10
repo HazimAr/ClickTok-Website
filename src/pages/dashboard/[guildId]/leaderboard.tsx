@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Leaderboard() {
-  const [isPublic, setIsPublic] = useState(true);
+  const [isPublic, setIsPublic] = useState(null);
   const router = useRouter();
   const toast = useToast();
   const { data: session } = useSession();
@@ -45,7 +45,7 @@ export default function Leaderboard() {
           View Leaderboard
         </Button>
       </HStack>
-      <Card>
+      <Card isLoaded={isPublic != null}>
         <HStack>
           <Heading fontSize="lg" flex="1">
             Make my server's leaderboard public
@@ -99,16 +99,3 @@ export default function Leaderboard() {
     </DashboardLayout>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
