@@ -16,7 +16,7 @@ import {
   Image,
   Button,
 } from "@chakra-ui/react";
-import { FaBell, FaCrown } from "react-icons/fa";
+import { FaBell, FaCrown, FaRecycle } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 // import { HiViewBoards } from "react-icons/hi";
 import { MdHome } from "react-icons/md";
@@ -164,6 +164,9 @@ export default function DashboardLayout({ children = null }) {
         </NavItem>
         <NavItem href="/statistics" icon={BsGraphUp}>
           Statistics
+        </NavItem>
+        <NavItem href="/convert" icon={FaRecycle}>
+          Convert
         </NavItem>
         {/* <NavItem href="/leaderboard" icon={HiViewBoards}>
           Leaderboard
