@@ -13,14 +13,24 @@ const data = {
     description:
       "Automatically embed TikToks in the message if they are found. (Default: true)",
   },
+  deleteOrigin: {
+    label: "Delete Origin",
+    description:
+      "Delete the original message if a TikTok is found in it after sending the embed. (Default: false)",
+  },
+  suppressEmbed: {
+    label: "Supress Embed",
+    description:
+      "Remove the original embed discord gives when a TikTok link is found in a message. (Default: true)",
+  },
 };
+
 
 export default function Settings() {
   const [settings, setSettings] = useState({
     autoEmbed: true,
     deleteOrigin: false,
     suppressEmbed: true,
-    public: true,
   });
   const title = "leaderboard";
   const router = useRouter();
@@ -47,7 +57,7 @@ export default function Settings() {
           <Switch
             size="lg"
             isChecked={settings[name]}
-            onChange={async (e) => {
+            onChange={async () => {
               setSettings((old) => ({ ...old, [name]: !old[name] }));
               axios
                 .post(
