@@ -5,10 +5,10 @@ export default function EnhancedChakraLink(props: any) {
   return (
     <NextLink href={props.href} passHref>
       <Link
-        {...props}
         _active={{ boxShadow: "none" }}
         _focus={{ boxShadow: "none" }}
         _hover={{ textDecoration: "none" }}
+        {...props}
       >
         {props.children}
       </Link>

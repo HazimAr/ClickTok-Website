@@ -1,19 +1,40 @@
-import { HStack, VStack } from "@chakra-ui/react";
+import { HStack, VStack, Link } from "@chakra-ui/react";
 import EnhancedChakraLink from "./EnhancedChakraLink";
 
 export default function Footer() {
   return (
     <VStack as="footer" py={4}>
       <HStack>
-        <EnhancedChakraLink href="/privacypolicy.pdf" target="_blank">
+        <EnhancedChakraLink
+          href="/privacypolicy.pdf"
+          target="_blank"
+          _hover={{
+            textDecor: "underline",
+          }}
+        >
           Privacy Policy
         </EnhancedChakraLink>
         <p>|</p>
-        <EnhancedChakraLink href="/terms.pdf" target="_blank">
+        <EnhancedChakraLink
+          href="/terms.pdf"
+          target="_blank"
+          _hover={{
+            textDecor: "underline",
+          }}
+        >
           Terms Of Use
         </EnhancedChakraLink>
       </HStack>
-      {/* <Link
+      <EnhancedChakraLink
+        href="https://forms.gle/4FfMCWTj4mSJinAu5"
+        target="_blank"
+        _hover={{
+          textDecor: "underline",
+        }}
+      >
+        Data Removal Request
+      </EnhancedChakraLink>
+      <Link
         href="https://hazim.tech"
         _hover={{
           textDecor: "underline",
@@ -22,13 +43,7 @@ export default function Footer() {
       >
         Designed & Developed with<span>💖</span>
         by: <span style={{ fontWeight: "bold" }}>Hazim Arafa</span>
-      </Link> */}
-      <EnhancedChakraLink
-        href="https://forms.gle/4FfMCWTj4mSJinAu5"
-        target="_blank"
-      >
-        Data Removal Request
-      </EnhancedChakraLink>
+      </Link>
     </VStack>
   );
 }
