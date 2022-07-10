@@ -55,6 +55,8 @@ function Guild({ admin = false, guild }: { admin?: boolean; guild: Guild }) {
       <Avatar
         src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}`}
         name={guild.name}
+        bg="transparent"
+        color="white"
         boxSize="75px"
         borderRadius="100%"
         border="2px"
