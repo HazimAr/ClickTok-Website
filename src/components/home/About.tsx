@@ -20,7 +20,7 @@ const data = [
   },
   {
     title: "Download straight to your computer",
-    description: "Download TikTok's for free.",
+    description: "Download TikToks for free.",
     button: "Start Downloading",
     href: "/download",
     img: "/download.gif",
