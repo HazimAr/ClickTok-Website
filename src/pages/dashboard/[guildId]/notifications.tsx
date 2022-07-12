@@ -12,7 +12,10 @@ import {
   ModalHeader,
   ModalOverlay,
   Select,
+  Switch,
+  Tooltip,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import Card from "@components/Card";
 import DashboardLayout from "@components/Layout";
@@ -29,6 +32,7 @@ export default function Notifications() {
   const { isOpen, onClose, onToggle } = useDisclosure();
   const { data: session } = useSession();
   const router = useRouter();
+  const toast = useToast();
 
   useEffect(() => {
     if (!session?.accessToken) return;
@@ -80,9 +84,24 @@ export default function Notifications() {
                     }
                   )
                   .then(() => {
+                    toast({
+                      title: "Subscription deleted",
+                      status: "success",
+                      duration: 5000,
+                      isClosable: true,
+                    });
                     setSubscriptions(
                       subscriptions.filter((s) => s.id !== subscription.id)
                     );
+                  })
+                  .catch(({ data }) => {
+                    toast({
+                      title: "Error",
+                      description: data.message,
+                      status: "error",
+                      duration: 5000,
+                      isClosable: true,
+                    });
                   });
               }}
             >
@@ -107,11 +126,20 @@ export default function Notifications() {
             <Input placeholder="Creator Username (NOT DISPLAY NAME)" mb={4} />
 
             <label>Channel the notification will send in</label>
-            <Select>
+            <Select mb={4}>
               {channels.map((channel) => (
                 <option value={channel?.id}># {channel?.name}</option>
               ))}
             </Select>
+            <HStack justify="space-between">
+              <Tooltip
+                label="Enable video previews on notifications."
+                aria-label="A tooltip"
+              >
+                Previews
+              </Tooltip>
+              <Switch />
+            </HStack>
           </ModalBody>
           <ModalFooter>
             <Button variant="outline" mr={3} onClick={onClose}>
