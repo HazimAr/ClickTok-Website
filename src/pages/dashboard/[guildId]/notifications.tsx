@@ -58,7 +58,7 @@ export default function Notifications() {
           <Heading size="md" flex="1">
             Subscriptions
           </Heading>
-          <Heading size="md">0/1</Heading>
+          <Heading size="md">{subscriptions.length}/1</Heading>
         </HStack>
 
         {subscriptions.map((subscription) => (
