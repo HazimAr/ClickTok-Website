@@ -49,7 +49,7 @@ export default function Settings() {
     return (
       <Card my={4} isLoaded={settings[name] != null}>
         <HStack>
-          <Heading fontSize="lg" flex="1">
+          <Heading flex="1" size="md">
             {data[name].label}
           </Heading>
           <Switch
@@ -90,13 +90,13 @@ export default function Settings() {
             }}
           />
         </HStack>
-        <Text fontSize="sm">{data[name].description}</Text>
+        <Text>{data[name].description}</Text>
       </Card>
     );
   }
   return (
     <DashboardLayout>
-      <Heading fontSize="xl" mb={10} flex={1}>
+      <Heading flex={1} as="h1">
         Server Settings
       </Heading>
       {Object.keys(settings).map((key) => {
