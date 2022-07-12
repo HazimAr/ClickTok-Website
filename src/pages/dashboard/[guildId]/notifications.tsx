@@ -109,7 +109,7 @@ export default function Notifications() {
             <label>Channel the notification will send in</label>
             <Select>
               {channels.map((channel) => (
-                <option value={channel?.id}>{channel?.name}</option>
+                <option value={channel?.id}># {channel?.name}</option>
               ))}
             </Select>
           </ModalBody>
