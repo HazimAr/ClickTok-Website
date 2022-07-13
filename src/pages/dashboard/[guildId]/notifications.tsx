@@ -85,7 +85,7 @@ export default function Notifications() {
           {notifications.map((notification) => (
             <HStack
               key={notification.id}
-              bg="whiteAlpha.100"
+              bg="blackAlpha.400"
               p={4}
               rounded="lg"
             >
