@@ -23,7 +23,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
-import { Formik, Form } from "formik";
+import { Formik } from "formik";
 import { InputControl, SelectControl, SwitchControl } from "formik-chakra-ui";
 import * as Yup from "yup";
 
@@ -170,67 +170,69 @@ export default function Notifications() {
                 })
             }
           >
-            <Form>
-              <ModalHeader>Recieve Notifications</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody as={Stack} spacing={4}>
-                <InputControl
-                  name="creator"
-                  label="Creator:"
-                  inputProps={{
-                    placeholder: "Creator Username EX: (khaby.lame)",
-                  }}
-                />
-
-                <SelectControl name="channel" label="Channel to send in:">
-                  {channels.map((channel) => (
-                    <option value={channel?.id}># {channel?.name}</option>
-                  ))}
-                </SelectControl>
-
-                <SelectControl
-                  name="role"
-                  label="Role to ping:"
-                  selectProps={{ placeholder: "Don't Ping" }}
-                >
-                  {roles.map((role) => (
-                    <option value={role?.id}>{role?.name}</option>
-                  ))}
-                </SelectControl>
-
-                <HStack justify="space-between">
-                  <Tooltip
-                    label="Enable video previews on notifications."
-                    aria-label="A tooltip"
-                  >
-                    Previews
-                  </Tooltip>
-                  <SwitchControl
-                    name="preview"
-                    switchProps={{
-                      size: "lg",
-                      defaultChecked: true,
+            {({}) => (
+              <>
+                <ModalHeader>Recieve Notifications</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody as={Stack} spacing={4}>
+                  <InputControl
+                    name="creator"
+                    label="Creator:"
+                    inputProps={{
+                      placeholder: "Creator Username EX: (khaby.lame)",
                     }}
                   />
-                </HStack>
-              </ModalBody>
-              <ModalFooter>
-                <Button variant="outline" mr={3} onClick={onClose}>
-                  Close
-                </Button>
-                <Button
-                  // onClick={() => {
-                  //   axios.post(`${API}/notifications`, {
-                  //     channelId: channels[0].id,
-                  //     creatorUsername: "",
-                  //   });
-                  // }}
-                  type="submit"
-                >
-                  Setup Notification
-                </Button>
-              </ModalFooter>
-            </Form>
+
+                  <SelectControl name="channel" label="Channel to send in:">
+                    {channels.map((channel) => (
+                      <option value={channel?.id}># {channel?.name}</option>
+                    ))}
+                  </SelectControl>
+
+                  <SelectControl
+                    name="role"
+                    label="Role to ping:"
+                    selectProps={{ placeholder: "Don't Ping" }}
+                  >
+                    {roles.map((role) => (
+                      <option value={role?.id}>{role?.name}</option>
+                    ))}
+                  </SelectControl>
+
+                  <HStack justify="space-between">
+                    <Tooltip
+                      label="Enable video previews on notifications."
+                      aria-label="A tooltip"
+                    >
+                      Previews
+                    </Tooltip>
+                    <SwitchControl
+                      name="preview"
+                      switchProps={{
+                        size: "lg",
+                        defaultChecked: true,
+                      }}
+                    />
+                  </HStack>
+                </ModalBody>
+                <ModalFooter>
+                  <Button variant="outline" mr={3} onClick={onClose}>
+                    Close
+                  </Button>
+                  <Button
+                    // onClick={() => {
+                    //   axios.post(`${API}/notifications`, {
+                    //     channelId: channels[0].id,
+                    //     creatorUsername: "",
+                    //   });
+                    // }}
+                    type="submit"
+                  >
+                    Setup Notification
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
           </Formik>
         </ModalContent>
       </Modal>
