@@ -170,7 +170,7 @@ export default function Notifications() {
                 })
             }
           >
-            {({}) => (
+            {({ submitForm }) => (
               <>
                 <ModalHeader>Recieve Notifications</ModalHeader>
                 <ModalCloseButton />
@@ -226,7 +226,7 @@ export default function Notifications() {
                     //     creatorUsername: "",
                     //   });
                     // }}
-                    type="submit"
+                    onClick={() => submitForm()}
                   >
                     Setup Notification
                   </Button>
