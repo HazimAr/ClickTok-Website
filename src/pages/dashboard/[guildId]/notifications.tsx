@@ -226,7 +226,7 @@ export default function Notifications() {
                     //     creatorUsername: "",
                     //   });
                     // }}
-                    onClick={() => submitForm()}
+                    type="submit"
                   >
                     Setup Notification
                   </Button>
