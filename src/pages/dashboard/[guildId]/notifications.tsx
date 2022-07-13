@@ -34,6 +34,7 @@ export default function Notifications() {
   const [notification, setNotification] = useState({
     creator: "",
     channel: "",
+    id: "",
   });
   const [notifications, setNotifications] = useState([]);
   const [channels, setChannels] = useState<GuildChannel[]>([]);
@@ -130,10 +131,11 @@ export default function Notifications() {
                           notifications.filter((s) => s.id !== notification.id)
                         );
                       })
-                      .catch(({ data }) => {
+                      .catch(() => {
                         toast({
                           title: "Error",
-                          description: data.message,
+                          description:
+                            "Something went wrong. If this keeps happening, please contact support.",
                           status: "error",
                           duration: 5000,
                           isClosable: true,
@@ -185,6 +187,7 @@ export default function Notifications() {
                   }
                 )
                 .then(() => {
+                  const updated = values.id && true;
                   toast({
                     title: "Created",
                     description:
@@ -194,11 +197,22 @@ export default function Notifications() {
                     isClosable: true,
                   });
                   onClose();
+
+                  if (updated) {
+                    setNotifications(
+                      notifications.map((s) =>
+                        s.id === values.id ? values : s
+                      )
+                    );
+                  } else {
+                    setNotifications([...notifications, values]);
+                  }
                 })
-                .catch(({ data }) => {
+                .catch(() => {
                   toast({
                     title: "Error",
-                    description: data.message,
+                    description:
+                      "Something went wrong. If this keeps happening, please contact support.",
                     status: "error",
                     duration: 9000,
                     isClosable: true,
