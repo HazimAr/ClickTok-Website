@@ -158,7 +158,9 @@ export default function Notifications() {
                   <InputControl
                     name="creator"
                     label="Creator:"
-                    placeholder="Creator Username EX: (khaby.lame)"
+                    inputProps={{
+                      placeholder: "Creator Username EX: (khaby.lame)",
+                    }}
                   />
 
                   <SelectControl name="channel" label="Channel to send in:">
