@@ -14,6 +14,7 @@ import {
   Tooltip,
   useDisclosure,
   useToast,
+  Input,
 } from "@chakra-ui/react";
 import Card from "@components/Card";
 import DashboardLayout from "@components/Layout";
@@ -226,7 +227,7 @@ export default function Notifications() {
                     //     creatorUsername: "",
                     //   });
                     // }}
-
+                    as={Input}
                     type="submit"
                   >
                     Setup Notification
