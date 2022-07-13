@@ -170,7 +170,7 @@ export default function Notifications() {
                 })
             }
           >
-            {({ submitForm }) => (
+            {({ }) => (
               <>
                 <ModalHeader>Recieve Notifications</ModalHeader>
                 <ModalCloseButton />
