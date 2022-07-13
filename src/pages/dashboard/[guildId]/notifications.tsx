@@ -12,6 +12,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Select,
+  Stack,
   Switch,
   Tooltip,
   useDisclosure,
@@ -27,7 +28,7 @@ import { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 
 export default function Notifications() {
-  const [subscriptions, setSubscriptions] = useState([]);
+  const [notifications, setNotifications] = useState([]);
   const [channels, setChannels] = useState([]);
   const { isOpen, onClose, onToggle } = useDisclosure();
   const { data: session } = useSession();
@@ -42,7 +43,7 @@ export default function Notifications() {
           Authorization: `Bearer ${session.accessToken}`,
         },
       })
-      .then((response) => setSubscriptions(response.data));
+      .then((response) => setNotifications(response.data));
     axios
       .get(`${API}/guilds/${router.query.guildId}/channels`, {
         headers: {
@@ -60,15 +61,15 @@ export default function Notifications() {
       <Card isLoaded>
         <HStack>
           <Heading size="md" flex="1">
-            Subscriptions
+            Notifications
           </Heading>
-          <Heading size="md">{subscriptions.length}/1</Heading>
+          <Heading size="md">{notifications.length}/1</Heading>
         </HStack>
 
-        {subscriptions.map((subscription) => (
-          <HStack key={subscription.id}>
+        {notifications.map((notification) => (
+          <HStack key={notification.id}>
             <Heading size="md" flex="1">
-              {subscription.name}
+              {notification.name}
             </Heading>
             <Button
               size="sm"
@@ -76,7 +77,7 @@ export default function Notifications() {
               onClick={() => {
                 axios
                   .delete(
-                    `${API}/guilds/${router.query.guildId}/subscriptions/${subscription.id}`,
+                    `${API}/guilds/${router.query.guildId}/notifications/${notification.id}`,
                     {
                       headers: {
                         Authorization: `Bearer ${session.accessToken}`,
@@ -85,13 +86,13 @@ export default function Notifications() {
                   )
                   .then(() => {
                     toast({
-                      title: "Subscription deleted",
+                      title: "Notification deleted",
                       status: "success",
                       duration: 5000,
                       isClosable: true,
                     });
-                    setSubscriptions(
-                      subscriptions.filter((s) => s.id !== subscription.id)
+                    setNotifications(
+                      notifications.filter((s) => s.id !== notification.id)
                     );
                   })
                   .catch(({ data }) => {
@@ -121,16 +122,20 @@ export default function Notifications() {
         <ModalContent>
           <ModalHeader>Subscribe To A Creator</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-            <label>The creator to subscribe to</label>
-            <Input placeholder="Creator Username (NOT DISPLAY NAME)" mb={4} />
+          <ModalBody as={Stack} spacing={4}>
+            <div>
+              <label>The creator to subscribe to</label>
+              <Input placeholder="Creator Username (NOT DISPLAY NAME)" />
+            </div>
 
-            <label>Channel the notification will send in</label>
-            <Select mb={4}>
-              {channels.map((channel) => (
-                <option value={channel?.id}># {channel?.name}</option>
-              ))}
-            </Select>
+            <div>
+              <label>Channel the notification will send in</label>
+              <Select>
+                {channels.map((channel) => (
+                  <option value={channel?.id}># {channel?.name}</option>
+                ))}
+              </Select>
+            </div>
             <HStack justify="space-between">
               <Tooltip
                 label="Enable video previews on notifications."
