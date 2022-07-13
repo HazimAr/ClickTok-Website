@@ -184,7 +184,13 @@ export default function Notifications() {
                     >
                       Previews
                     </Tooltip>
-                    <SwitchControl name="preview" size="lg" defaultChecked />
+                    <SwitchControl
+                      name="preview"
+                      switchProps={{
+                        size: "lg",
+                      }}
+                      defaultChecked
+                    />
                   </HStack>
                 </ModalBody>
                 <ModalFooter>
