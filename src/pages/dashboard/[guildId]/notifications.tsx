@@ -161,7 +161,10 @@ export default function Notifications() {
         <ModalOverlay />
         <ModalContent>
           <Formik
-            initialValues={notification}
+            initialValues={{
+              creator: "",
+              channel: "",
+            }}
             validationSchema={Yup.object({
               creator: Yup.string().required(),
               channel: Yup.string().required(),
@@ -213,12 +216,13 @@ export default function Notifications() {
                     inputProps={{
                       placeholder: "Creator Username EX: (khaby.lame)",
                       value: notification.creator,
-                      onChange: (e) =>
-                        setNotification({
-                          ...notification,
-                          creator: e.target.value,
-                        }),
                     }}
+                    onChange={(e) =>
+                      setNotification({
+                        ...notification,
+                        creator: e.target.value,
+                      })
+                    }
                     isRequired
                   />
 
