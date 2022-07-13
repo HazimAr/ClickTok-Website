@@ -190,8 +190,8 @@ export default function Notifications() {
                       name="preview"
                       switchProps={{
                         size: "lg",
+                        defaultChecked: true,
                       }}
-                      defaultChecked
                     />
                   </HStack>
                 </ModalBody>
