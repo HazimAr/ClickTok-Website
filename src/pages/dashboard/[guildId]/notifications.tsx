@@ -28,7 +28,7 @@ import { Formik } from "formik";
 import { InputControl, SelectControl, SwitchControl } from "formik-chakra-ui";
 import * as Yup from "yup";
 import { QuestionIcon } from "@chakra-ui/icons";
-import { GuildChannel, GuildTextBasedChannel, Role } from "discord.js";
+import { GuildChannel, Role } from "discord.js";
 
 export default function Notifications() {
   const [notifications, setNotifications] = useState([]);
