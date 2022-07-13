@@ -138,7 +138,17 @@ export default function Notifications() {
               role: Yup.string(),
               preview: Yup.boolean(),
             })}
-            onSubmit={() => null}
+            onSubmit={(values) =>
+              axios.post(
+                `${API}/guilds/${router.query.guildId}/notifications`,
+                values,
+                {
+                  headers: {
+                    Authorization: `Bearer ${session.accessToken}`,
+                  },
+                }
+              )
+            }
           >
             {({}) => (
               <>
@@ -157,8 +167,11 @@ export default function Notifications() {
                     ))}
                   </SelectControl>
 
-                  <SelectControl name="role" label="Role to ping:">
-                    <option value="">Don't Ping</option>
+                  <SelectControl
+                    name="role"
+                    label="Role to ping:"
+                    selectProps={{ placeholder: "Don't Ping" }}
+                  >
                     {roles.map((role) => (
                       <option value={role?.id}>{role?.name}</option>
                     ))}
