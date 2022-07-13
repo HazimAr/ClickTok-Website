@@ -139,15 +139,35 @@ export default function Notifications() {
               preview: Yup.boolean(),
             })}
             onSubmit={(values) =>
-              axios.post(
-                `${API}/guilds/${router.query.guildId}/notifications`,
-                values,
-                {
-                  headers: {
-                    Authorization: `Bearer ${session.accessToken}`,
-                  },
-                }
-              )
+              axios
+                .post(
+                  `${API}/guilds/${router.query.guildId}/notifications`,
+                  values,
+                  {
+                    headers: {
+                      Authorization: `Bearer ${session.accessToken}`,
+                    },
+                  }
+                )
+                .then(() =>
+                  toast({
+                    title: "Created",
+                    description:
+                      "Your notification has successfully been setup. Clicktok will send the notification up to 1 minute after the video has been posted.",
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                  })
+                )
+                .catch(({ data }) => {
+                  toast({
+                    title: "Error",
+                    description: data.message,
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                  });
+                })
             }
           >
             {({}) => (
