@@ -90,7 +90,12 @@ export default function Notifications() {
             >
               <HStack flex="1">
                 <Heading size="md">{notification.creator}</Heading>
-                <Heading size="md">{notification.channel}</Heading>
+                <Heading size="md">
+                  #
+                  {channels.find(
+                    (channel) => channel.id == notification.channel
+                  )?.name || "Loading..."}
+                </Heading>
               </HStack>
 
               <HStack>
@@ -161,10 +166,7 @@ export default function Notifications() {
         <ModalOverlay />
         <ModalContent>
           <Formik
-            initialValues={{
-              creator: "",
-              channel: "",
-            }}
+            initialValues={notification}
             validationSchema={Yup.object({
               creator: Yup.string().required(),
               channel: Yup.string().required(),
@@ -220,6 +222,7 @@ export default function Notifications() {
                     onChange={(e) =>
                       setNotification({
                         ...notification,
+                        // @ts-ignore
                         creator: e.target.value,
                       })
                     }
@@ -229,12 +232,22 @@ export default function Notifications() {
                   <SelectControl
                     name="channel"
                     label="Channel to send in:"
-                    selectProps={{ placeholder: "Select Channel" }}
+                    selectProps={{
+                      placeholder: "Select Channel",
+                      value: notification.channel,
+                    }}
+                    onChange={(e) =>
+                      setNotification({
+                        ...notification,
+                        // @ts-ignore
+                        channel: e.target.value,
+                      })
+                    }
                     isRequired
                   >
                     {channels.map((channel) => (
                       <option key={channel.id} value={channel.id}>
-                        # {channel.name}
+                        #{channel.name}
                       </option>
                     ))}
                   </SelectControl>
