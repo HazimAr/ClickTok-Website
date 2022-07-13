@@ -3,6 +3,7 @@ import {
   Center,
   Heading,
   HStack,
+  Icon,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -26,6 +27,7 @@ import { FaPlus } from "react-icons/fa";
 import { Formik } from "formik";
 import { InputControl, SelectControl, SwitchControl } from "formik-chakra-ui";
 import * as Yup from "yup";
+import { QuestionIcon } from "@chakra-ui/icons";
 
 export default function Notifications() {
   const [notifications, setNotifications] = useState([]);
@@ -138,7 +140,7 @@ export default function Notifications() {
               role: Yup.string(),
               preview: Yup.boolean(),
             })}
-            onSubmit={(values) =>
+            onSubmit={(values, { setSubmitting }) => {
               axios
                 .post(
                   `${API}/guilds/${router.query.guildId}/notifications`,
@@ -149,28 +151,30 @@ export default function Notifications() {
                     },
                   }
                 )
-                .then(() =>
+                .then(() => {
                   toast({
                     title: "Created",
                     description:
                       "Your notification has successfully been setup. Clicktok will send the notification up to 1 minute after the video has been posted.",
                     status: "success",
-                    duration: 5000,
+                    duration: 9000,
                     isClosable: true,
-                  })
-                )
+                  });
+                  onClose();
+                })
                 .catch(({ data }) => {
                   toast({
                     title: "Error",
                     description: data.message,
                     status: "error",
-                    duration: 5000,
+                    duration: 9000,
                     isClosable: true,
                   });
                 })
-            }
+                .finally(() => setSubmitting(false));
+            }}
           >
-            {({}) => (
+            {({ submitForm, isSubmitting }) => (
               <>
                 <ModalHeader>Recieve Notifications</ModalHeader>
                 <ModalCloseButton />
@@ -181,9 +185,15 @@ export default function Notifications() {
                     inputProps={{
                       placeholder: "Creator Username EX: (khaby.lame)",
                     }}
+                    isRequired
                   />
 
-                  <SelectControl name="channel" label="Channel to send in:">
+                  <SelectControl
+                    name="channel"
+                    label="Channel to send in:"
+                    selectProps={{ placeholder: "Select Channel" }}
+                    isRequired
+                  >
                     {channels.map((channel) => (
                       <option key={channel.id} value={channel?.id}>
                         # {channel?.name}
@@ -194,7 +204,7 @@ export default function Notifications() {
                   <SelectControl
                     name="role"
                     label="Role to ping:"
-                    selectProps={{ placeholder: "Don't Ping" }}
+                    selectProps={{ placeholder: "Do Not Ping Any Role" }}
                   >
                     {roles.map((role) => (
                       <option key={role.id} value={role?.id}>
@@ -208,7 +218,10 @@ export default function Notifications() {
                       label="Enable video previews on notifications."
                       aria-label="A tooltip"
                     >
-                      Previews
+                      <HStack>
+                        <Icon as={QuestionIcon} />
+                        <p>Previews</p>
+                      </HStack>
                     </Tooltip>
                     <SwitchControl
                       name="preview"
@@ -223,15 +236,7 @@ export default function Notifications() {
                   <Button variant="outline" mr={3} onClick={onClose}>
                     Close
                   </Button>
-                  <Button
-                    // onClick={() => {
-                    //   axios.post(`${API}/notifications`, {
-                    //     channelId: channels[0].id,
-                    //     creatorUsername: "",
-                    //   });
-                    // }}
-                    type="submit"
-                  >
+                  <Button onClick={submitForm} isLoading={isSubmitting}>
                     Setup Notification
                   </Button>
                 </ModalFooter>
