@@ -170,7 +170,7 @@ export default function Notifications() {
                 })
             }
           >
-            {({ }) => (
+            {({}) => (
               <>
                 <ModalHeader>Recieve Notifications</ModalHeader>
                 <ModalCloseButton />
@@ -185,7 +185,9 @@ export default function Notifications() {
 
                   <SelectControl name="channel" label="Channel to send in:">
                     {channels.map((channel) => (
-                      <option value={channel?.id}># {channel?.name}</option>
+                      <option key={channel.id} value={channel?.id}>
+                        # {channel?.name}
+                      </option>
                     ))}
                   </SelectControl>
 
@@ -195,7 +197,9 @@ export default function Notifications() {
                     selectProps={{ placeholder: "Don't Ping" }}
                   >
                     {roles.map((role) => (
-                      <option value={role?.id}>{role?.name}</option>
+                      <option key={role.id} value={role?.id}>
+                        {role?.name}
+                      </option>
                     ))}
                   </SelectControl>
 
