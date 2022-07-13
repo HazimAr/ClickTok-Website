@@ -156,6 +156,7 @@ export default function Notifications() {
               setNotification({
                 creator: "",
                 channel: "",
+                id: "",
               });
               onOpen();
             }}
