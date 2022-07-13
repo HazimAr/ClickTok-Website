@@ -90,7 +90,7 @@ export default function Notifications() {
               rounded="lg"
             >
               <HStack flex="1">
-                <Heading size="md">{notification.creator}</Heading>
+                <Heading size="md">@{notification.creator}</Heading>
                 <Heading size="md">
                   #
                   {channels.find(
