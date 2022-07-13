@@ -120,16 +120,16 @@ export default function Notifications() {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Subscribe To A Creator</ModalHeader>
+          <ModalHeader>Recieve Notifications</ModalHeader>
           <ModalCloseButton />
           <ModalBody as={Stack} spacing={4}>
             <div>
-              <label>The creator to subscribe to</label>
+              <label>The creator to get notifications from:</label>
               <Input placeholder="Creator Username (NOT DISPLAY NAME)" />
             </div>
 
             <div>
-              <label>Channel the notification will send in</label>
+              <label>Channel the notification will send in:</label>
               <Select>
                 {channels.map((channel) => (
                   <option value={channel?.id}># {channel?.name}</option>
@@ -143,7 +143,7 @@ export default function Notifications() {
               >
                 Previews
               </Tooltip>
-              <Switch />
+              <Switch size="lg" />
             </HStack>
           </ModalBody>
           <ModalFooter>
