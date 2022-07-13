@@ -31,10 +31,14 @@ import { QuestionIcon } from "@chakra-ui/icons";
 import { GuildChannel, Role } from "discord.js";
 
 export default function Notifications() {
+  const [notification, setNotification] = useState({
+    creator: "",
+    channel: "",
+  });
   const [notifications, setNotifications] = useState([]);
   const [channels, setChannels] = useState<GuildChannel[]>([]);
   const [roles, setRoles] = useState<Role[]>([]);
-  const { isOpen, onClose, onToggle } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: session } = useSession();
   const router = useRouter();
   const toast = useToast();
@@ -70,60 +74,85 @@ export default function Notifications() {
         TikTok Notifications
       </Heading>
       <Card isLoaded>
-        <HStack>
+        <HStack mb={5}>
           <Heading size="md" flex="1">
             Notifications
           </Heading>
           <Heading size="md">{notifications.length}/1</Heading>
         </HStack>
-
-        {notifications.map((notification) => (
-          <HStack key={notification.id}>
-            <Heading size="md" flex="1">
-              {notification.name}
-            </Heading>
-            <Button
-              size="sm"
-              colorScheme="red"
-              onClick={() => {
-                axios
-                  .delete(
-                    `${API}/guilds/${router.query.guildId}/notifications/${notification.id}`,
-                    {
-                      headers: {
-                        Authorization: `Bearer ${session.accessToken}`,
-                      },
-                    }
-                  )
-                  .then(() => {
-                    toast({
-                      title: "Notification deleted",
-                      status: "success",
-                      duration: 5000,
-                      isClosable: true,
-                    });
-                    setNotifications(
-                      notifications.filter((s) => s.id !== notification.id)
-                    );
-                  })
-                  .catch(({ data }) => {
-                    toast({
-                      title: "Error",
-                      description: data.message,
-                      status: "error",
-                      duration: 5000,
-                      isClosable: true,
-                    });
-                  });
-              }}
+        <Stack mb={10}>
+          {notifications.map((notification) => (
+            <HStack
+              key={notification.id}
+              bg="whiteAlpha.100"
+              p={4}
+              rounded="lg"
             >
-              Delete
-            </Button>
-          </HStack>
-        ))}
+              <HStack flex="1">
+                <Heading size="md">{notification.creator}</Heading>
+                <Heading size="md">{notification.channel}</Heading>
+              </HStack>
 
+              <HStack>
+                <Button
+                  onClick={() => {
+                    setNotification(notification);
+                    onOpen();
+                  }}
+                >
+                  Edit
+                </Button>
+                <Button
+                  variant="accent"
+                  onClick={() => {
+                    axios
+                      .delete(
+                        `${API}/guilds/${router.query.guildId}/notifications/${notification.id}`,
+                        {
+                          headers: {
+                            Authorization: `Bearer ${session.accessToken}`,
+                          },
+                        }
+                      )
+                      .then(() => {
+                        toast({
+                          title: "Notification deleted",
+                          status: "success",
+                          duration: 5000,
+                          isClosable: true,
+                        });
+                        setNotifications(
+                          notifications.filter((s) => s.id !== notification.id)
+                        );
+                      })
+                      .catch(({ data }) => {
+                        toast({
+                          title: "Error",
+                          description: data.message,
+                          status: "error",
+                          duration: 5000,
+                          isClosable: true,
+                        });
+                      });
+                  }}
+                >
+                  Delete
+                </Button>
+              </HStack>
+            </HStack>
+          ))}
+        </Stack>
         <Center>
-          <Button variant="outline" onClick={onToggle}>
+          <Button
+            variant="outline"
+            onClick={() => {
+              setNotification({
+                creator: "",
+                channel: "",
+              });
+              onOpen();
+            }}
+          >
             <FaPlus />
           </Button>
         </Center>
@@ -132,14 +161,12 @@ export default function Notifications() {
         <ModalOverlay />
         <ModalContent>
           <Formik
-            initialValues={{
-              creator: "",
-            }}
+            initialValues={notification}
             validationSchema={Yup.object({
               creator: Yup.string().required(),
               channel: Yup.string().required(),
-              role: Yup.string(),
-              preview: Yup.boolean(),
+              role: Yup.string().nullable(),
+              preview: Yup.boolean().nullable(),
             })}
             onSubmit={(values, { setSubmitting }) => {
               axios
@@ -185,6 +212,12 @@ export default function Notifications() {
                     label="Creator:"
                     inputProps={{
                       placeholder: "Creator Username EX: (khaby.lame)",
+                      value: notification.creator,
+                      onChange: (e) =>
+                        setNotification({
+                          ...notification,
+                          creator: e.target.value,
+                        }),
                     }}
                     isRequired
                   />
@@ -244,7 +277,7 @@ export default function Notifications() {
                     Close
                   </Button>
                   <Button onClick={submitForm} isLoading={isSubmitting}>
-                    Setup Notification
+                    Submit Notification
                   </Button>
                 </ModalFooter>
               </>

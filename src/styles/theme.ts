@@ -3,8 +3,7 @@ import { Button, Link } from "./components";
 
 const theme = extendTheme({
   config: {
-    initialColorMode: "system",
-    useSystemColorMode: true,
+    initialColorMode: "dark",
   },
   colors: {
     primary: "hsl(209, 61%, 50%)",
