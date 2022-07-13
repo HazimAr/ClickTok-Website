@@ -229,7 +229,7 @@ export default function Notifications() {
 
                     type="submit"
                   >
-                    Subscribe
+                    Setup Notification
                   </Button>
                 </ModalFooter>
               </>
