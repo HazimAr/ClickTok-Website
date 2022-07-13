@@ -38,7 +38,7 @@ export default function Notifications() {
   useEffect(() => {
     if (!session?.accessToken) return;
     axios
-      .get(`${API}/guilds/${router.query.guildId}/subscriptions`, {
+      .get(`${API}/guilds/${router.query.guildId}/notifications`, {
         headers: {
           Authorization: `Bearer ${session.accessToken}`,
         },
@@ -152,7 +152,7 @@ export default function Notifications() {
             </Button>
             <Button
               // onClick={() => {
-              //   axios.post(`${API}/subscriptions`, {
+              //   axios.post(`${API}/notifications`, {
               //     channelId: channels[0].id,
               //     creatorUsername: "",
               //   });
