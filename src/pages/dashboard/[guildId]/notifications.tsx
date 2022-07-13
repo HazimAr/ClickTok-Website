@@ -82,72 +82,99 @@ export default function Notifications() {
           <Heading size="md">{notifications.length}/1</Heading>
         </HStack>
         <Stack mb={10}>
-          {notifications.map((notification) => (
-            <HStack
-              key={notification.id}
-              bg="blackAlpha.400"
-              p={4}
-              rounded="lg"
-            >
-              <HStack flex="1">
-                <Heading size="md">@{notification.creator}</Heading>
-                <Heading size="md">
-                  #
-                  {channels.find(
-                    (channel) => channel.id == notification.channel
-                  )?.name || "Loading..."}
-                </Heading>
-              </HStack>
+          {notifications.map((notification) => {
+            const roleColor = roles.find(
+              (role) => role.id === notification.role
+            ).color;
+            return (
+              <HStack
+                key={notification.id}
+                bg="blackAlpha.400"
+                p={4}
+                rounded="lg"
+              >
+                <HStack flex="1">
+                  <Heading size="md">@{notification.creator}</Heading>
+                  <Heading size="md">
+                    #
+                    {channels.find(
+                      (channel) => channel.id == notification.channel
+                    )?.name || "Loading..."}
+                  </Heading>
 
-              <HStack>
-                <Button
-                  onClick={() => {
-                    setNotification(notification);
-                    onOpen();
-                  }}
-                >
-                  Edit
-                </Button>
-                <Button
-                  variant="accent"
-                  onClick={() => {
-                    axios
-                      .delete(
-                        `${API}/guilds/${router.query.guildId}/notifications/${notification.id}`,
-                        {
-                          headers: {
-                            Authorization: `Bearer ${session.accessToken}`,
-                          },
-                        }
-                      )
-                      .then(() => {
-                        toast({
-                          title: "Notification deleted",
-                          status: "success",
-                          duration: 5000,
-                          isClosable: true,
+                  <Heading
+                    size="md"
+                    color={`#${roles
+                      .find((role) => role.id == notification.role)
+                      ?.color?.toString(16)}`}
+                    bg={
+                      roleColor != 0
+                        ? `#${roles
+                            .find((role) => role.id == notification.role)
+                            ?.color?.toString(16)}44`
+                        : "blackAlpha.400"
+                    }
+                    p={2}
+                    rounded="lg"
+                  >
+                    @
+                    {roles.find((role) => role.id == notification.role)?.name ||
+                      "Loading..."}
+                  </Heading>
+                </HStack>
+
+                <HStack>
+                  <Button
+                    onClick={() => {
+                      setNotification(notification);
+                      onOpen();
+                    }}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    variant="accent"
+                    onClick={() => {
+                      axios
+                        .delete(
+                          `${API}/guilds/${router.query.guildId}/notifications/${notification.id}`,
+                          {
+                            headers: {
+                              Authorization: `Bearer ${session.accessToken}`,
+                            },
+                          }
+                        )
+                        .then(() => {
+                          toast({
+                            title: "Notification deleted",
+                            status: "success",
+                            duration: 5000,
+                            isClosable: true,
+                          });
+                          setNotifications(
+                            notifications.filter(
+                              (s) => s.id !== notification.id
+                            )
+                          );
+                        })
+                        .catch(() => {
+                          toast({
+                            title: "Error",
+                            description:
+                              "Something went wrong. If this keeps happening, please contact support.",
+                            status: "error",
+                            duration: 5000,
+                            isClosable: true,
+                          });
                         });
-                        setNotifications(
-                          notifications.filter((s) => s.id !== notification.id)
-                        );
-                      })
-                      .catch(() => {
-                        toast({
-                          title: "Error",
-                          description:
-                            "Something went wrong. If this keeps happening, please contact support.",
-                          status: "error",
-                          duration: 5000,
-                          isClosable: true,
-                        });
-                      });
-                  }}
-                >
-                  Delete
-                </Button>
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </HStack>
               </HStack>
-            </HStack>
-          ))}
+            );
+          })}
         </Stack>
         <Center>
           <Button
