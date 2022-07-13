@@ -3,7 +3,6 @@ import {
   Center,
   Heading,
   HStack,
-  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -11,9 +10,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
   Stack,
-  Switch,
   Tooltip,
   useDisclosure,
   useToast,
@@ -26,10 +23,14 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
+import { Formik } from "formik";
+import { InputControl, SelectControl, SwitchControl } from "formik-chakra-ui";
+import * as Yup from "yup";
 
 export default function Notifications() {
   const [notifications, setNotifications] = useState([]);
   const [channels, setChannels] = useState([]);
+  const [roles, setRoles] = useState([]);
   const { isOpen, onClose, onToggle } = useDisclosure();
   const { data: session } = useSession();
   const router = useRouter();
@@ -51,6 +52,13 @@ export default function Notifications() {
         },
       })
       .then((response) => setChannels(response.data));
+    axios
+      .get(`${API}/guilds/${router.query.guildId}/roles`, {
+        headers: {
+          Authorization: `Bearer ${session.accessToken}`,
+        },
+      })
+      .then((response) => setRoles(response.data));
   }, [session]);
 
   return (
@@ -120,49 +128,72 @@ export default function Notifications() {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Recieve Notifications</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody as={Stack} spacing={4}>
-            <div>
-              <label>The creator to get notifications from:</label>
-              <Input placeholder="Creator Username (NOT DISPLAY NAME)" />
-            </div>
+          <Formik
+            initialValues={{
+              creator: "",
+            }}
+            validationSchema={Yup.object({
+              creator: Yup.string().required(),
+              channel: Yup.string().required(),
+              role: Yup.string(),
+              preview: Yup.boolean(),
+            })}
+            onSubmit={() => null}
+          >
+            {({}) => (
+              <>
+                <ModalHeader>Recieve Notifications</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody as={Stack} spacing={4}>
+                  <InputControl
+                    name="creator"
+                    label="Creator:"
+                    placeholder="Creator Username EX: (khaby.lame)"
+                  />
 
-            <div>
-              <label>Channel the notification will send in:</label>
-              <Select>
-                {channels.map((channel) => (
-                  <option value={channel?.id}># {channel?.name}</option>
-                ))}
-              </Select>
-            </div>
-            <HStack justify="space-between">
-              <Tooltip
-                label="Enable video previews on notifications."
-                aria-label="A tooltip"
-              >
-                Previews
-              </Tooltip>
-              <Switch size="lg" />
-            </HStack>
-          </ModalBody>
-          <ModalFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button
-              // onClick={() => {
-              //   axios.post(`${API}/notifications`, {
-              //     channelId: channels[0].id,
-              //     creatorUsername: "",
-              //   });
-              // }}
+                  <SelectControl name="channel" label="Channel to send in:">
+                    {channels.map((channel) => (
+                      <option value={channel?.id}># {channel?.name}</option>
+                    ))}
+                  </SelectControl>
 
-              type="submit"
-            >
-              Subscribe
-            </Button>
-          </ModalFooter>
+                  <SelectControl name="role" label="Role to ping:">
+                    <option value="">Don't Ping</option>
+                    {roles.map((role) => (
+                      <option value={role?.id}>{role?.name}</option>
+                    ))}
+                  </SelectControl>
+
+                  <HStack justify="space-between">
+                    <Tooltip
+                      label="Enable video previews on notifications."
+                      aria-label="A tooltip"
+                    >
+                      Previews
+                    </Tooltip>
+                    <SwitchControl name="preview" size="lg" defaultChecked />
+                  </HStack>
+                </ModalBody>
+                <ModalFooter>
+                  <Button variant="outline" mr={3} onClick={onClose}>
+                    Close
+                  </Button>
+                  <Button
+                    // onClick={() => {
+                    //   axios.post(`${API}/notifications`, {
+                    //     channelId: channels[0].id,
+                    //     creatorUsername: "",
+                    //   });
+                    // }}
+
+                    type="submit"
+                  >
+                    Subscribe
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </Formik>
         </ModalContent>
       </Modal>
     </DashboardLayout>
