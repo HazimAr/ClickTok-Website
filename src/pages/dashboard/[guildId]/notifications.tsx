@@ -28,11 +28,12 @@ import { Formik } from "formik";
 import { InputControl, SelectControl, SwitchControl } from "formik-chakra-ui";
 import * as Yup from "yup";
 import { QuestionIcon } from "@chakra-ui/icons";
+import { GuildChannel, GuildTextBasedChannel, Role } from "discord.js";
 
 export default function Notifications() {
   const [notifications, setNotifications] = useState([]);
-  const [channels, setChannels] = useState([]);
-  const [roles, setRoles] = useState([]);
+  const [channels, setChannels] = useState<GuildChannel[]>([]);
+  const [roles, setRoles] = useState<Role[]>([]);
   const { isOpen, onClose, onToggle } = useDisclosure();
   const { data: session } = useSession();
   const router = useRouter();
@@ -195,8 +196,8 @@ export default function Notifications() {
                     isRequired
                   >
                     {channels.map((channel) => (
-                      <option key={channel.id} value={channel?.id}>
-                        # {channel?.name}
+                      <option key={channel.id} value={channel.id}>
+                        # {channel.name}
                       </option>
                     ))}
                   </SelectControl>
@@ -206,11 +207,17 @@ export default function Notifications() {
                     label="Role to ping:"
                     selectProps={{ placeholder: "Do Not Ping Any Role" }}
                   >
-                    {roles.map((role) => (
-                      <option key={role.id} value={role?.id}>
-                        {role?.name}
-                      </option>
-                    ))}
+                    {roles
+                      .sort((a, b) => b.rawPosition - a.rawPosition)
+                      .map((role) => (
+                        <option
+                          key={role.id}
+                          value={role.id}
+                          style={{ color: `#${role.color.toString(16)}` }}
+                        >
+                          {role.name}
+                        </option>
+                      ))}
                   </SelectControl>
 
                   <HStack justify="space-between">
