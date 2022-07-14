@@ -79,7 +79,13 @@ export default function Notifications() {
           <Heading size="md" flex="1">
             Notifications
           </Heading>
-          <Heading size="md">{notifications.length}/1</Heading>
+
+          <Tooltip label="Premium members get unlimited notifications" mr={4}>
+            <HStack>
+              <Heading size="md">{notifications.length}/1</Heading>
+              <Icon as={QuestionIcon} />
+            </HStack>
+          </Tooltip>
         </HStack>
         <Stack mb={10}>
           {notifications.map((notification) => {
