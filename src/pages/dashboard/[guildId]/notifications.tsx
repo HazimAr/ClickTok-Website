@@ -350,6 +350,13 @@ export default function Notifications() {
                         size: "lg",
                         defaultChecked: true,
                       }}
+                      onChange={(e) =>
+                        setNotification({
+                          ...notification,
+                          // @ts-ignore
+                          preview: e.target.value,
+                        })
+                      }
                     />
                   </HStack>
                 </ModalBody>
