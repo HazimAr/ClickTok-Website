@@ -47,6 +47,7 @@ export default function Notifications() {
 
   useEffect(() => {
     if (!session?.accessToken) return;
+    if (!router.query.guildId) return;
     axios
       .get(`${API}/guilds/${router.query.guildId}/notifications`, {
         headers: {
@@ -68,7 +69,7 @@ export default function Notifications() {
         },
       })
       .then((response) => setRoles(response.data));
-  }, [session]);
+  }, [session, router]);
 
   return (
     <DashboardLayout>
