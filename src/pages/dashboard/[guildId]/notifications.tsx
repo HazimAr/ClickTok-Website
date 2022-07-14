@@ -35,6 +35,7 @@ export default function Notifications() {
     creator: "",
     channel: "",
     id: "",
+    preview: true,
   });
   const [notifications, setNotifications] = useState([]);
   const [channels, setChannels] = useState<GuildChannel[]>([]);
@@ -202,6 +203,7 @@ export default function Notifications() {
                 creator: "",
                 channel: "",
                 id: "",
+                preview: true,
               });
               onOpen();
             }}
@@ -219,7 +221,7 @@ export default function Notifications() {
               creator: Yup.string().required(),
               channel: Yup.string().required(),
               role: Yup.string().nullable(),
-              preview: Yup.boolean().nullable(),
+              preview: Yup.boolean(),
             })}
             onSubmit={(values, { setSubmitting }) => {
               axios
