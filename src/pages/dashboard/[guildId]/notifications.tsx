@@ -92,6 +92,7 @@ export default function Notifications() {
                 bg="blackAlpha.400"
                 p={4}
                 rounded="lg"
+                flexDir={{ base: "column", md: "row" }}
               >
                 <HStack flex="1">
                   <Heading size="md">@{notification.creator}</Heading>
