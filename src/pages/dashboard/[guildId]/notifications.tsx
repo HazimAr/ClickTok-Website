@@ -195,7 +195,7 @@ export default function Notifications() {
                 return toast({
                   title: "Error",
                   description:
-                    "You have reached your maximum notifications at a time. If you would like more, please upgrade to premium.",
+                    "You have reached your maximum notifications. If you would like more, please upgrade to premium.",
                   status: "error",
                   duration: 9000,
                   isClosable: true,
