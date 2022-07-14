@@ -125,7 +125,7 @@ export default function Notifications() {
                   )}
                 </HStack>
 
-                <HStack>
+                <HStack pt={{ base: 4, md: 0 }}>
                   <Button
                     onClick={() => {
                       setNotification(notification);
