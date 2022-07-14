@@ -85,7 +85,7 @@ export default function Notifications() {
           {notifications.map((notification) => {
             const roleColor = roles.find(
               (role) => role.id === notification.role
-            ).color;
+            )?.color;
             return (
               <HStack
                 key={notification.id}
@@ -101,26 +101,27 @@ export default function Notifications() {
                       (channel) => channel.id == notification.channel
                     )?.name || "Loading..."}
                   </Heading>
-
-                  <Heading
-                    size="md"
-                    color={`#${roles
-                      .find((role) => role.id == notification.role)
-                      ?.color?.toString(16)}`}
-                    bg={
-                      roleColor != 0
-                        ? `#${roles
-                            .find((role) => role.id == notification.role)
-                            ?.color?.toString(16)}44`
-                        : "blackAlpha.400"
-                    }
-                    p={2}
-                    rounded="lg"
-                  >
-                    @
-                    {roles.find((role) => role.id == notification.role)?.name ||
-                      "Loading..."}
-                  </Heading>
+                  {roleColor && (
+                    <Heading
+                      size="md"
+                      color={`#${roles
+                        .find((role) => role.id == notification.role)
+                        ?.color?.toString(16)}`}
+                      bg={
+                        roleColor != 0
+                          ? `#${roles
+                              .find((role) => role.id == notification.role)
+                              ?.color?.toString(16)}44`
+                          : "blackAlpha.400"
+                      }
+                      p={2}
+                      rounded="lg"
+                    >
+                      @
+                      {roles.find((role) => role.id == notification.role)
+                        ?.name || "Loading..."}
+                    </Heading>
+                  )}
                 </HStack>
 
                 <HStack>
@@ -157,13 +158,14 @@ export default function Notifications() {
                             )
                           );
                         })
-                        .catch(() => {
+                        .catch(({ response }) => {
                           toast({
                             title: "Error",
                             description:
+                              response.data.message ||
                               "Something went wrong. If this keeps happening, please contact support.",
                             status: "error",
-                            duration: 5000,
+                            duration: 9000,
                             isClosable: true,
                           });
                         });
@@ -180,6 +182,15 @@ export default function Notifications() {
           <Button
             variant="outline"
             onClick={() => {
+              if (notifications.length >= 1)
+                return toast({
+                  title: "Error",
+                  description:
+                    "You can only have 1 notification at a time. If you would like more, please upgrade to premium.",
+                  status: "error",
+                  duration: 9000,
+                  isClosable: true,
+                });
               setNotification({
                 creator: "",
                 channel: "",
@@ -236,10 +247,11 @@ export default function Notifications() {
                     setNotifications([...notifications, values]);
                   }
                 })
-                .catch(() => {
+                .catch(({ response }) => {
                   toast({
                     title: "Error",
                     description:
+                      response.data.message ||
                       "Something went wrong. If this keeps happening, please contact support.",
                     status: "error",
                     duration: 9000,
