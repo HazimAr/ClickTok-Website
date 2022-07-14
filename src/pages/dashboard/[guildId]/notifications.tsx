@@ -195,7 +195,7 @@ export default function Notifications() {
                 return toast({
                   title: "Error",
                   description:
-                    "You can only have 1 notification at a time. If you would like more, please upgrade to premium.",
+                    "You have reached your maximum notifications at a time. If you would like more, please upgrade to premium.",
                   status: "error",
                   duration: 9000,
                   isClosable: true,
@@ -225,6 +225,7 @@ export default function Notifications() {
               preview: Yup.boolean(),
             })}
             onSubmit={(values, { setSubmitting }) => {
+              console.log(values);
               axios
                 .post(
                   `${API}/guilds/${router.query.guildId}/notifications`,
@@ -348,15 +349,14 @@ export default function Notifications() {
                       name="preview"
                       switchProps={{
                         size: "lg",
-                        defaultChecked: true,
                       }}
-                      onChange={(e) =>
+                      onChange={(e) => {
                         setNotification({
                           ...notification,
                           // @ts-ignore
                           preview: e.target.value,
-                        })
-                      }
+                        });
+                      }}
                     />
                   </HStack>
                 </ModalBody>
