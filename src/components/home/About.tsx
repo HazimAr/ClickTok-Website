@@ -7,7 +7,7 @@ const data = [
   {
     title: "Easily embed Tiktok videos",
     description:
-      "ClickTok is a simple Discord bot that allows you to embed Tiktok videos easily in your Discord server.",
+      "ClickTok is a simple Discord bot that allows you to embed Tiktok videos easily in your Discord server. The official TikTok verified embedding bot! ",
     button: "Start Embedding",
     img: "/embed.gif",
   },
