@@ -54,7 +54,17 @@ export default function Statistics() {
           Authorization: `Bearer ${session.accessToken}`,
         },
       })
-      .then((response) => setStatistics(response.data));
+      .then((response) => setStatistics(response.data))
+      .catch((error) => {
+        console.error(error);
+        toast({
+          title: "Error",
+          description: "Could not load statistics",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      });
     axios
       .get(`${API}/guilds/${router.query.guildId}/channels/voice`, {
         headers: {
@@ -63,7 +73,7 @@ export default function Statistics() {
       })
       .then((response) => setChannels(response.data));
   }, [session, router]);
-
+  console.log(statistics);
   return (
     <DashboardLayout>
       <Heading as="h1" mb={10}>
@@ -272,7 +282,6 @@ export default function Statistics() {
                         followers: e.target.value,
                       })
                     }
-                    isRequired
                   >
                     {channels.map((channel) => (
                       <option key={channel.id} value={channel.id}>
@@ -295,7 +304,6 @@ export default function Statistics() {
                         likes: e.target.value,
                       })
                     }
-                    isRequired
                   >
                     {channels.map((channel) => (
                       <option key={channel.id} value={channel.id}>
@@ -318,7 +326,6 @@ export default function Statistics() {
                         videos: e.target.value,
                       })
                     }
-                    isRequired
                   >
                     {channels.map((channel) => (
                       <option key={channel.id} value={channel.id}>
