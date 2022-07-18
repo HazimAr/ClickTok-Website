@@ -96,7 +96,7 @@ export default function Settings() {
   }
   return (
     <DashboardLayout>
-      <Heading flex={1} as="h1">
+      <Heading as="h1">
         Server Settings
       </Heading>
       {Object.keys(settings).map((key) => {

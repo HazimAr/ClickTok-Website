@@ -35,7 +35,7 @@ export default function Leaderboard() {
   return (
     <DashboardLayout>
       <HStack mb={10}>
-        <Heading fontSize="xl" flex={1}>
+        <Heading flex={1}>
           Leaderboard Settings
         </Heading>
         <Button

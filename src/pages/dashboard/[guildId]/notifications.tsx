@@ -73,7 +73,7 @@ export default function Notifications() {
 
   return (
     <DashboardLayout>
-      <Heading as="h1" flex="1" mb={10}>
+      <Heading as="h1" mb={10}>
         TikTok Notifications
       </Heading>
       <Card isLoaded>
