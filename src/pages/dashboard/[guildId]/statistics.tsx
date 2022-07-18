@@ -104,10 +104,7 @@ export default function Statistics() {
               >
                 <HStack flex="1">
                   <Heading size="md">@{statistic.creator}</Heading>
-                  <Heading size="md">
-                    {channels.find((channel) => channel.id == statistic.channel)
-                      ?.name || "Loading..."}
-                  </Heading>
+
                 </HStack>
 
                 <HStack pt={{ base: 4, md: 0 }}>
