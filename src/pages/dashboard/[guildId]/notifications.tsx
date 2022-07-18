@@ -28,7 +28,7 @@ import { Formik } from "formik";
 import { InputControl, SelectControl, SwitchControl } from "formik-chakra-ui";
 import * as Yup from "yup";
 import { QuestionIcon } from "@chakra-ui/icons";
-import { GuildChannel, Role } from "discord.js";
+import { BaseGuildTextChannel, Role } from "discord.js";
 
 export default function Notifications() {
   const [notification, setNotification] = useState({
@@ -38,7 +38,7 @@ export default function Notifications() {
     preview: true,
   });
   const [notifications, setNotifications] = useState([]);
-  const [channels, setChannels] = useState<GuildChannel[]>([]);
+  const [channels, setChannels] = useState<BaseGuildTextChannel[]>([]);
   const [roles, setRoles] = useState<Role[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: session } = useSession();

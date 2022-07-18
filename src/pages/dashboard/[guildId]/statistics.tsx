@@ -25,21 +25,21 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { Formik } from "formik";
-import { InputControl, SelectControl, SwitchControl } from "formik-chakra-ui";
+import { InputControl, SelectControl } from "formik-chakra-ui";
 import * as Yup from "yup";
 import { QuestionIcon } from "@chakra-ui/icons";
-import { GuildChannel, Role } from "discord.js";
+import { VoiceChannel } from "discord.js";
 
 export default function Statistics() {
-  const [notification, setNotification] = useState({
-    creator: "",
-    channel: "",
+  const [statistic, setStatistic] = useState({
     id: "",
-    preview: true,
+    creator: "",
+    followers: "",
+    likes: "",
+    videos: "",
   });
-  const [notifications, setNotifications] = useState([]);
-  const [channels, setChannels] = useState<GuildChannel[]>([]);
-  const [roles, setRoles] = useState<Role[]>([]);
+  const [statistics, setStatistics] = useState([]);
+  const [channels, setChannels] = useState<VoiceChannel[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: session } = useSession();
   const router = useRouter();
@@ -49,26 +49,19 @@ export default function Statistics() {
     if (!session?.accessToken) return;
     if (!router.query.guildId) return;
     axios
-      .get(`${API}/guilds/${router.query.guildId}/notifications`, {
+      .get(`${API}/guilds/${router.query.guildId}/statistics`, {
         headers: {
           Authorization: `Bearer ${session.accessToken}`,
         },
       })
-      .then((response) => setNotifications(response.data));
+      .then((response) => setStatistics(response.data));
     axios
-      .get(`${API}/guilds/${router.query.guildId}/channels`, {
+      .get(`${API}/guilds/${router.query.guildId}/channels/voice`, {
         headers: {
           Authorization: `Bearer ${session.accessToken}`,
         },
       })
       .then((response) => setChannels(response.data));
-    axios
-      .get(`${API}/guilds/${router.query.guildId}/roles`, {
-        headers: {
-          Authorization: `Bearer ${session.accessToken}`,
-        },
-      })
-      .then((response) => setRoles(response.data));
   }, [session, router]);
 
   return (
@@ -84,59 +77,33 @@ export default function Statistics() {
 
           <Tooltip label="Premium members get unlimited statistics" mr={4}>
             <HStack>
-              <Heading size="md">{notifications.length}/1</Heading>
+              <Heading size="md">{statistics.length}/1</Heading>
               <Icon as={QuestionIcon} />
             </HStack>
           </Tooltip>
         </HStack>
         <Stack mb={10}>
-          {notifications.map((notification) => {
-            const roleColor = roles.find(
-              (role) => role.id === notification.role
-            )?.color;
+          {statistics.map((statistic) => {
             return (
               <HStack
-                key={notification.id}
+                key={statistic.id}
                 bg="blackAlpha.400"
                 p={4}
                 rounded="lg"
                 flexDir={{ base: "column", md: "row" }}
               >
                 <HStack flex="1">
-                  <Heading size="md">@{notification.creator}</Heading>
+                  <Heading size="md">@{statistic.creator}</Heading>
                   <Heading size="md">
-                    #
-                    {channels.find(
-                      (channel) => channel.id == notification.channel
-                    )?.name || "Loading..."}
+                    {channels.find((channel) => channel.id == statistic.channel)
+                      ?.name || "Loading..."}
                   </Heading>
-                  {roleColor && (
-                    <Heading
-                      size="md"
-                      color={`#${roles
-                        .find((role) => role.id == notification.role)
-                        ?.color?.toString(16)}`}
-                      bg={
-                        roleColor != 0
-                          ? `#${roles
-                              .find((role) => role.id == notification.role)
-                              ?.color?.toString(16)}44`
-                          : "blackAlpha.400"
-                      }
-                      p={2}
-                      rounded="lg"
-                    >
-                      @
-                      {roles.find((role) => role.id == notification.role)
-                        ?.name || "Loading..."}
-                    </Heading>
-                  )}
                 </HStack>
 
                 <HStack pt={{ base: 4, md: 0 }}>
                   <Button
                     onClick={() => {
-                      setNotification(notification);
+                      setStatistic(statistic);
                       onOpen();
                     }}
                   >
@@ -147,7 +114,7 @@ export default function Statistics() {
                     onClick={() => {
                       axios
                         .delete(
-                          `${API}/guilds/${router.query.guildId}/notifications/${notification.id}`,
+                          `${API}/guilds/${router.query.guildId}/statistic/${statistic.id}`,
                           {
                             headers: {
                               Authorization: `Bearer ${session.accessToken}`,
@@ -156,15 +123,13 @@ export default function Statistics() {
                         )
                         .then(() => {
                           toast({
-                            title: "Notification deleted",
+                            title: "Statistic deleted",
                             status: "success",
                             duration: 5000,
                             isClosable: true,
                           });
-                          setNotifications(
-                            notifications.filter(
-                              (s) => s.id !== notification.id
-                            )
+                          setStatistics(
+                            statistics.filter((s) => s.id !== statistic.id)
                           );
                         })
                         .catch(({ response }) => {
@@ -191,7 +156,7 @@ export default function Statistics() {
           <Button
             variant="outline"
             onClick={() => {
-              if (notifications.length >= 1)
+              if (statistics.length >= 1)
                 return toast({
                   title: "Error",
                   description:
@@ -200,11 +165,12 @@ export default function Statistics() {
                   duration: 9000,
                   isClosable: true,
                 });
-              setNotification({
-                creator: "",
-                channel: "",
+              setStatistic({
                 id: "",
-                preview: true,
+                creator: "",
+                followers: "",
+                likes: "",
+                videos: "",
               });
               onOpen();
             }}
@@ -217,18 +183,18 @@ export default function Statistics() {
         <ModalOverlay />
         <ModalContent>
           <Formik
-            initialValues={notification}
+            initialValues={statistic}
             validationSchema={Yup.object({
               creator: Yup.string().required(),
-              channel: Yup.string().required(),
-              role: Yup.string().nullable(),
-              preview: Yup.boolean(),
+              followers: Yup.string().nullable(),
+              likes: Yup.string().nullable(),
+              videos: Yup.string().nullable(),
             })}
             onSubmit={(values, { setSubmitting }) => {
               console.log(values);
               axios
                 .post(
-                  `${API}/guilds/${router.query.guildId}/notifications`,
+                  `${API}/guilds/${router.query.guildId}/statistics`,
                   values,
                   {
                     headers: {
@@ -249,13 +215,11 @@ export default function Statistics() {
                   onClose();
 
                   if (updated) {
-                    setNotifications(
-                      notifications.map((s) =>
-                        s.id === values.id ? values : s
-                      )
+                    setStatistics(
+                      statistics.map((s) => (s.id === values.id ? values : s))
                     );
                   } else {
-                    setNotifications([...notifications, values]);
+                    setStatistics([...statistics, values]);
                   }
                 })
                 .catch(({ response }) => {
@@ -282,11 +246,11 @@ export default function Statistics() {
                     label="Creator:"
                     inputProps={{
                       placeholder: "Creator Username EX: (khaby.lame)",
-                      value: notification.creator,
+                      value: statistic.creator,
                     }}
                     onChange={(e) =>
-                      setNotification({
-                        ...notification,
+                      setStatistic({
+                        ...statistic,
                         // @ts-ignore
                         creator: e.target.value,
                       })
@@ -295,70 +259,73 @@ export default function Statistics() {
                   />
 
                   <SelectControl
-                    name="channel"
-                    label="Channel to send in:"
+                    name="followers"
+                    label="The followers channel:"
                     selectProps={{
                       placeholder: "Select Channel",
-                      value: notification.channel,
+                      value: statistic.followers,
                     }}
                     onChange={(e) =>
-                      setNotification({
-                        ...notification,
+                      setStatistic({
+                        ...statistic,
                         // @ts-ignore
-                        channel: e.target.value,
+                        followers: e.target.value,
                       })
                     }
                     isRequired
                   >
                     {channels.map((channel) => (
                       <option key={channel.id} value={channel.id}>
-                        #{channel.name}
+                        {channel.name}
                       </option>
                     ))}
                   </SelectControl>
 
                   <SelectControl
-                    name="role"
-                    label="Role to ping:"
-                    selectProps={{ placeholder: "Do Not Ping Any Role" }}
+                    name="likes"
+                    label="The likes channel:"
+                    selectProps={{
+                      placeholder: "Select Channel",
+                      value: statistic.followers,
+                    }}
+                    onChange={(e) =>
+                      setStatistic({
+                        ...statistic,
+                        // @ts-ignore
+                        likes: e.target.value,
+                      })
+                    }
+                    isRequired
                   >
-                    {roles
-                      .sort((a, b) => b.rawPosition - a.rawPosition)
-                      .map((role) => (
-                        <option
-                          key={role.id}
-                          value={role.id}
-                          style={{ color: `#${role.color.toString(16)}` }}
-                        >
-                          {role.name}
-                        </option>
-                      ))}
+                    {channels.map((channel) => (
+                      <option key={channel.id} value={channel.id}>
+                        {channel.name}
+                      </option>
+                    ))}
                   </SelectControl>
 
-                  <HStack justify="space-between">
-                    <Tooltip
-                      label="Enable video previews on notifications."
-                      aria-label="A tooltip"
-                    >
-                      <HStack>
-                        <Icon as={QuestionIcon} />
-                        <p>Previews</p>
-                      </HStack>
-                    </Tooltip>
-                    <SwitchControl
-                      name="preview"
-                      switchProps={{
-                        size: "lg",
-                      }}
-                      onChange={(e) => {
-                        setNotification({
-                          ...notification,
-                          // @ts-ignore
-                          preview: e.target.value,
-                        });
-                      }}
-                    />
-                  </HStack>
+                  <SelectControl
+                    name="videos"
+                    label="The videos channel:"
+                    selectProps={{
+                      placeholder: "Select Channel",
+                      value: statistic.followers,
+                    }}
+                    onChange={(e) =>
+                      setStatistic({
+                        ...statistic,
+                        // @ts-ignore
+                        videos: e.target.value,
+                      })
+                    }
+                    isRequired
+                  >
+                    {channels.map((channel) => (
+                      <option key={channel.id} value={channel.id}>
+                        {channel.name}
+                      </option>
+                    ))}
+                  </SelectControl>
                 </ModalBody>
                 <ModalFooter>
                   <Button variant="outline" mr={3} onClick={onClose}>
