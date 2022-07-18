@@ -241,7 +241,7 @@ export default function Notifications() {
                   toast({
                     title: "Created",
                     description:
-                      "Your notification has successfully been setup. Clicktok will send the notification up to 1 minute after a video has been posted.",
+                      "Your notification has successfully been setup. Clicktok will send the notification up to 5 minutes after a video has been posted. If the video is not posted within 5 minutes, please contact support.",
                     status: "success",
                     duration: 9000,
                     isClosable: true,
