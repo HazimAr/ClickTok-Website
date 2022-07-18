@@ -217,7 +217,7 @@ export default function Statistics() {
                   toast({
                     title: "Created",
                     description:
-                      "Your notification has successfully been setup. Clicktok will send the notification up to 5 minutes after a video has been posted. If the video is not posted within 5 minutes, please contact support.",
+                      "Your statistics has successfully been setup. Clicktok will update the statistics every 10 minutes due to discord limitations. If the statistics are not updated within 10 minutes, please contact support.",
                     status: "success",
                     duration: 9000,
                     isClosable: true,
@@ -248,7 +248,7 @@ export default function Statistics() {
           >
             {({ submitForm, isSubmitting }) => (
               <>
-                <ModalHeader>Recieve Notifications</ModalHeader>
+                <ModalHeader>Creator Statistics</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody as={Stack} spacing={4}>
                   <InputControl
@@ -295,7 +295,7 @@ export default function Statistics() {
                     label="The likes channel:"
                     selectProps={{
                       placeholder: "Select Channel",
-                      value: statistic.followers,
+                      value: statistic.likes,
                     }}
                     onChange={(e) =>
                       setStatistic({
@@ -317,7 +317,7 @@ export default function Statistics() {
                     label="The videos channel:"
                     selectProps={{
                       placeholder: "Select Channel",
-                      value: statistic.followers,
+                      value: statistic.videos,
                     }}
                     onChange={(e) =>
                       setStatistic({
