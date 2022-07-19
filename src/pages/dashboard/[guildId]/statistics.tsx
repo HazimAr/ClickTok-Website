@@ -350,7 +350,7 @@ export default function Statistics() {
                     Close
                   </Button>
                   <Button onClick={submitForm} isLoading={isSubmitting}>
-                    Submit Notification
+                    Submit Statistic
                   </Button>
                 </ModalFooter>
               </>
