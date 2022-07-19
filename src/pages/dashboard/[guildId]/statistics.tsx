@@ -34,9 +34,15 @@ export default function Statistics() {
   const [statistic, setStatistic] = useState({
     id: "",
     creator: "",
+
     followers: "",
+    followersPrefix: "",
+
     likes: "",
+    likesPrefix: "",
+
     videos: "",
+    videosPrefix: "",
   });
   const [statistics, setStatistics] = useState([]);
   const [channels, setChannels] = useState<VoiceChannel[]>([]);
@@ -73,7 +79,7 @@ export default function Statistics() {
       })
       .then((response) => setChannels(response.data));
   }, [session, router]);
-  console.log(statistics);
+
   return (
     <DashboardLayout>
       <Heading as="h1" mb={10}>
@@ -104,7 +110,6 @@ export default function Statistics() {
               >
                 <HStack flex="1">
                   <Heading size="md">@{statistic.creator}</Heading>
-
                 </HStack>
 
                 <HStack pt={{ base: 4, md: 0 }}>
@@ -167,7 +172,7 @@ export default function Statistics() {
                 return toast({
                   title: "Error",
                   description:
-                    "You have reached your maximum notifications. If you would like more, please upgrade to premium.",
+                    "You have reached your maximum statistics. If you would like more, please upgrade to premium.",
                   status: "error",
                   duration: 9000,
                   isClosable: true,
@@ -175,9 +180,15 @@ export default function Statistics() {
               setStatistic({
                 id: "",
                 creator: "",
+
                 followers: "",
+                followersPrefix: "",
+
                 likes: "",
+                likesPrefix: "",
+
                 videos: "",
+                videosPrefix: "",
               });
               onOpen();
             }}
@@ -330,6 +341,7 @@ export default function Statistics() {
                       </option>
                     ))}
                   </SelectControl>
+                  <p>You do not have to choose all 3 statistics to submit.</p>
                 </ModalBody>
                 <ModalFooter>
                   <Button variant="outline" mr={3} onClick={onClose}>
