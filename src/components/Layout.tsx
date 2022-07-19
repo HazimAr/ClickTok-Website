@@ -36,6 +36,7 @@ export default function DashboardLayout({ children = null }) {
   const { data, status } = useSession();
 
   useEffect(() => {
+    if (!router.query.guildId) return;
     if (status == "loading") return;
     if (status == "unauthenticated") {
       router.push("/login");
@@ -48,7 +49,7 @@ export default function DashboardLayout({ children = null }) {
         },
       })
       .catch(() => router.push("/dashboard"));
-  }, [status]);
+  }, [status, router]);
 
   const NavItem = (props) => {
     const { icon, children, href, ...rest } = props;
