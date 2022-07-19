@@ -116,7 +116,6 @@ export default function Convert() {
               <Heading size="md">Whitelist</Heading>
             </HStack>
           </HStack>
-
           <Center>
             <Button variant="outline">
               <FaPlus />
