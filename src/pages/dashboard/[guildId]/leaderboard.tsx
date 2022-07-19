@@ -35,9 +35,7 @@ export default function Leaderboard() {
   return (
     <DashboardLayout>
       <HStack mb={10}>
-        <Heading flex={1}>
-          Leaderboard Settings
-        </Heading>
+        <Heading flex={1}>Leaderboard Settings</Heading>
         <Button
           as={EnhancedChakraLink}
           href={`/leaderboard/${router.query.guildId}`}
