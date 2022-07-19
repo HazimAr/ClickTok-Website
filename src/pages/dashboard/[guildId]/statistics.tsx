@@ -48,6 +48,7 @@ export default function Statistics() {
   const [channels, setChannels] = useState<VoiceChannel[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: session, status } = useSession();
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
   const toast = useToast();
 
@@ -70,7 +71,8 @@ export default function Statistics() {
           duration: 9000,
           isClosable: true,
         });
-      });
+      })
+      .finally(() => setLoading(false));
     axios
       .get(`${API}/guilds/${router.query.guildId}/channels/voice`, {
         headers: {
@@ -85,7 +87,7 @@ export default function Statistics() {
       <Heading as="h1" mb={10}>
         TikTok Statistics
       </Heading>
-      <Card isLoaded={status == "authenticated"}>
+      <Card isLoaded={!loading && status == "authenticated"}>
         <HStack mb={5}>
           <Heading size="md" flex="1">
             Statistics

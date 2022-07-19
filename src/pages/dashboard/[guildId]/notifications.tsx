@@ -40,6 +40,7 @@ export default function Notifications() {
   const [notifications, setNotifications] = useState([]);
   const [channels, setChannels] = useState<BaseGuildTextChannel[]>([]);
   const [roles, setRoles] = useState<Role[]>([]);
+  const [loading, setLoading] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -54,7 +55,9 @@ export default function Notifications() {
           Authorization: `Bearer ${session.accessToken}`,
         },
       })
-      .then((response) => setNotifications(response.data));
+      .then((response) => setNotifications(response.data))
+      .finally(() => setLoading(false));
+
     axios
       .get(`${API}/guilds/${router.query.guildId}/channels`, {
         headers: {
@@ -76,7 +79,7 @@ export default function Notifications() {
       <Heading as="h1" mb={10}>
         TikTok Notifications
       </Heading>
-      <Card isLoaded={status == "authenticated"}>
+      <Card isLoaded={!loading && status == "authenticated"}>
         <HStack mb={5}>
           <Heading size="md" flex="1">
             Notifications
