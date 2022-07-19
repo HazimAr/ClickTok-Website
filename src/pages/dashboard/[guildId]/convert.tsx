@@ -52,7 +52,7 @@ export default function Convert() {
         Convert Settings
       </Heading>
       <Stack spacing={8}>
-        <Card isLoaded>
+        <Card isLoaded={settings}>
           <HStack spacing={0} flexDir={{ base: "column", sm: "row" }}>
             <Heading size="md" flex="1">
               Channels
@@ -122,7 +122,7 @@ export default function Convert() {
             </Button>
           </Center>
         </Card>
-        <Card isLoaded>
+        <Card isLoaded={settings}>
           <HStack spacing={0} flexDir={{ base: "column", sm: "row" }}>
             <Heading size="md" flex="1">
               Roles
@@ -187,7 +187,7 @@ export default function Convert() {
             </HStack>
           </HStack>
         </Card>
-        <Card isLoaded>
+        <Card isLoaded={settings}>
           <HStack spacing={0} flexDir={{ base: "column", sm: "row" }}>
             <Heading size="md" flex="1">
               Users
