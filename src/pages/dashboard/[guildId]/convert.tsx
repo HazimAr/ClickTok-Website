@@ -72,7 +72,7 @@ export default function Convert() {
                       ...settings?.lists,
                       channels: {
                         ...settings?.lists?.channels,
-                        whitelist: !settings.lists.channels.whitelist,
+                        whitelist: !settings?.lists?.channels?.whitelist,
                       },
                     },
                   });
