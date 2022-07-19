@@ -58,7 +58,7 @@ export default function Leaderboard() {
                 .post(
                   `${API}/guilds/${router.query.guildId}/settings`,
                   {
-                    public: !isPublic,
+                    "public": !isPublic,
                   },
                   {
                     headers: {
