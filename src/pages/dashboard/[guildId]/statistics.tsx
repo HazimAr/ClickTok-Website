@@ -47,7 +47,7 @@ export default function Statistics() {
   const [statistics, setStatistics] = useState([]);
   const [channels, setChannels] = useState<VoiceChannel[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
   const toast = useToast();
 
@@ -85,7 +85,7 @@ export default function Statistics() {
       <Heading as="h1" mb={10}>
         TikTok Statistics
       </Heading>
-      <Card isLoaded>
+      <Card isLoaded={status == "authenticated"}>
         <HStack mb={5}>
           <Heading size="md" flex="1">
             Statistics
