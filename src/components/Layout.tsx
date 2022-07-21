@@ -16,7 +16,11 @@ import {
   Image,
   Button,
 } from "@chakra-ui/react";
-import { FaBell, FaCrown, FaRecycle } from "react-icons/fa";
+import {
+  FaBell,
+  FaCrown,
+  // FaRecycle
+} from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 // import { HiViewBoards } from "react-icons/hi";
 import { MdHome } from "react-icons/md";
@@ -27,7 +31,8 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import axios from "axios";
-import { API } from "config";
+import { API, META } from "config";
+import Head from "next/head";
 
 export default function DashboardLayout({ children = null }) {
   const sidebar = useDisclosure();
@@ -166,11 +171,8 @@ export default function DashboardLayout({ children = null }) {
         <NavItem href="/statistics" icon={BsGraphUp}>
           Statistics
         </NavItem>
-        <NavItem href="/convert" icon={FaRecycle}>
+        {/* <NavItem href="/convert" icon={FaRecycle}>
           Convert
-        </NavItem>
-        {/* <NavItem href="/leaderboard" icon={HiViewBoards}>
-          Leaderboard
         </NavItem> */}
         <NavItem href="/settings" icon={BsGearFill}>
           Settings
@@ -178,95 +180,103 @@ export default function DashboardLayout({ children = null }) {
       </Flex>
     </Box>
   );
+  const title = router.asPath.split("/")[router.asPath.split("/").length - 1];
 
   return (
-    <Box
-      as="section"
-      bg="gray.50"
-      color="black"
-      _dark={{
-        bg: "gray.700",
-        color: "white",
-      }}
-      minH="100vh"
-    >
-      <SidebarContent
-        display={{
-          base: "none",
-          md: "unset",
-        }}
-      />
-      <Drawer
-        isOpen={sidebar.isOpen}
-        onClose={sidebar.onClose}
-        placement="left"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <SidebarContent w="full" borderRight="none" />
-        </DrawerContent>
-      </Drawer>
+    <>
+      <Head>
+        <title>
+          {title.charAt(0).toUpperCase() + title.substring(1)} | {META.title}
+        </title>
+      </Head>
       <Box
-        ml={{
-          base: 0,
-          md: 60,
+        as="section"
+        bg="gray.50"
+        color="black"
+        _dark={{
+          bg: "gray.700",
+          color: "white",
         }}
-        transition=".3s ease"
+        minH="100vh"
       >
-        <Flex
-          as="header"
-          align="center"
-          justify="space-between"
-          w="full"
-          px="4"
-          bg="white"
-          _dark={{
-            bg: "gray.800",
+        <SidebarContent
+          display={{
+            base: "none",
+            md: "unset",
           }}
-          borderBottomWidth="1px"
-          color="inherit"
-          py={4}
+        />
+        <Drawer
+          isOpen={sidebar.isOpen}
+          onClose={sidebar.onClose}
+          placement="left"
         >
-          <IconButton
-            aria-label="Menu"
-            display={{
-              base: "inline-flex",
-              md: "none",
+          <DrawerOverlay />
+          <DrawerContent>
+            <SidebarContent w="full" borderRight="none" />
+          </DrawerContent>
+        </Drawer>
+        <Box
+          ml={{
+            base: 0,
+            md: 60,
+          }}
+          transition=".3s ease"
+        >
+          <Flex
+            as="header"
+            align="center"
+            justify="space-between"
+            w="full"
+            px="4"
+            bg="white"
+            _dark={{
+              bg: "gray.800",
             }}
-            onClick={sidebar.onOpen}
-            icon={<FiMenu />}
-            size="sm"
-          />
-          <InputGroup
-            display={{
-              base: "none",
-              md: "flex",
-            }}
-            pr="4"
+            borderBottomWidth="1px"
+            color="inherit"
+            py={4}
           >
-            <InputLeftElement color="gray.500">
-              <FiSearch />
-            </InputLeftElement>
-            <Input placeholder="Search..." border="0px" w="100%" />
-          </InputGroup>
-
-          <Flex align="center" cursor="pointer" gap={4}>
-            {/* <Icon color="gray.500" as={FaBell} cursor="pointer" /> */}
-            <Button
-              as={EnhancedChakraLink}
-              href={`/dashboard/${router.query.guildId}/premium`}
+            <IconButton
+              aria-label="Menu"
+              display={{
+                base: "inline-flex",
+                md: "none",
+              }}
+              onClick={sidebar.onOpen}
+              icon={<FiMenu />}
+              size="sm"
+            />
+            <InputGroup
+              display={{
+                base: "none",
+                md: "flex",
+              }}
+              pr="4"
             >
-              Upgrade to Premium
-            </Button>
-            <Avatar size="sm" name={data?.user.name} src={data?.user.image} />
-            <Icon as={FiMenu} />
-          </Flex>
-        </Flex>
+              <InputLeftElement color="gray.500">
+                <FiSearch />
+              </InputLeftElement>
+              <Input placeholder="Search..." border="0px" w="100%" />
+            </InputGroup>
 
-        <Box as="main" p={8}>
-          {children}
+            <Flex align="center" cursor="pointer" gap={4}>
+              {/* <Icon color="gray.500" as={FaBell} cursor="pointer" /> */}
+              <Button
+                as={EnhancedChakraLink}
+                href={`/dashboard/${router.query.guildId}/premium`}
+              >
+                Upgrade to Premium
+              </Button>
+              <Avatar size="sm" name={data?.user.name} src={data?.user.image} />
+              <Icon as={FiMenu} />
+            </Flex>
+          </Flex>
+
+          <Box as="main" p={8}>
+            {children}
+          </Box>
         </Box>
       </Box>
-    </Box>
+    </>
   );
 }
