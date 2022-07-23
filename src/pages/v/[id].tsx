@@ -13,11 +13,14 @@ import {
 import Container from "@components/Container";
 import ContainerInside from "@components/ContainerInside";
 import EnhancedChakraLink from "@components/EnhancedChakraLink";
+import Footer from "@components/Footer";
+import Header from "@components/Header";
 import { NextPageContext } from "next";
 import Head from "next/head";
+import { ReactElement } from "react";
 import { FaMusic } from "react-icons/fa";
 
-export default function ({ video }) {
+const videoId = ({ video }) => {
   return (
     <>
       <Head>
@@ -131,7 +134,18 @@ export default function ({ video }) {
       </Container>
     </>
   );
-}
+};
+
+videoId.getLayout = (page: ReactElement) => {
+  return (
+    <>
+      <Header />
+      {page}
+      <Footer />
+    </>
+  );
+};
+
 
 async function downloadVideo(
   videoUrl: RequestInfo | URL,
