@@ -146,6 +146,7 @@ videoId.getLayout = (page: ReactElement) => {
   );
 };
 
+export default videoId;
 
 async function downloadVideo(
   videoUrl: RequestInfo | URL,
