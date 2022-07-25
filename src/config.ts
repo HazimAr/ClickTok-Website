@@ -4,7 +4,7 @@ const GA_TRACKING_ID = "G-PGZQKZHHW0";
 const META = {
   title: "ClickTok | The Officially Verified TikTok Discord Bot",
   description:
-    "ClickTok is a simple Discord bot that allows you to embed Tiktok videos in Discord channels.",
+    "A simple Discord bot that allows you to embed Tiktok videos, recieve Tiktok Notifications and show statistics for a TikTok creator all inside your Discord server.",
   url: "https://clicktok.xyz",
   image: "/logo.png",
 };
