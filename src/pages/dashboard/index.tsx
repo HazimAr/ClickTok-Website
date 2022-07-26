@@ -7,10 +7,23 @@ import axios from "axios";
 import { API } from "config";
 import { NextPageContext } from "next";
 import { unstable_getServerSession } from "next-auth";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { Guild } from "types";
 import { authOptions } from "../api/auth/[...nextauth]";
 
 const Dashboard = ({ guilds }) => {
+  const router = useRouter();
+  const { status } = useSession();
+  useEffect(() => {
+    if (!router) return;
+    if (status == "loading") return;
+    if (status == "unauthenticated") {
+      router.push("/login");
+      return;
+    }
+  }, [status, router]);
   return (
     <Container>
       <ContainerInside>
