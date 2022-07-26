@@ -322,6 +322,10 @@ const NAV_ITEMS: Array<NavItem> = [
     href: "/download",
   },
   {
+    label: "Dashboard",
+    href: "/dashboard",
+  },
+  {
     label: "Invite Bot",
     href: "/invite",
     external: true,
