@@ -16,14 +16,16 @@ const Dashboard = ({ guilds }) => {
       <ContainerInside>
         <VStack>
           <Heading mb={10}>Select A Server</Heading>
-          <SimpleGrid columns={3} gap={4}>
-            {guilds.botGuilds.map((guild: Guild) => (
-              <Guild key={guild.id} guild={guild} admin />
-            ))}
-            {guilds.normalGuilds.map((guild: Guild) => (
-              <Guild key={guild.id} guild={guild} />
-            ))}
-          </SimpleGrid>
+          {guilds && (
+            <SimpleGrid columns={3} gap={4}>
+              {guilds.botGuilds.map((guild: Guild) => (
+                <Guild key={guild.id} guild={guild} admin />
+              ))}
+              {guilds.normalGuilds.map((guild: Guild) => (
+                <Guild key={guild.id} guild={guild} />
+              ))}
+            </SimpleGrid>
+          )}
         </VStack>
       </ContainerInside>
     </Container>
