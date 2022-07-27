@@ -12,8 +12,9 @@ export default function Hero() {
           ClickTok
         </Heading>
         <Text maxW="50ch" textAlign="center">
-          ClickTok is a simple Discord bot that allows you to embed Tiktok
-          videos easily in your Discord server.
+          Embed TikTok videos, receive TikTok notifications, and view TikTok
+          stats easily in your server. The Officially VERIFIED TikTok Discord
+          bot.
         </Text>
         <HStack spacing={4}>
           <Button
