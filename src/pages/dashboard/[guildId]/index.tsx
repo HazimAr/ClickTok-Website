@@ -1,4 +1,4 @@
-import { Button, Flex, Heading, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import Card from "@components/Card";
 import EnhancedChakraLink from "@components/EnhancedChakraLink";
 import DashboardLayout from "@components/Layout";
@@ -10,13 +10,19 @@ export default function GuildHome() {
     <DashboardLayout>
       <Stack spacing={8}>
         <Card isLoaded>
-          <Flex justify="center" align="center">
-            <div>
+          <Flex
+            justify="center"
+            align="center"
+            flexDir={{ base: "column", md: "row" }}
+            textAlign={{ base: "center", md: "left" }}
+            gap={4}
+          >
+            <Box>
               <Heading>Notifications</Heading>
               <Text>Recieve live notifications from any creator you want.</Text>
-            </div>
+            </Box>
             <Button
-              ml="auto"
+              ml={{ base: "none", md: "auto" }}
               as={EnhancedChakraLink}
               href={`/dashboard/${router.query.guildId}/notifications`}
             >
@@ -25,7 +31,13 @@ export default function GuildHome() {
           </Flex>
         </Card>
         <Card isLoaded>
-          <Flex justify="center" align="center">
+          <Flex
+            justify="center"
+            align="center"
+            flexDir={{ base: "column", md: "row" }}
+            textAlign={{ base: "center", md: "left" }}
+            gap={4}
+          >
             <div>
               <Heading>Statistics</Heading>
               <Text>
@@ -33,7 +45,7 @@ export default function GuildHome() {
               </Text>
             </div>
             <Button
-              ml="auto"
+              ml={{ base: "none", md: "auto" }}
               as={EnhancedChakraLink}
               href={`/dashboard/${router.query.guildId}/statistics`}
             >
@@ -42,7 +54,13 @@ export default function GuildHome() {
           </Flex>
         </Card>
         <Card isLoaded>
-          <Flex justify="center" align="center">
+          <Flex
+            justify="center"
+            align="center"
+            flexDir={{ base: "column", md: "row" }}
+            textAlign={{ base: "center", md: "left" }}
+            gap={4}
+          >
             <div>
               <Heading>Settings</Heading>
               <Text>
@@ -51,7 +69,7 @@ export default function GuildHome() {
               </Text>
             </div>
             <Button
-              ml="auto"
+              ml={{ base: "none", md: "auto" }}
               as={EnhancedChakraLink}
               href={`/dashboard/${router.query.guildId}/settings`}
             >
