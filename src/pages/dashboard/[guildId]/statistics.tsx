@@ -128,7 +128,7 @@ export default function Statistics() {
                     onClick={() => {
                       axios
                         .delete(
-                          `${API}/guilds/${router.query.guildId}/statistic/${statistic.id}`,
+                          `${API}/guilds/${router.query.guildId}/statistics/${statistic.id}`,
                           {
                             headers: {
                               Authorization: `Bearer ${session.accessToken}`,
