@@ -237,7 +237,7 @@ export default function DashboardLayout({ children = null }) {
             align="center"
             justify="space-between"
             w="full"
-            px="4"
+            px={8}
             bg="white"
             _dark={{
               bg: "gray.800",
