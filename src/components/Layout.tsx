@@ -15,6 +15,10 @@ import {
   Text,
   Image,
   Button,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
 } from "@chakra-ui/react";
 import {
   FaBell,
@@ -23,16 +27,22 @@ import {
 } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 // import { HiViewBoards } from "react-icons/hi";
-import { MdHome } from "react-icons/md";
+import { MdHome, MdLogout } from "react-icons/md";
 import { BsGearFill, BsGraphUp } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import EnhancedChakraLink from "./EnhancedChakraLink";
 import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useEffect } from "react";
 import axios from "axios";
 import { API, META } from "config";
 import Head from "next/head";
+import {
+  AddIcon,
+  ExternalLinkIcon,
+  RepeatIcon,
+  EditIcon,
+} from "@chakra-ui/icons";
 
 export default function DashboardLayout({ children = null }) {
   const sidebar = useDisclosure();
@@ -246,7 +256,7 @@ export default function DashboardLayout({ children = null }) {
               icon={<FiMenu />}
               size="sm"
             />
-            <InputGroup
+            {/* <InputGroup
               display={{
                 base: "none",
                 md: "flex",
@@ -257,9 +267,9 @@ export default function DashboardLayout({ children = null }) {
                 <FiSearch />
               </InputLeftElement>
               <Input placeholder="Search..." border="0px" w="100%" />
-            </InputGroup>
+            </InputGroup> */}
 
-            <Flex align="center" cursor="pointer" gap={4}>
+            <Flex align="center" cursor="pointer" gap={4} ml="auto">
               {/* <Icon color="gray.500" as={FaBell} cursor="pointer" /> */}
               <Button
                 as={EnhancedChakraLink}
@@ -267,8 +277,33 @@ export default function DashboardLayout({ children = null }) {
               >
                 Upgrade to Premium
               </Button>
-              <Avatar size="sm" name={data?.user.name} src={data?.user.image} />
-              <Icon as={FiMenu} />
+              <Menu>
+                <MenuButton
+                  as={Avatar}
+                  aria-label="Options"
+                  size="sm"
+                  name={data?.user.name}
+                  src={data?.user.image}
+                />
+                <MenuList>
+                  <EnhancedChakraLink href="/dashboard">
+                    <MenuItem icon={<AddIcon />}>
+                      Choose Another Server
+                    </MenuItem>
+                  </EnhancedChakraLink>
+                  <EnhancedChakraLink
+                    href={`/dashboard/${router.query.guildId}/premium`}
+                  >
+                    <MenuItem icon={<FaCrown />}>Get Premium</MenuItem>
+                  </EnhancedChakraLink>
+                  <MenuItem
+                    icon={<MdLogout />}
+                    onClick={() => signOut({ callbackUrl: "/" })}
+                  >
+                    Logout
+                  </MenuItem>
+                </MenuList>
+              </Menu>
             </Flex>
           </Flex>
 
