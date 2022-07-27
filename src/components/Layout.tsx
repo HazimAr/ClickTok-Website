@@ -35,7 +35,7 @@ import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 import { useEffect } from "react";
 import axios from "axios";
-import { API, META } from "config";
+import { API } from "config";
 import Head from "next/head";
 import {
   AddIcon,
