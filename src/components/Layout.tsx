@@ -29,7 +29,7 @@ import { FiMenu } from "react-icons/fi";
 // import { HiViewBoards } from "react-icons/hi";
 import { MdHome, MdLogout } from "react-icons/md";
 import { BsGearFill, BsGraphUp } from "react-icons/bs";
-import { FiSearch } from "react-icons/fi";
+// import { FiSearch } from "react-icons/fi";
 import EnhancedChakraLink from "./EnhancedChakraLink";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
@@ -39,9 +39,9 @@ import { API, META } from "config";
 import Head from "next/head";
 import {
   AddIcon,
-  ExternalLinkIcon,
-  RepeatIcon,
-  EditIcon,
+  // ExternalLinkIcon,
+  // RepeatIcon,
+  // EditIcon,
 } from "@chakra-ui/icons";
 
 export default function DashboardLayout({ children = null }) {
