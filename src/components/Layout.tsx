@@ -196,7 +196,7 @@ export default function DashboardLayout({ children = null }) {
     <>
       <Head>
         <title>
-          {title.charAt(0).toUpperCase() + title.substring(1)} | {META.title}
+          ClickTok | {title.charAt(0).toUpperCase() + title.substring(1)}
         </title>
       </Head>
       <Box
