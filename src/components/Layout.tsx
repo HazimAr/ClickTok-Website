@@ -19,6 +19,7 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Divider,
 } from "@chakra-ui/react";
 import {
   FaBell,
@@ -39,6 +40,7 @@ import { API } from "config";
 import Head from "next/head";
 import {
   AddIcon,
+  QuestionIcon,
   // ExternalLinkIcon,
   // RepeatIcon,
   // EditIcon,
@@ -67,11 +69,12 @@ export default function DashboardLayout({ children = null }) {
   }, [status, router]);
 
   const NavItem = (props) => {
-    const { icon, children, href, ...rest } = props;
+    const { icon, children, href, isExternal, ...rest } = props;
     return (
       <Flex
         as={EnhancedChakraLink}
-        href={`/dashboard/${router.query.guildId}${href}`}
+        href={isExternal ? href : `/dashboard/${router.query.guildId}${href}`}
+        isExternal={isExternal}
         // this right here is called im fucking lazy and i don't wanna refractor this bullshit of a code
         bg={
           router.asPath.split("/")[router.asPath.split("/").length - 1] ==
@@ -186,6 +189,11 @@ export default function DashboardLayout({ children = null }) {
         </NavItem> */}
         <NavItem href="/settings" icon={BsGearFill}>
           Settings
+        </NavItem>
+
+        <Divider />
+        <NavItem icon={QuestionIcon} isExternal href="/support">
+          Support
         </NavItem>
       </Flex>
     </Box>
