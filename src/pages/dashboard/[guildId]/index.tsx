@@ -15,7 +15,7 @@ export default function GuildHome() {
             align="center"
             flexDir={{ base: "column", md: "row" }}
             textAlign={{ base: "center", md: "left" }}
-            gap={4}
+            gap={2}
           >
             <Box>
               <Heading>Notifications</Heading>
@@ -36,7 +36,7 @@ export default function GuildHome() {
             align="center"
             flexDir={{ base: "column", md: "row" }}
             textAlign={{ base: "center", md: "left" }}
-            gap={4}
+            gap={2}
           >
             <div>
               <Heading>Statistics</Heading>
@@ -59,7 +59,7 @@ export default function GuildHome() {
             align="center"
             flexDir={{ base: "column", md: "row" }}
             textAlign={{ base: "center", md: "left" }}
-            gap={4}
+            gap={2}
           >
             <div>
               <Heading>Settings</Heading>
