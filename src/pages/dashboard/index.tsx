@@ -119,13 +119,20 @@ export async function getServerSideProps({
     return { props: {} };
   }
 
-  const { data } = await axios.get(`${API}/guilds`, {
+  const response = await axios.get(`${API}/guilds`, {
     headers: {
       authorization: `Bearer ${session.accessToken}`,
     },
   });
 
+  if (response.status > 400) {
+    res.writeHead(307, {
+      location: "/login",
+    });
+    res.end();
+    return { props: {} };
+  }
   return {
-    props: { guilds: data },
+    props: { guilds: response.data },
   };
 }
