@@ -24,7 +24,7 @@
 		"@emotion/react": "^11.9.3",
 		"@emotion/styled": "^11.9.3",
 		"axios": "^0.27.2",
-		"discord.js": "^14.0.3",
+		"discord.js": "^14.1.0",
 		"formik": "^2.2.9",
 		"formik-chakra-ui": "^1.6.0",
 		"framer-motion": "^6.5.1",
