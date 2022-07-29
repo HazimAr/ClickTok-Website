@@ -119,11 +119,22 @@ export async function getServerSideProps({
     return { props: {} };
   }
 
-  const response = await axios.get(`${API}/guilds`, {
-    headers: {
-      authorization: `Bearer ${session.accessToken}`,
-    },
-  });
+  const response = await axios
+    .get(`${API}/guilds`, {
+      headers: {
+        authorization: `Bearer ${session.accessToken}`,
+      },
+    })
+    .catch(() => {
+      return null;
+    });
+  if (!response) {
+    res.writeHead(307, {
+      location: "/login",
+    });
+    res.end();
+    return { props: {} };
+  }
 
   if (response.status > 400) {
     res.writeHead(307, {
