@@ -239,7 +239,7 @@ export default function Notifications() {
                     },
                   }
                 )
-                .then(() => {
+                .then((response) => {
                   const updated = values.id && true;
                   toast({
                     title: "Created",
@@ -260,6 +260,8 @@ export default function Notifications() {
                   } else {
                     setNotifications([...notifications, values]);
                   }
+
+                  setNotification(response.data)
                 })
                 .catch(({ response }) => {
                   toast({
