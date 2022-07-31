@@ -222,7 +222,7 @@ export default function Statistics() {
                     },
                   }
                 )
-                .then(() => {
+                .then((response) => {
                   const updated = values.id && true;
                   toast({
                     title: "Created",
@@ -241,6 +241,7 @@ export default function Statistics() {
                   } else {
                     setStatistics([...statistics, values]);
                   }
+                  setStatistic(response.data);
                 })
                 .catch(({ response }) => {
                   toast({
