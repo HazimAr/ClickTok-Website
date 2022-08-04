@@ -9,6 +9,6 @@ const META = {
   image: "/logo.png",
 };
 
-export const API = "https://4e5a-70-173-133-195.ngrok.io";
+export const API = "https://6ac7-70-173-133-195.ngrok.io";
 
 export { GA_TRACKING_ID, META };
